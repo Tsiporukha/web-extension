@@ -9,6 +9,13 @@ export function addToCurrentQueue(songs) {
   }
 }
 
+export function addToCurrentQueueTop(songs) {
+  return {
+    type: types.ADD_SONGS_TO_TOP,
+    payload:  songs.map(song => ({...song, id: v4()}) )
+  }
+}
+
 export function removeFromCurrentQueue(songs) {
   return {
     type: types.REMOVE_SONGS,
@@ -23,14 +30,12 @@ export function updateSearchQueue(songs) {
   }
 }
 
-
 export function searchSongs(term) {
   return {
     type: types.SEARCH_SONGS,
     payload: term
   }
 }
-
 
 export function searchAndUpdateSearchQueue(term) {
   return {

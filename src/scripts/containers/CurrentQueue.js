@@ -20,6 +20,8 @@ class CurrentQueue extends Component {
     return (
       <div>
         {this.props.songs && <div>Current Queue: {this.props.songs.length} songs</div>}
+        <button className={'btn btn-danger'} onClick={() => { this.props.removeFromCurrentQueue(this.props.songs) }}
+          className={'btn btn-danger'}> remove all songs</button>
         <SongList {...this.props}/>
       </div>
     )
