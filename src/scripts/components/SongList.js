@@ -12,6 +12,7 @@ export default class SongList extends Component {
               key={song.id || song.uid}
               addToCurrentQueue={this.props.addToCurrentQueue}
               removeFromCurrentQueue={this.props.removeFromCurrentQueue}
+              play={this.props.play}
             />)
           )}
           </div> :

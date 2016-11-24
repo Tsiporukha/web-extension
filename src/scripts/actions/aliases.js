@@ -1,7 +1,6 @@
 import {updateSearchQueue} from './SongsActions';
 import {updateAutocomplete} from './AutocompleteActions'
-import {SEARCH_SONGS, SEARCH_AND_UPDATE_SEARCH_QUEUE} from '../constants/ActionTypes';
-import {SEARCH_AND_UPDATE_AUTOCOMPLETE} from '../constants/ActionTypes';
+import {SEARCH_SONGS, SEARCH_AND_UPDATE_SEARCH_QUEUE, SEARCH_AND_UPDATE_AUTOCOMPLETE} from '../constants/ActionTypes';
 import {searchOnYoutube} from '../lib/youtube';
 
 function searchSongs(term){

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import QueueTab from './QueueTab'
+import Player from '../containers/Player'
 
 
 class App extends Component {
@@ -25,6 +26,8 @@ class App extends Component {
           <TabPanel>My playlists</TabPanel>
           <TabPanel>History</TabPanel>
         </Tabs>
+
+        <Player />
       </div>
     );
   }

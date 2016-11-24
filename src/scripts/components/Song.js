@@ -15,7 +15,9 @@ export default class Song extends Component {
           <button className={'btn btn-success'} onClick={() => this.props.addToCurrentQueue([this.props.song])}>addToCurrentQueue</button> }
         {this.props.removeFromCurrentQueue &&
           <button className={'btn btn-danger'} onClick={() => this.props.removeFromCurrentQueue([this.props.song])}>removeFromCurrentQueue</button> }
-      </div>
+        {this.props.play &&
+          <button className={'btn btn-success'} onClick={() => this.props.play(this.props.song)}>play</button> }
+        </div>
     );
   }
 
