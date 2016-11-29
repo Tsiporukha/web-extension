@@ -1,4 +1,4 @@
-import {PLAY, PAUSE, SET_PLAYING_SONG, SET_VOLUME, SET_PROGRESS} from "../constants/ActionTypes";
+import {PLAY, PAUSE, SET_PLAYING_SONG, SET_VOLUME, SET_PROGRESS, CLEAN_PLAYER} from "../constants/ActionTypes";
 
 export function play() {
   return {type: PLAY}
@@ -6,6 +6,10 @@ export function play() {
 
 export function pause() {
   return {type: PAUSE}
+}
+
+export function clean() {
+  return {type: CLEAN_PLAYER}
 }
 
 export function setPlayingSong(song) {

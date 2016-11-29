@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-
+import {duration} from '../lib/duration';
 
 export default class Song extends Component {
 
@@ -10,7 +10,7 @@ export default class Song extends Component {
         artist: {this.props.song.artist},
         title: {this.props.song.title},
         source: {this.props.song.source},
-        duration: {this.props.song.duration}
+        duration: {duration(this.props.song.duration)}
         {this.props.addToCurrentQueue &&
           <button className={'btn btn-success'} onClick={() => this.props.addToCurrentQueue([this.props.song])}>addToCurrentQueue</button> }
         {this.props.removeFromCurrentQueue &&

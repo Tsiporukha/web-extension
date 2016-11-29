@@ -11,6 +11,7 @@ export const SEARCH_AND_UPDATE_SEARCH_QUEUE = 'SEARCH_AND_UPDATE_SEARCH_QUEUE';
 
 export const PLAY = 'PLAY';
 export const PAUSE = 'PAUSE';
+export const CLEAN_PLAYER = 'CLEAN_PLAYER';
 export const SET_PLAYING_SONG = 'SET_PLAYING_SONG';
 export const SET_VOLUME = 'SET_VOLUME';
 export const SET_PROGRESS = 'SET_PROGRESS';

@@ -2,22 +2,22 @@ import React, { Component } from 'react'
 import ReactPlayer from 'react-player'
 import { connect } from 'react-redux';
 
-import {play, pause, setPlayingSong, setVolume, setProgress} from '../actions/PlayerActions'
+import {play, pause, setVolume, setProgress} from '../actions/PlayerActions'
 
 const mapStateToProps = (state, ownProps) => {
-  return {
-    playingSong: state.player.currentSong,
-    playing: state.player.playing,
-    volume: state.player.volume,
-    played: state.player.played
-  }
+  return state.player ?
+    {
+      playingSong: state.player.currentSong,
+      playing: state.player.playing,
+      volume: state.player.volume,
+      played: state.player.played
+    } : {played: 0, volume: 80, playingSong: {}}
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     play: () => { dispatch(play()) },
     pause: () => { dispatch(pause()) },
-    setPlayingSong: (song) => { dispatch(setPlayingSong(song)) },
     setVolume: (e) => { dispatch(setVolume(parseFloat(e.target.value))) },
     setProgress: (progress) => { dispatch(setProgress(progress)) }
   }
@@ -38,21 +38,26 @@ class Player extends Component {
 
   render () {
     return (
-      <div>
+      <div style={{position: 'fixed', bottom: '0px', backgroundColor: 'cadetblue',
+        visibility: this.props.playingSong.data_url ? 'visible' : 'hidden' }}>
         <ReactPlayer
           ref={player => { this.player = player }}
           className='react-player'
-          width={480}
-          height={270}
+          width={240}
+          height={135}
           url={this.props.playingSong.data_url}
           playing={this.props.playing}
           volume={this.props.volume}
           onProgress={this.onProgress}
           onDuration={duration => {console.log(duration)}}
         />
-        <button onClick={this.props.pause}>pause</button>
-        <button onClick={this.props.play}>play</button>
+        {this.props.playing ?
+          <button className={'btn btn-warning'} onClick={this.props.pause}>pause</button> :
+          <button className={'btn btn-success'} onClick={this.props.play}>play</button>
+        }
+        volume
         <input type='range' min={0} max={1} step='any' value={this.props.volume} onChange={this.props.setVolume} />
+        progress
         <input type='range' min={0} max={1} step='any' value={this.props.played}
           onMouseDown={this.onSeekMouseDown}
           onMouseUp={this.onSeekMouseUp}
