@@ -1,4 +1,7 @@
-import {PLAY, PAUSE, SET_PLAYING_SONG, SET_VOLUME, SET_PROGRESS, CLEAN_PLAYER} from "../constants/ActionTypes";
+import {PLAY, PAUSE, SET_PLAYING_SONG, SET_VOLUME, SET_PROGRESS, CLEAN_PLAYER,
+  PLAY_NEXT, PLAY_PREV} from "../constants/ActionTypes";
+import {at, findIndex} from 'lodash';
+
 
 export function play() {
   return {type: PLAY}
@@ -31,4 +34,58 @@ export function setProgress(progress){
     type: SET_PROGRESS,
     payload: progress
   }
+}
+
+export function playNextSong(currentSong, playlistPath){
+  return{
+    type: PLAY_NEXT,
+    payload: {currentSong, playlistPath}
+  }
+}
+
+export function playPrevSong(currentSong, playlistPath){
+  return{
+    type: PLAY_PREV,
+    payload: {currentSong, playlistPath}
+  }
+}
+
+
+export function next(currentSong, playlistPath) {
+  return (dispatch, getState) =>
+    playNext(currentSong, playlistPath, getNextSong)(dispatch, getState);
+}
+
+export function prev(currentSong, playlistPath) {
+  return (dispatch, getState) =>
+    playNext(currentSong, playlistPath, getPrevSong)(dispatch, getState);
+}
+
+
+function getPlaylist(playlistPath){
+  return getState => at(getState(), playlistPath)[0];
+}
+
+function getSongIndex(playlist, song) {
+  return findIndex(playlist, {id: song.id});
+}
+
+function playNext(currentSong, playlistPath, getNextSongToPlay){
+  return (dispatch, getState) => {
+    const currentPlaylist = getPlaylist(playlistPath)(getState);
+    if(!currentPlaylist) return Promise.resolve();
+    const currentSongIndex = getSongIndex(currentPlaylist, currentSong);
+    const nextSong = getNextSongToPlay(currentPlaylist, currentSongIndex);
+    return dispatch(setPlayingSong({...nextSong, playlist: playlistPath}));
+  }
+}
+
+function getNextSong(playlist, currentSongIndex) {
+  return currentSongIndex == playlist.length-1 ?
+    playlist[0] : playlist[currentSongIndex+1];
+}
+
+function getPrevSong(playlist, currentSongIndex) {
+  return currentSongIndex == 0 ?
+    playlist[ playlist.length-1] : playlist[currentSongIndex-1];
 }

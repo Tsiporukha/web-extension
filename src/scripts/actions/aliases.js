@@ -1,7 +1,9 @@
 import {updateSearchQueue} from './SongsActions';
 import {updateAutocomplete} from './AutocompleteActions'
-import {SEARCH_SONGS, SEARCH_AND_UPDATE_SEARCH_QUEUE, SEARCH_AND_UPDATE_AUTOCOMPLETE} from '../constants/ActionTypes';
+import {SEARCH_SONGS, SEARCH_AND_UPDATE_SEARCH_QUEUE, SEARCH_AND_UPDATE_AUTOCOMPLETE,
+  PLAY_NEXT, PLAY_PREV} from '../constants/ActionTypes';
 import {searchOnYoutube} from '../lib/youtube';
+import {next, prev} from './PlayerActions'
 
 function searchSongs(term){
   return dispatch => searchOnYoutube(term);
@@ -15,9 +17,20 @@ function searchAndUpdateAutocomplete(term) {
 //  return dispatch => searchAutocomplete(term)
 }
 
+function playNextSong(currentSong, playlistPath){
+  return (dispatch, getState) => next(currentSong, playlistPath)(dispatch, getState);
+}
+
+function playPrevSong(currentSong, playlistPath){
+  return (dispatch, getState) => prev(currentSong, playlistPath)(dispatch, getState);
+}
+
+
 const aliases = {};
 aliases[SEARCH_SONGS] = action => searchSongs(action.payload);
 aliases[SEARCH_AND_UPDATE_SEARCH_QUEUE] = action => searchAndUpdateSearchQueue(action.payload);
 aliases[SEARCH_AND_UPDATE_AUTOCOMPLETE] = action => searchAndUpdateAutocomplete(action.payload);
+aliases[PLAY_NEXT] = action => playNextSong(action.payload.currentSong, action.payload.playlistPath);
+aliases[PLAY_PREV] = action => playPrevSong(action.payload.currentSong, action.payload.playlistPath);
 
 export default aliases;
