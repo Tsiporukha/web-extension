@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import ReactPlayer from 'react-player'
+import React, { Component } from 'react';
+import ReactPlayer from 'react-player';
 import { connect } from 'react-redux';
 
 import {play, pause, setVolume, setProgress, playNextSong, playPrevSong} from '../actions/PlayerActions'
@@ -31,13 +31,20 @@ class Player extends Component {
 
   onSeekMouseDown = e => { this.setState({ seeking: true }) };
 
-  onSeekMouseUp = e => {
-    this.player.seekTo(parseFloat(e.target.value))
-    this.setState({ seeking: false })
-  };
-
   onProgress = progress => { if(!this.state.seeking) this.props.setProgress(progress) };
 
+  onSeekMouseUp = e => {
+    this.setState({ seeking: false });
+    this.player.seekTo(parseFloat(e.target.value));
+  };
+
+  syncPlayer = () => {
+    const wasPlaying = this.props.playing;
+    this.player.seekTo(this.props.played);
+    this.props.play();
+    if(!wasPlaying) this.props.pause();
+//    this.player.player.player.a.id = 'ytPlayer';
+  };
 
   componentDidMount(){
   }
@@ -56,7 +63,8 @@ class Player extends Component {
           volume={this.props.volume}
           onProgress={this.onProgress}
           onEnded={() => { this.props.next(this.props.playingSong, this.props.playingSong.playlist) }}
-          onDuration={duration => {console.log(duration)}}
+          onReady={this.syncPlayer}
+          onDuration={duration => { console.log(duration) }}
         />
         {this.props.playing ?
           <button className={'btn btn-warning'} onClick={this.props.pause}>pause</button> :
