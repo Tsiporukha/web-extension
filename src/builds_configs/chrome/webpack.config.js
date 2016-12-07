@@ -1,13 +1,12 @@
 const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
 
   entry: {
     bundle: __dirname + '/index', // will be  /build/chrome/bundle.js,
-    background: __dirname + '/background',
-    styles: './src/assets/styles/_main.scss'
+    background: __dirname + '/background'
   },
   output: {
     path: './build/chrome',
@@ -26,12 +25,8 @@ module.exports = {
         }
       },
       {
-        test: /\.scss$/,
-        loader: ExtractTextPlugin.extract('style-loader', 'css-loader!resolve-url!sass-loader?sourceMap')
-      },
-      {
-        test: /\.css$/,
-        loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
+        test: /\.(scss|css)$/,
+        loader: ExtractTextPlugin.extract('style-loader', 'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!sass?sourceMap')
       },
       {
         test: /\.woff2?$|\.ttf$|\.eot$|\.svg$|\.png|\.jpe?g|\.gif$/,
@@ -46,9 +41,9 @@ module.exports = {
       {from: __dirname + '/logo.png'},
       {from: __dirname + '/echo.css'}
     ]),
-    new ExtractTextPlugin('styles.css', {
-      allChunks: true
-    })
-  ]
+    new ExtractTextPlugin('styles.css', {allChunks: true})
+  ],
+
+  stats: { children: false }
 
 }

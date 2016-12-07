@@ -1,4 +1,4 @@
-.echo-ext-root-fade {
+.fade {
   opacity:    0.9;
   background: #000;
   width:      100%;
@@ -11,6 +11,3 @@
   overflow:   auto;
   input{color: #343434}
 }
-
-@import 'queue.scss';
-@import 'bootstrap.css';

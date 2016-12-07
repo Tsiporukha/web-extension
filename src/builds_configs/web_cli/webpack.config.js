@@ -1,13 +1,12 @@
 const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 
 module.exports = {
 
   entry: {
-    bundle: __dirname + '/index.js', // will be  /build/bundle.js
-    styles: './src/assets/styles/_main.scss'
+    bundle: __dirname + '/index.js' // will be  /build/bundle.js
   },
   output: {
     path: './build/web',
@@ -26,12 +25,8 @@ module.exports = {
         }
       },
       {
-        test: /\.scss$/,
-        loader: ExtractTextPlugin.extract('style-loader', 'css-loader!resolve-url!sass-loader?sourceMap')
-      },
-      {
-        test: /\.css$/,
-        loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
+        test: /\.(scss|css)$/,
+        loader: ExtractTextPlugin.extract('style-loader', 'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!sass?sourceMap')
       },
       {
         test: /\.woff2?$|\.ttf$|\.eot$|\.svg$|\.png|\.jpe?g|\.gif$/,
@@ -44,9 +39,9 @@ module.exports = {
     new CopyWebpackPlugin([
       {from: __dirname + '/index.html'}  // {output}/index.html
     ]),
-    new ExtractTextPlugin('styles.css', {
-      allChunks: true
-    })
-  ]
+    new ExtractTextPlugin('styles.css', {allChunks: true})
+  ],
+
+  stats: { children: false }
 
 }
