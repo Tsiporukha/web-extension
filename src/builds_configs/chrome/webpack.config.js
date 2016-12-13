@@ -2,7 +2,10 @@ const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
+const nmPath = '../../../node_modules';
+
 module.exports = {
+  cache: true,
 
   entry: {
     bundle: __dirname + '/index', // will be  /build/chrome/bundle.js,
@@ -43,6 +46,16 @@ module.exports = {
     ]),
     new ExtractTextPlugin('styles.css', {allChunks: true})
   ],
+
+  noParse: [
+    nmPath + '/react',
+    nmPath + '/react-dom',
+    nmPath + '/redux',
+    nmPath + '/redux-thunk',
+    nmPath + '/react-toolbox',
+    nmPath + '/react-player',
+    nmPath + 'lodash'
+   ],
 
   stats: { children: false }
 

@@ -7,7 +7,7 @@ import YT from './yt.js';
 if(!(window['YT'] && window['YT'].loaded)) YT();
 
 if(!document.getElementById('echo-app-ext')){
-  document.body.innerHTML = document.body.innerHTML + '<div id="echo-app-ext" class="echo-ext-root-fade"></div>';
+  document.body.innerHTML = document.body.innerHTML + '<div id="echo-app-ext"></div>';
 }
 
 

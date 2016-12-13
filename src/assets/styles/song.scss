@@ -1,0 +1,66 @@
+.artwork{
+  padding: 0;
+  height: 60px;
+  width: 60px;
+
+
+  img{
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.content{
+  width: calc(100% - 60px - 80px);
+  border-bottom: 1px solid #e1e1e1;
+  padding: 0 0 0 10px;
+  height: 60px;
+  color: #A5A5A5;
+  font-size: 11px;
+}
+
+.title{
+  font-size: 12px;
+  padding-top: 6px;
+  color: #000;
+}
+
+.duration{
+  font-size: 10px;
+}
+
+
+.icons{
+  padding: 0;
+  width: 80px;
+  height: 60px;
+  cursor: pointer;
+  border-bottom: 1px solid #e1e1e1;
+
+  :global(.material-icons){
+    font-size: 30px;
+    top: 15px;
+    position: relative;
+    margin: 0 8px;
+  }
+}
+
+.playPause{
+  position: relative;
+  z-index: 1;
+  width: 40px;
+  height: 40px;
+  left: 9px;
+  bottom: 51px;
+
+  :global(.material-icons){
+    font-size: 26px;
+    color: white;
+    padding: 8px;
+    cursor: pointer;
+    border-radius: 60px;
+    background-color: rgba(0, 0, 0, 0.5);
+
+    &:hover, &:active{ background-color: rgba(0, 0, 0, 0.8); }
+  }
+}

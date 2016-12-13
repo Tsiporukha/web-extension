@@ -1,0 +1,10 @@
+.queue{
+  background: #fafafa;
+  height: 500px;
+}
+
+.songList{
+  overflow-y: auto;
+  &.current{ height: 386px; }
+  &.search{ height: 446px; }
+}

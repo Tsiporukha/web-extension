@@ -12,7 +12,9 @@
   "browser_action": {
     "default_icon": "logo.png"
   },
-  "permissions": ["tabs", "activeTab", "*://*.googleapis.com/*"],
+  "permissions": ["tabs", "activeTab", "<all_urls>"],
+
+  "content_security_policy": "script-src 'self' https://maxcdn.bootstrapcdn.com https://fonts.gstatic.com https://googleapis.com 'unsafe-eval'; object-src 'self'",
 
   "content_scripts": [
     {

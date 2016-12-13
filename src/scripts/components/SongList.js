@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { List } from 'react-toolbox/lib/list';
 import Song from './Song';
 
 export default class SongList extends Component {
@@ -14,7 +15,7 @@ export default class SongList extends Component {
               removeFromCurrentQueue={this.props.removeFromCurrentQueue}
               play={this.props.play}
             />)
-          )}
+        )}
           </div> :
           <div>No songs</div>
         }

@@ -5,6 +5,7 @@ import {addToCurrentQueue, addToCurrentQueueTop, searchAndUpdateSearchQueue} fro
 import {setPlayingSong, play} from '../actions/PlayerActions';
 import SongList from '../components/SongList';
 import { Typeahead } from 'react-typeahead';
+import styles from '../../assets/styles/queue.scss';
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -29,7 +30,7 @@ class SearchQueue extends Component {
   render(){
     let typeaheadConstr;
     return (
-      <div>
+      <div className={styles.queue}>
         Search queue
         <form onSubmit={e => {
           e.preventDefault();
@@ -45,17 +46,19 @@ class SearchQueue extends Component {
               console.log(typeaheadConstr.state.entryValue);
             }}
           />
-          <button className={'btn btn-info'} type="submit">Search</button>
+          <button hidden type="submit">.</button>
         </form>
-        <button onClick={() => { this.props.addToCurrentQueue(this.props.songs) }}
-          className={'btn btn-success'}> add all to queue </button>
-        <button onClick={() => { this.props.playAll(this.props.songs) }}
-          className={'btn btn-success'}> play all </button>
-        <SongList
-          songs={this.props.songs}
-          addToCurrentQueue={this.props.addToCurrentQueue}
-          play={(song) => {this.props.playAll([song])}}
-        />
+        <i onClick={() => { this.props.addToCurrentQueue(this.props.songs) }}
+          className={'material-icons'}>&#xE145;</i>
+        <i onClick={() => { this.props.playAll(this.props.songs) }}
+          className={'material-icons'}>&#xE037;</i>
+        <div className={`${styles.songList} ${styles.search}`}>
+          <SongList
+            songs={this.props.songs}
+            addToCurrentQueue={this.props.addToCurrentQueue}
+            play={(song) => {this.props.playAll([song])}}
+          />
+        </div>
       </div>
     )
   }

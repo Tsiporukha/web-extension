@@ -1,0 +1,21 @@
+.tabs, .tab{
+//  height: 100%;
+}
+
+.pointer{
+  background-color: white;
+}
+
+.label{
+  color: rgba(255, 255, 255, 0.7);
+
+  &.active{
+    color: white;
+  }
+
+}
+
+.navigation{
+  box-shadow: none;
+  overflow-x: none;
+}
