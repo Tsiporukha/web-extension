@@ -11,7 +11,7 @@ export default class Song extends Component {
   render() {
     return (
       <div className={`${bp.row} no-margin`}>
-        <div className={`${bp['col-xs-1']} ${styles.artwork}`}>
+        <div className={`${bp['col-xs-1']} no-padding ${styles.artwork}`}>
           <img src={this.props.song.artwork_url} />
           <span className={styles.playPause}>
             <PlayPauseSong songId={this.props.song.id} play={() => this.props.play(this.props.song)}/>
@@ -22,7 +22,7 @@ export default class Song extends Component {
           <div className={`${bp.row} no-margin`}>{this.props.song.artist}</div>
           <div className={`${bp.row} no-margin ${styles.duration}`}>{duration(this.props.song.duration)}</div>
         </div>
-        <div className={`${bp['col-xs-1']} ${styles.icons}`}>
+        <div className={`${bp['col-xs-1']} no-padding ${styles.icons}`}>
           {this.props.addToCurrentQueue && <i className="material-icons pull-right"
             onClick={() => this.props.addToCurrentQueue([this.props.song])}>&#xE145;</i> }
           {this.props.removeFromCurrentQueue && <i className="material-icons pull-right"

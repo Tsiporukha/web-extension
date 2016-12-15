@@ -1,5 +1,10 @@
-.tabs, .tab{
-//  height: 100%;
+.tabs{
+  height: 100%;
+}
+
+.tab{
+  height: calc(100% - 100px);
+  padding-bottom: 0;
 }
 
 .pointer{

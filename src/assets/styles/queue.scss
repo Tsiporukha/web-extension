@@ -1,10 +1,61 @@
+$headerHeight: 28px;
+$sqHeaderPadding: 10px;
+
 .queue{
   background: #fafafa;
-  height: 500px;
 }
 
 .songList{
   overflow-y: auto;
-  &.current{ height: 386px; }
-  &.search{ height: 446px; }
+  &.current{ height: calc(100% - 28px - 20px); }
+  &.search{ height: calc(100% - 28px - 20px); }
+}
+
+
+.header{
+  background-color: #273559;
+  color: #fff;
+  height: $headerHeight;
+  padding: 10px;
+  font-size: 14px;
+}
+
+.sqHeader{
+  composes: header;
+  padding: $sqHeaderPadding;
+  .icons{
+    box-sizing: border-box;
+    padding: 2px 0;
+    i{
+      float: right;
+      font-size: 26px;
+      position: relative;
+      top: -1px;
+      padding: 0 4px;
+      cursor: pointer;
+    }
+  }
+}
+
+.search{
+  input {
+    width: 100%;
+    border-radius: 4px;
+    outline: none;
+    border: none;
+    height: 20px;
+    padding: 4px 8px;
+  }
+}
+
+.cqInfo{
+  position: relative;
+  top: 4px;
+  i{
+    float: right;
+    position: relative;
+    top: -5px;
+    font-size: 30px;
+    cursor: pointer;
+  }
 }

@@ -34,10 +34,15 @@ class CurrentQueue extends Component {
   render(){
     const queueDuration = flowRight([durationWithHours, sumBy])(this.props.songs, 'duration');
     return (
-      <div className={styles.queue}>
-        {this.props.songs && <div>Current Queue: {this.props.songs.length} songs, {queueDuration}</div>}
-        <i className="material-icons pull-right"
-          onClick={() => { this.props.cleanCurrentQueue(this.props.songs, this.props.isQueuePlaying) }}>&#xE5CD;</i>
+      <div className={`${styles.queue} h100perc`}>
+        {this.props.songs && <div className={`${styles.header}`}>
+          <span className={styles.cqInfo}>
+            YOUR QUEUE: <b>{this.props.songs.length} songs, {queueDuration}</b>
+            <i className="material-icons"
+              onClick={() => { this.props.cleanCurrentQueue(this.props.songs, this.props.isQueuePlaying) }}>&#xE5CD;</i>
+            <i className="material-icons">add</i>
+          </span>
+        </div>}
         <div className={`${styles.songList} ${styles.current}`}>
           <SongList {...this.props}/>
         </div>
