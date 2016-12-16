@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import ReactPlayer from 'react-player';
 import { connect } from 'react-redux';
 import Slider from 'react-toolbox/lib/slider';
-import {play, pause, setVolume, setProgress, playNextSong, playPrevSong} from '../actions/PlayerActions'
+import {play, pause, setVolume, setProgress, playNextSong, playPrevSong, clean} from '../actions/PlayerActions'
+import {removeFromCurrentQueue} from '../actions/SongsActions';
 import {duration} from '../lib/duration';
 import styles from '../../assets/styles/player.scss';
 
@@ -24,7 +25,13 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     pause: () => { dispatch(pause()) },
 //    setVolume: (e) => { dispatch(setVolume(parseFloat(e.target.value))) },
     setVolume: (value) => dispatch(setVolume(value)),
-    setProgress: (progress) => { dispatch(setProgress(progress)) }
+    setProgress: (progress) => { dispatch(setProgress(progress)) },
+    removeFromCurrentQueue: song => {
+      dispatch(playNextSong(song, song.playlist)).then(newCurSong => {
+        dispatch(removeFromCurrentQueue([song]));
+        if(newCurSong.id == song.id) dispatch(clean());
+      });
+    }
   }
 }
 
@@ -81,6 +88,8 @@ class Player extends Component {
              onChange={e => { this.props.setProgress({played: parseFloat(e.target.value)}) }}/>
         </div>
         {duration(this.state.duration *(1 - this.props.played))}
+        {this.props.playingSong.playlist == 'currentQueue' && <i className="material-icons"
+          onClick={() => this.props.removeFromCurrentQueue(this.props.playingSong)}>close</i>}
 
         <ReactPlayer
           ref={player => { this.player = player }}
