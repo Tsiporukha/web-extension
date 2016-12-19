@@ -5,10 +5,11 @@
 .tab{
   height: calc(100% - 100px);
   padding-bottom: 0;
+  &:focus{outline: none;}
 }
 
 .pointer{
-  background-color: white;
+  display: none;
 }
 
 .label{
@@ -16,6 +17,7 @@
 
   &.active{
     color: white;
+    border-left: 3px solid white;
   }
 
 }
@@ -26,5 +28,18 @@
 }
 
 .navigationContainer{
-  display: none
+  position: fixed;
+  width: 180px;
+  top: 40px;
+  left: 2px;
+
+  .navigation{
+    display: inline;
+    label{
+      padding: 14px 0px 14px 40px;
+      text-align: left;
+      font-size: 22px;
+      text-transform: none;
+    }
+  }
 }

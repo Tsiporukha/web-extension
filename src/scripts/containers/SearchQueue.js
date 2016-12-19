@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import {addToCurrentQueue, addToCurrentQueueTop, searchAndUpdateSearchQueue} from '../actions/SongsActions';
 import {setPlayingSong, play} from '../actions/PlayerActions';
 import SongList from '../components/SongList';
-import { Typeahead } from 'react-typeahead';
 
 import styles from '../../assets/styles/queue.scss';
 import bp from '../../assets/styles/bootstrap.css';
@@ -30,24 +29,24 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 
 class SearchQueue extends Component {
   render(){
-    let typeaheadConstr;
+    let searchInput;
     return (
       <div className={`${styles.queue} h100perc`}>
         <div className={`${bp.row} no-margin ${styles.sqHeader}`}>
           <div className={`${bp['col-xs-9']} no-padding`}>
-            <form onSubmit={e => {
-              e.preventDefault();
-              if (!typeaheadConstr.state.entryValue.trim()) return;
-              this.props.searchAndUpdateSearchQueue(typeaheadConstr.state.entryValue);
+            <form className={`${styles.search}`}
+              onSubmit={e => {
+                e.preventDefault();
+                if (!searchInput.value.trim()) return;
+                this.props.searchAndUpdateSearchQueue(searchInput.value);
             }}>
-              <Typeahead
-                ref={node => { typeaheadConstr = node }}
+              <input
+                type='text'
+                ref={node => { searchInput = node }}
                 // options={this.props.autocomplete}
-                className={`${styles.search}`}
-                maxVisible={8}
                 onKeyUp={ e => {
-                  if (!typeaheadConstr || typeaheadConstr.state.entryValue.trim().length < 3) return;
-                  console.log(typeaheadConstr.state.entryValue);
+                  if (!searchInput || searchInput.value.trim().length < 3) return;
+                  console.log(searchInput.value);
                 }}
               />
               <button hidden type="submit">.</button>

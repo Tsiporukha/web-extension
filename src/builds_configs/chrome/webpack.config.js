@@ -6,6 +6,7 @@ const nmPath = '../../../node_modules';
 
 module.exports = {
   cache: true,
+  devtool: 'eval',
 
   entry: {
     bundle: __dirname + '/index', // will be  /build/chrome/bundle.js,
@@ -23,7 +24,7 @@ module.exports = {
         exclude: /(node_modules|bower_components)/,
         loader: 'babel',
         query: {
-          presets: ['es2015', 'stage-0', 'react'],
+          presets: ['react', 'es2015', 'stage-0'],
           plugins: ['transform-object-rest-spread']
         }
       },
@@ -48,14 +49,8 @@ module.exports = {
   ],
 
   noParse: [
-    nmPath + '/react',
-    nmPath + '/react-dom',
-    nmPath + '/redux',
-    nmPath + '/redux-thunk',
-    nmPath + '/react-toolbox',
-    nmPath + '/react-player',
-    nmPath + 'lodash'
-   ],
+    nmPath
+  ],
 
   stats: { children: false }
 
