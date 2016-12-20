@@ -668,7 +668,7 @@ export default function(){
         this.a.width = 640;
         this.a.height = 390;
         this.a.title = "";
-        this.a.host = ("https:" == document.location.protocol ? "https:" : "http:") + "//www.youtube.com"
+        this.a.host = ("https:" == document.location.protocol ? "https:" : "https:") + "//www.youtube.com"
       }
       var W = null;
 

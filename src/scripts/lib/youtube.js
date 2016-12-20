@@ -1,7 +1,7 @@
-import fetch from 'isomorphic-fetch'
-import find from 'lodash/find'
+import fetch from 'isomorphic-fetch';
+import find from 'lodash/find';
 
-import {YOUTUBE_API_KEY} from '../constants/skeys.js'
+import {YOUTUBE_API_KEY} from '../constants/skeys.js';
 const BASE_URL = 'https://www.googleapis.com/youtube/v3';
 
 export function searchOnYoutube(term){
@@ -29,8 +29,8 @@ function parseYoutubeItem(item){
     uid: `youtube/${item['id']['videoId']}`,
     source: 'youtube',
     artwork_url: item['snippet']['thumbnails']['high']['url'],
-    data_url: `http://www.youtube.com/watch?v=${item['id']['videoId']}`,
-    export_data_url: `http://www.youtube.com/watch?v=${item['id']['videoId']}`,
+    data_url: `https://www.youtube.com/watch?v=${item['id']['videoId']}`,
+    export_data_url: `https://www.youtube.com/watch?v=${item['id']['videoId']}`,
     artist,
     title,
     duration: ytDurationToSeconds(item['snippet']['duration'])
