@@ -5,7 +5,7 @@ import {at, findIndex} from 'lodash';
 
 export function play() {
   return {type: PLAY}
-};
+}
 
 export function pause() {
   return {type: PAUSE}

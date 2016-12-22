@@ -20,8 +20,8 @@ class PlayPauseSong extends Component {
   render(){
     return (
       this.props.isPlaing ?
-        <i className="material-icons" onClick={this.props.pause}>&#xE034;</i> :
-        <i className="material-icons" onClick={this.props.play}>&#xE037;</i>
+        <i className='material-icons' onClick={this.props.pause}>&#xE034;</i> :
+        <i className='material-icons' onClick={this.props.play}>&#xE037;</i>
     )
   }
 }

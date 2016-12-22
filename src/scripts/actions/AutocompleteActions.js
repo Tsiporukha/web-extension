@@ -5,7 +5,7 @@ export function updateAutocomplete(variants) {
     type: UPDATE_AUTOCOMPLETE,
     payload: variants
   }
-};
+}
 
 export function searchAndUpdateAutocomplete(term) {
   return {

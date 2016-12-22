@@ -1,5 +1,5 @@
 import { v4 } from 'node-uuid'
-import * as types from "../constants/ActionTypes";
+import * as types from '../constants/ActionTypes';
 
 
 export function addToCurrentQueue(songs) {

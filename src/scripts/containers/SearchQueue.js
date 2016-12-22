@@ -16,13 +16,13 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    addToCurrentQueue: (songs) => { dispatch(addToCurrentQueue(songs)) },
-    searchAndUpdateSearchQueue: (term) => { dispatch(searchAndUpdateSearchQueue(term)) },
-    playAll: (songs) => {
+    addToCurrentQueue: songs => dispatch(addToCurrentQueue(songs)),
+    searchAndUpdateSearchQueue: term => dispatch(searchAndUpdateSearchQueue(term)),
+    playAll: songs => {
       const fSongs = songs.map(song => ({id: v4(), ...song}) );
       dispatch(addToCurrentQueueTop(fSongs));
       dispatch(setPlayingSong({...fSongs[0], playlist: 'currentQueue'}));
-      dispatch(play());
+      return dispatch(play());
     }
   }
 }
@@ -38,25 +38,25 @@ class SearchQueue extends Component {
               onSubmit={e => {
                 e.preventDefault();
                 if (!searchInput.value.trim()) return;
-                this.props.searchAndUpdateSearchQueue(searchInput.value);
+                return this.props.searchAndUpdateSearchQueue(searchInput.value);
             }}>
               <input
                 type='text'
                 ref={node => { searchInput = node }}
                 // options={this.props.autocomplete}
-                onKeyUp={ e => {
+                onKeyUp={e => {
                   if (!searchInput || searchInput.value.trim().length < 3) return;
                   console.log(searchInput.value);
                 }}
               />
-              <button hidden type="submit">.</button>
+              <button hidden type='submit'>.</button>
             </form>
           </div>
           <div className={`${bp['col-xs-3']} ${styles.icons}`}>
-            <i onClick={() => { this.props.addToCurrentQueue(this.props.songs) }}
+            <i onClick={() => this.props.addToCurrentQueue(this.props.songs)}
               className={`material-icons`}>add</i>
             <i className={`material-icons`}>playlist_play</i>
-            <i onClick={() => { this.props.playAll(this.props.songs) }}
+            <i onClick={() => this.props.playAll(this.props.songs)}
               className={`material-icons`}>play_arrow</i>
           </div>
         </div>
@@ -64,7 +64,7 @@ class SearchQueue extends Component {
           <SongList
             songs={this.props.songs}
             addToCurrentQueue={this.props.addToCurrentQueue}
-            play={(song) => {this.props.playAll([song])}}
+            play={song => this.props.playAll([song])}
           />
         </div>
       </div>

@@ -10,12 +10,12 @@ function searchSongs(term){
 }
 
 function searchAndUpdateSearchQueue(term) {
-  return dispatch => searchOnYoutube(term).then(songs => { dispatch(updateSearchQueue(songs)) })
+  return dispatch => searchOnYoutube(term).then(songs => dispatch(updateSearchQueue(songs)))
 }
 
-function searchAndUpdateAutocomplete(term) {
+//function searchAndUpdateAutocomplete(term) {
 //  return dispatch => searchAutocomplete(term)
-}
+//}
 
 function playNextSong(currentSong, playlistPath){
   return (dispatch, getState) => next(currentSong, playlistPath)(dispatch, getState);
@@ -29,7 +29,7 @@ function playPrevSong(currentSong, playlistPath){
 const aliases = {};
 aliases[SEARCH_SONGS] = action => searchSongs(action.payload);
 aliases[SEARCH_AND_UPDATE_SEARCH_QUEUE] = action => searchAndUpdateSearchQueue(action.payload);
-aliases[SEARCH_AND_UPDATE_AUTOCOMPLETE] = action => searchAndUpdateAutocomplete(action.payload);
+//aliases[SEARCH_AND_UPDATE_AUTOCOMPLETE] = action => searchAndUpdateAutocomplete(action.payload);
 aliases[PLAY_NEXT] = action => playNextSong(action.payload.currentSong, action.payload.playlistPath);
 aliases[PLAY_PREV] = action => playPrevSong(action.payload.currentSong, action.payload.playlistPath);
 
