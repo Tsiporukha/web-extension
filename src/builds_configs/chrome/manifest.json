@@ -6,7 +6,7 @@
   "description": "Echo chrome extension",
 
   "background": {
-    "scripts": ["background.js"],
+    "page": "background.html",
     "persistent": true
   },
   "browser_action": {
@@ -25,6 +25,11 @@
       "matches": ["*://*.echoapplication.com/*"],
       "css": ["echo.css"]
     }
+  ],
+
+  "web_accessible_resources": [
+    "background.html",
+    "echo.css"
   ]
 
 }

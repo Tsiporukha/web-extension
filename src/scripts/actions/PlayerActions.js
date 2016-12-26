@@ -1,5 +1,5 @@
 import {PLAY, PAUSE, SET_PLAYING_SONG, SET_VOLUME, SET_PROGRESS, CLEAN_PLAYER,
-  PLAY_NEXT, PLAY_PREV} from "../constants/ActionTypes";
+  PLAY_NEXT, PLAY_PREV, SEET_TO} from "../constants/ActionTypes";
 import {at, findIndex} from 'lodash';
 
 
@@ -47,6 +47,13 @@ export function playPrevSong(currentSong, playlistPath){
   return{
     type: PLAY_PREV,
     payload: {currentSong, playlistPath}
+  }
+}
+
+export function seekTo(val){
+  return{
+    type: SEET_TO,
+    payload: val
   }
 }
 

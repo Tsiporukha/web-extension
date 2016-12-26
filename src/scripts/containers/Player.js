@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import ReactPlayer from 'react-player';
 import { connect } from 'react-redux';
 import Slider from 'react-toolbox/lib/slider';
-import {play, pause, setVolume, setProgress, playNextSong, playPrevSong, clean} from '../actions/PlayerActions'
+import {play, pause, setVolume, setProgress, playNextSong, playPrevSong, clean,
+  seekTo} from '../actions/PlayerActions'
 import {removeFromCurrentQueue} from '../actions/SongsActions';
 import {duration} from '../lib/duration';
 import styles from '../../assets/styles/player.scss';
@@ -14,7 +15,7 @@ const mapStateToProps = (state, ownProps) => {
       playing: state.player.playing,
       volume: state.player.volume,
       played: state.player.played
-    } : {played: 0, volume: 80, playingSong: {}}
+    } : {played: 0, volume: 80, playingSong: {duration: 0}}
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
@@ -31,7 +32,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         dispatch(removeFromCurrentQueue([song]));
         if(newCurSong.id == song.id) dispatch(clean());
       });
-    }
+    },
+    seekTo: val => dispatch(seekTo(val))
   }
 }
 
@@ -45,7 +47,7 @@ class Player extends Component {
 
   onSeekMouseUp = e => {
     this.setState({ seeking: false });
-    return this.player.seekTo(parseFloat(e.target.value));
+    return this.props.seekTo(parseFloat(e.target.value));
   };
 
   syncPlayer = () => {
@@ -77,19 +79,20 @@ class Player extends Component {
 
         <i className='material-icons'>&#xE04D;</i>
         <div className={styles["player-volume"]}> <Slider min={0} max={1} value={this.props.volume} onChange={this.props.setVolume} /> </div>
-        {duration(this.state.duration * this.props.played)}
+        {duration(this.props.playingSong.duration * this.props.played)}
         <div className={styles["song-progress"]} >
           <input type='range' step='any'  min={0} max={1} value={this.props.played}
             onMouseUp={this.onSeekMouseUp}
             onMouseDown={this.onSeekMouseDown}
-            onChange={e => { this.props.setProgress({played: parseFloat(e.target.value)}) }}/>
+            onChange={e =>  this.props.setProgress({played: parseFloat(e.target.value)})} />
         </div>
-        {duration(this.state.duration *(1 - this.props.played))}
+        {duration(this.props.playingSong.duration *(1 - this.props.played))}
         {this.props.playingSong.playlist == 'currentQueue' && <i className='material-icons'
           onClick={() => this.props.removeFromCurrentQueue(this.props.playingSong)}>close</i>}
 
+        {window.ONLY_IN_BG &&
         <ReactPlayer
-          ref={player => this.player = player}
+          ref={player =>  window.bgReactPlayer = this.player = player}
           className={styles.reactPlayer}
           width={240}
           height={135}
@@ -100,7 +103,7 @@ class Player extends Component {
           onEnded={() => this.props.next(this.props.playingSong, this.props.playingSong.playlist)}
           onReady={this.syncPlayer}
           onDuration={duration => this.setState({ duration })}
-        />
+        />}
       </div>
     )
   }

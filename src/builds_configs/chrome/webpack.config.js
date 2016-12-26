@@ -41,6 +41,7 @@ module.exports = {
 
   plugins: [
     new CopyWebpackPlugin([
+      {from: __dirname + '/background.html'},
       {from: __dirname + '/manifest.json'},
       {from: __dirname + '/logo.png'},
       {from: __dirname + '/echo.css'}
