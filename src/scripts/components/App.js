@@ -25,7 +25,7 @@ class App extends Component {
 
         <Tabs theme={tabStyles} index={this.state.index} onChange={this.handleTabChange}>
           <Tab label='Queue'> <QueueTab /> </Tab>
-          <Tab label='Secondary' className='hide-on-echo'>Scan</Tab>
+          <Tab label='Scan' className='hide-on-echo'>Scan</Tab>
           <Tab label='My playlists'> <i className='material-icons'>&#xE84F;</i> <i className='fa fa-eercast' aria-hidden='true' /></Tab>
           <Tab label='History'>History</Tab>
         </Tabs>

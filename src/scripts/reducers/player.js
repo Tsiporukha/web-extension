@@ -1,11 +1,13 @@
-import {PLAY, PAUSE, SET_PLAYING_SONG, SET_VOLUME, SET_PROGRESS, CLEAN_PLAYER} from '../constants/ActionTypes';
+import {PLAY, PAUSE, SET_PLAYING_SONG, SET_VOLUME, SET_PROGRESS, CLEAN_PLAYER,
+  SET_SEEKING} from '../constants/ActionTypes';
 
 const initialState = {
   currentSong: {},
   playing: true,
   volume: 0.8,
   played: 0,
-  loaded: 0
+  loaded: 0,
+  seeking: false
 }
 
 export default (state = initialState, action) => {
@@ -22,6 +24,8 @@ export default (state = initialState, action) => {
       return {...state, volume: action.payload}
     case SET_PROGRESS:
       return {...state, ...action.payload}
+    case SET_SEEKING:
+      return {...state, seeking: action.payload}
     case CLEAN_PLAYER:
       return initialState;
     default:

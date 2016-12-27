@@ -1,7 +1,7 @@
 import {updateSearchQueue} from './SongsActions';
 import {updateAutocomplete} from './AutocompleteActions'
 import {SEARCH_SONGS, SEARCH_AND_UPDATE_SEARCH_QUEUE, SEARCH_AND_UPDATE_AUTOCOMPLETE,
-  PLAY_NEXT, PLAY_PREV, SEET_TO} from '../constants/ActionTypes';
+  PLAY_NEXT, PLAY_PREV, SEEK_TO} from '../constants/ActionTypes';
 import {searchOnYoutube} from '../lib/youtube';
 import {next, prev} from './PlayerActions'
 
@@ -35,6 +35,6 @@ aliases[SEARCH_AND_UPDATE_SEARCH_QUEUE] = action => searchAndUpdateSearchQueue(a
 //aliases[SEARCH_AND_UPDATE_AUTOCOMPLETE] = action => searchAndUpdateAutocomplete(action.payload);
 aliases[PLAY_NEXT] = action => playNextSong(action.payload.currentSong, action.payload.playlistPath);
 aliases[PLAY_PREV] = action => playPrevSong(action.payload.currentSong, action.payload.playlistPath);
-aliases[SEET_TO] = action => seekTo(action.payload);
+aliases[SEEK_TO] = action => seekTo(action.payload);
 
 export default aliases;

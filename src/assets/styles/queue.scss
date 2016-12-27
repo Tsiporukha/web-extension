@@ -3,12 +3,13 @@ $sqHeaderPadding: 10px;
 
 .queue{
   background: #fafafa;
+  box-shadow: 0 4px 46px #020202;
 }
 
 .songList{
   overflow-y: auto;
   &.current{ height: calc(100% - 28px - 20px); }
-  &.search{ height: calc(100% - 28px - 20px); }
+  &.search{ height: calc(100% - 28px - 20px - 40px); }
 }
 
 
@@ -33,6 +34,21 @@ $sqHeaderPadding: 10px;
       top: -1px;
       padding: 0 4px;
       cursor: pointer;
+    }
+  }
+}
+
+.sources{
+  background-color: #273559;
+  color: #fff;
+  height: 40px;
+  background-color: rgb(39, 53, 89);
+  color: white;
+  font-size: 24px;
+  i{
+    padding: 0px 40px 10px;
+    &.active{
+      border-bottom: 2px solid #6fb0df;
     }
   }
 }

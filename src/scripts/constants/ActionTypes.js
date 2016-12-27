@@ -17,4 +17,5 @@ export const SET_VOLUME = 'SET_VOLUME';
 export const SET_PROGRESS = 'SET_PROGRESS';
 export const PLAY_NEXT = 'PLAY_NEXT';
 export const PLAY_PREV = 'PLAY_PREV';
-export const SEET_TO = 'SEEK_TO';
+export const SEEK_TO = 'SEEK_TO';
+export const SET_SEEKING = 'SET_SEEKING';
