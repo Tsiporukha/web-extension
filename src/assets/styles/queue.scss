@@ -8,8 +8,8 @@ $sqHeaderPadding: 10px;
 
 .songList{
   overflow-y: auto;
-  &.current{ height: calc(100% - 28px - 20px); }
-  &.search{ height: calc(100% - 28px - 20px - 40px); }
+  &.current{ height: calc(100% - 28px - 32px); }
+  &.search{ height: calc(100% - 28px - 16px - 40px); }
 }
 
 
@@ -23,7 +23,7 @@ $sqHeaderPadding: 10px;
 
 .sqHeader{
   composes: header;
-  padding: $sqHeaderPadding;
+  padding-bottom: 6px;
   .icons{
     box-sizing: border-box;
     padding: 2px 0;
@@ -38,6 +38,11 @@ $sqHeaderPadding: 10px;
   }
 }
 
+.cqHeader{
+  composes: header;
+  padding: 16px 10px;
+}
+
 .sources{
   background-color: #273559;
   color: #fff;
@@ -46,7 +51,7 @@ $sqHeaderPadding: 10px;
   color: white;
   font-size: 24px;
   i{
-    padding: 0px 40px 10px;
+    padding: 0px 34px 9px;
     &.active{
       border-bottom: 2px solid #6fb0df;
     }
@@ -71,7 +76,8 @@ $sqHeaderPadding: 10px;
     float: right;
     position: relative;
     top: -5px;
-    font-size: 30px;
+    font-size: 28px;
     cursor: pointer;
+    padding-right: 6px;
   }
 }

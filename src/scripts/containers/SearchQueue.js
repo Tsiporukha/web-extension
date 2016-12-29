@@ -32,7 +32,7 @@ class SearchQueue extends Component {
     return (
       <div className={`${styles.queue} h100perc`}>
         <div className={`${bp.row} no-margin ${styles.sqHeader}`}>
-          <div className={`${bp['col-xs-9']} no-padding`}>
+          <div className={`${bp['col-xs-8']} no-padding`}>
             <form className={`${styles.search}`}
               onSubmit={e => {
                 e.preventDefault();
@@ -51,7 +51,7 @@ class SearchQueue extends Component {
               <button hidden type='submit'>.</button>
             </form>
           </div>
-          <div className={`${bp['col-xs-3']} ${styles.icons}`}>
+          <div className={`${bp['col-xs-4']} ${styles.icons}`}>
             <i onClick={() => this.props.addToCurrentQueue(this.props.songs)}
               className={`material-icons`}>add</i>
             <i className={`material-icons`}>playlist_play</i>

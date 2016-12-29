@@ -1,8 +1,10 @@
 .emptyQueue{
   color: #757575;
   position: relative;
-  top: 28%;
+  top: 24%;
   text-align: center;
+
+  &.current{ top: calc(24% + 18px); }
 
   i{
     font-size: 20px;

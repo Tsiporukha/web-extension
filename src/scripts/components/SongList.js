@@ -17,11 +17,11 @@ export default class SongList extends Component {
       </span>
     </div>;
 
-    const cQueue = <div className={styles.emptyQueue}>
+    const cQueue = <div className={`${styles.emptyQueue} ${styles.current}`}>
       <i className={`material-icons ${styles.bigIcon}`}>queue_music</i> <br />
       <span>
         Create/modify playlists<i className='material-icons'>add</i> <br />
-        Clear <i className='material-icons'>clear</i> <br />
+        Clear <i className='material-icons'>clear_all</i> <br />
         <b>Hint:</b> Grag-n-drop songs from Search to Queue
       </span>
     </div>;
