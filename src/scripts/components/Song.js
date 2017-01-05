@@ -19,7 +19,7 @@ export default class Song extends Component {
         </div>
         <div className={`${bp['col-xs-1']} ${styles.content}`}>
           <div className={`${bp.row} no-margin ${styles.title}`}>{this.props.song.title}</div>
-          <div className={`${bp.row} no-margin`}>{this.props.song.artist}</div>
+          <div className={`${bp.row} no-margin ${styles.artist}`}>{this.props.song.artist}</div>
           <div className={`${bp.row} no-margin ${styles.duration}`}>{duration(this.props.song.duration)}</div>
         </div>
         <div className={`${bp['col-xs-1']} no-padding ${styles.icons}`}>

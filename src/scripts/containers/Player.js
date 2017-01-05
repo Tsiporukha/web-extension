@@ -3,7 +3,7 @@ import ReactPlayer from 'react-player';
 import { connect } from 'react-redux';
 import Slider from 'react-toolbox/lib/slider';
 import {play, pause, setVolume, setProgress, playNextSong, playPrevSong, clean,
-  seekTo, setSeeking} from '../actions/PlayerActions'
+  seekTo, setSeeking} from '../actions/PlayerActions';
 import {removeFromCurrentQueue} from '../actions/SongsActions';
 import {duration} from '../lib/duration';
 import styles from '../../assets/styles/player.scss';
@@ -25,7 +25,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     next: (currentSong, playlistPath) => dispatch(playNextSong(currentSong, playlistPath)),
     prev: (currentSong, playlistPath) => dispatch(playPrevSong(currentSong, playlistPath)),
     pause: () => dispatch(pause()),
-//    setVolume: (e) => { dispatch(setVolume(parseFloat(e.target.value))) },
     setVolume: (value) => dispatch(setVolume(value)),
     setProgress: (progress) => dispatch(setProgress(progress)),
     removeFromCurrentQueue: song => {
@@ -64,36 +63,41 @@ class Player extends Component {
   render () {
     return (
       <div className={styles["bottom-player"]} style={{visibility: this.props.playingSong.data_url ? 'visible' : 'hidden' }}>
+
         <div className={styles["cover"]}>
           <img src={this.props.playingSong.artwork_url} className={styles["cover"]} />
         </div>
-        <div className={styles["song-info"]}>
-          <h5>{this.props.playingSong.artist}</h5>
-          <h6>{this.props.playingSong.title}</h6>
+
+        <div className={styles.songInfo}>
+          <h5>{this.props.playingSong.title}</h5>
+          <h6>by {this.props.playingSong.artist}</h6>
         </div>
+
         <i onClick={e => this.props.prev(this.props.playingSong, this.props.playingSong.playlist)}
-          className='material-icons'>&#xE045;</i>
+          className={`material-icons ${styles.prev}`}>skip_previous</i>
         {this.props.playing ?
-          <i className={`material-icons ${styles['mi-bpause']}`} onClick={this.props.pause}>&#xE034;</i> :
-          <i className={`material-icons ${styles['mi-bpause']}`} onClick={this.props.play}>&#xE037;</i>
+          <i className={`material-icons ${styles.pause}`} onClick={this.props.pause}>pause</i> :
+          <i className={`material-icons ${styles.play}`} onClick={this.props.play}>play_arrow</i>
         }
         <i onClick={e => this.props.next(this.props.playingSong, this.props.playingSong.playlist)}
-          className='material-icons'>&#xE044;</i>
+          className={`material-icons ${styles.next}`}>skip_next</i>
 
-        <i className='material-icons'>&#xE04D;</i>
-        <div className={styles["player-volume"]}> <Slider min={0} max={1} value={this.props.volume} onChange={this.props.setVolume} /> </div>
+        <i className={`material-icons ${styles.volumeIcon}`}>volume_down</i>
+        <div className={styles.playerVolume}>
+          <Slider min={0} max={1} className={`${styles}`} value={this.props.volume} onChange={this.props.setVolume} />
+        </div>
+
         {duration(this.props.playingSong.duration * this.props.played)}
-        <div className={`${styles['song-progress']}`}
-          onMouseUp={this.onSeekMouseUp} >
-          <Slider className={`${styles['song-progress']}`} min={0} max={1} value={this.props.played}
+        <div className={`${styles.songProgress}`} onMouseUp={this.onSeekMouseUp}>
+          <Slider className={`${styles.slider}`} min={0} max={1} value={this.props.played}
             onChange={val => {
               this.props.setSeeking(true);
               return this.props.setProgress({played: val});
             }} />
         </div>
-        {duration(this.props.playingSong.duration *(1 - this.props.played))}
-        {this.props.playingSong.playlist == 'currentQueue' && <i className='material-icons'
-          onClick={() => this.props.removeFromCurrentQueue(this.props.playingSong)}>close</i>}
+        {duration(this.props.playingSong.duration * (1 - this.props.played))}
+
+        <i className={`material-icons ${styles.currentQueueIcon}`}>queue_music</i>
 
         {window.ONLY_IN_BG &&
         <ReactPlayer

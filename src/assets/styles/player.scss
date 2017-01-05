@@ -1,4 +1,4 @@
-$playerHeight: 60px;
+$playerHeight: 52px;
 i{cursor: pointer;}
 .bottom-player {
 	height: $playerHeight;
@@ -13,61 +13,54 @@ i{cursor: pointer;}
 	font-size: 13px;
   box-shadow: 0 2px 2px darkgray;
   z-index: 1;
+	box-sizing: border-box;
 
-  .material-icons{
-    font-size: 30px;
-  }
-
-  .mi-bplay, .mi-bpause{
-    font-size: 36px;
-    border-radius: 60px;
-    background-color: #5bbbff;
-    padding: 5px;
-    margin: 0;
-  }
-
-  .mi-tracklist{
-    margin: 0 40px 0 18px;
-    width: 45px;
-    height: 45px;
-    border-radius: 60px;
-    i{
-      font-size: 36px;
-      color: #939dac;
-      position: relative;
-      left: 4px;
-      top: 6px
-    }
-
-    &.is-open{
-      background-color: rgba(255, 255, 255, 0.18);
-      i{color: white;}
-    }
-
-  }
-
-  .mi-volume .material-icons{
-    padding-top: 4px;
-  }
-
-  .dropdown-menu{ left: -100px; }
-
-	> * {
-		margin: 0 7px 0 7px;
+	.cover, .cover img {
+		height: $playerHeight;
 	}
 
-	> *:first-child {
-		margin-left: 0;
-	}
-
-	.song-info {
-    padding-top: 12px;
-		width: 16%;
+	.songInfo {
+    padding-top: 8px;
+		width: 12%;
+		height: $playerHeight;
 		h5, h6 {
 			white-space: nowrap;
 			overflow: hidden;
 			text-overflow: ellipsis;
+			font-size: 12px;
+			color: white;
 		}
+		h5{
+			position: relative;
+			top: -3px;
+			font-size: 14px;
+		}
+	}
+
+	.play, .pause{
+		font-size: 28px;
+		border-radius: 60px;
+		background-color: #5bbbff;
+		padding: 5px;
+		margin: 0;
+	}
+	.prev, .next{font-size: 26px;}
+
+	.volumeIcon{
+		margin: 0 0 0 10px;
+		font-size: 26px;
+	}
+
+	.songProgress, .playerVolume {
+		padding-top: 10px;
+		padding-bottom: 10px;
+	}
+	.playerVolume {
+		width: 10%;
+	}
+	.songProgress {
+		display: flex;
+		flex-grow: 2;
 	}
 
 	.progress {
@@ -83,20 +76,6 @@ i{cursor: pointer;}
 		background-color: #5ABBFF;
 	}
 
-	.cover img {
-		height: 60px;
-	}
-
-	.song-progress {
-		display: flex;
-		flex-grow: 2;
-	}
-
-	.song-progress, .player-volume {
-		padding-top: 10px;
-		padding-bottom: 10px;
-	}
-
 	.circle {
 		width: 16px;
 		height: 16px;
@@ -109,37 +88,6 @@ i{cursor: pointer;}
 		margin-top: -7px;
 	}
 
-	.i-bplay, .i-bpause {
-		width: 44px;
-		height: 44px;
-	}
-
-	.player-volume {
-		width: 10%;
-	}
-
-	h5 {
-		margin-top: 0;
-		margin-bottom: 0;
-		font-weight: $playerHeight
-	}
-
-	h6 {
-		margin-top: 0;
-		font-weight: 400;
-	}
-
-	.i-repeat {
-		opacity: 0.6;
-		&.active {
-			opacity: 1;
-		}
-	}
-
-	i {
-		font-size: 22px;
-	}
-
 	.time {
 		margin: 0 4px 0 40px;
 	}
@@ -148,76 +96,50 @@ i{cursor: pointer;}
 		margin: 0 14px 0 4px;
 	}
 
-  .pl-length{
-    display: block;
-    position: absolute;
-    width: 16px;
-    height: 16px;
-    background-color: #0091ea;
-    border-radius: 600px;
-    bottom: 0;
-    right: 37px;
-    font-weight: 500;
-    color: white;
-    font-size: 10px;
-    padding-top: 2px;
-    text-align: center;
-  }
+	.currentQueueIcon{
+		font-size: 28px !important;
+		background-color: #525d7a;
+		border-radius: 60px;
+		padding: 5px;
+		margin: 0 30px 0 16px;
+		color: #959fad;
+	}
 
-  .playlist-popup{
-    position: fixed;
-    bottom: 70px;
-    right: 30px;
-    width: 424px;
-    height: 438px;
-    box-shadow: 0 0 10px 2px darkgray;
+	.pl-length{
+		display: block;
+		position: absolute;
+		width: 16px;
+		height: 16px;
+		background-color: #0091ea;
+		border-radius: 600px;
+		bottom: 0;
+		right: 37px;
+		font-weight: 500;
+		color: white;
+		font-size: 10px;
+		padding-top: 2px;
+		text-align: center;
+	}
 
-    .pl-pp{
-      height: 48px;
-      background-color: #273559;
-      color: white; padding: 16px;
-      font-size: 12px;
-      i{
-        position: relative;
-        font-size: 22px;
-        bottom: 2px;
-      }
-    }
 
-    .playlist{ height: 390px; }
 
-    .playlist-item{
-      .col-xs-9 {
-        padding-left: 8px;
-        text-align: left;
-      }
+	h5 {
+		margin-top: 0;
+		margin-bottom: 0;
+		font-weight: $playerHeight
+	}
+	h6 {
+		margin-top: 0;
+		font-weight: 400;
+	}
 
-      .source i{ font-size: 28px; }
-    }
+	> * {
+		margin: 0 7px 0 7px;
+	}
 
-    .duration{
-      padding: 7px 0 0 0;
-      text-align: right;
-      margin: 0;
-    }
-  }
-  .dropup{ cursor: pointer; }
-  .playlist:after{
-    height: 0;
-    box-shadow: none;
-  }
-  .popover.top{
-    color: transparent;
-    width: 0;
-    margin-left: -10px;
-    >.arrow {
-      bottom: -4px;
-      &:after{
-        z-index: 1;
-        bottom: 2px;
-      }
-    }
-  }
+	> *:first-child {
+		margin-left: 0;
+	}
 }
 
 .reactPlayer{
@@ -231,4 +153,26 @@ body.player-visible {
 	.main-content {
 		bottom: $playerHeight;
 	}
+}
+
+
+
+.slider{
+	width: 100%;
+	.container{
+		background-color: black;
+	}
+}
+
+.value{
+	background-color: #5ABBFF;
+}
+.innerknob{
+	background-color: white;
+}
+.knob{
+	background-color: black;
+}
+.linear{
+	background-color: #989BA1;
 }
