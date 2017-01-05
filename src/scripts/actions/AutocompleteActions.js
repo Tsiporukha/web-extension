@@ -1,15 +1,15 @@
-import {UPDATE_AUTOCOMPLETE, SEARCH_AND_UPDATE_AUTOCOMPLETE} from "../constants/ActionTypes";
+import {GET_AND_UPDATE_AUTOCOMPLETE, UPDATE_AUTOCOMPLETE} from "../constants/ActionTypes";
 
-export function updateAutocomplete(variants) {
+export function getAndUpdateAutocomplete(term) {
   return {
-    type: UPDATE_AUTOCOMPLETE,
-    payload: variants
+    type: GET_AND_UPDATE_AUTOCOMPLETE,
+    payload: term
   }
 }
 
-export function searchAndUpdateAutocomplete(term) {
+export function updateAutocomplete(suggestions) {
   return {
-    type: SEARCH_AND_UPDATE_AUTOCOMPLETE,
-    payload: term
+    type: UPDATE_AUTOCOMPLETE,
+    payload: suggestions
   }
 }

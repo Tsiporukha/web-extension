@@ -9,7 +9,7 @@ $sqHeaderPadding: 10px;
 .songList{
   overflow-y: auto;
   &.current{ height: calc(100% - 28px - 32px); }
-  &.search{ height: calc(100% - 28px - 16px - 40px); }
+  &.searchList{ height: calc(100% - 28px - 16px - 40px); }
 }
 
 
@@ -24,48 +24,52 @@ $sqHeaderPadding: 10px;
 .sqHeader{
   composes: header;
   padding-bottom: 6px;
+  height: 42px;
+
+  .search{
+    width: 70%;
+    display: inline-block;
+  }
+
   .icons{
     box-sizing: border-box;
-    padding: 2px 0;
+    padding: 0;
+    height: 26px;
+    top: 0;
+    width: 30%;
+    display: inline;
+    float: right;
     i{
-      float: right;
       font-size: 26px;
       position: relative;
-      top: -1px;
-      padding: 0 4px;
+      padding: 0px 2px;
       cursor: pointer;
+      &:first-child{ padding: 0px 4px 0px 8px;}
     }
   }
 }
 
 .cqHeader{
   composes: header;
-  padding: 16px 10px;
+  padding: 18px 10px 16px;
+  height: 60px;
 }
 
 .sources{
   background-color: #273559;
   color: #fff;
-  height: 40px;
+  height: 42px;
   background-color: rgb(39, 53, 89);
   color: white;
-  font-size: 24px;
+  font-size: 26px;
   i{
-    padding: 0px 34px 9px;
+    height: 39px;
+    padding: 2px 34px;
+    color: #a0a6b6;
     &.active{
+      color: white;
       border-bottom: 2px solid #6fb0df;
     }
-  }
-}
-
-.search{
-  input {
-    width: 100%;
-    border-radius: 4px;
-    outline: none;
-    border: none;
-    height: 20px;
-    padding: 4px 8px;
   }
 }
 
@@ -79,5 +83,36 @@ $sqHeaderPadding: 10px;
     font-size: 28px;
     cursor: pointer;
     padding-right: 6px;
+  }
+}
+
+
+.input{
+  padding: 0;
+  div{padding: 0;}
+  input{
+    border-radius: 4px;
+    outline: none;
+    border: none;
+    padding: 2px 8px;
+    height: 26px;
+    background-color: white;
+    font-size: 12px;
+    min-height: 20px!important;
+    width: 100%!important;
+    height: 26px!important;
+    margin: 0!important;
+  }
+  span{display: none;}
+
+  ul{
+    top: 64px;
+    color: #343434;
+    padding: 0;
+    margin: 0;
+  }
+  li{
+    padding: 4px;
+    font-size: 12px;
   }
 }
