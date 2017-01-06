@@ -7,6 +7,7 @@ import {play, pause, setVolume, setProgress, playNextSong, playPrevSong, clean,
 import {removeFromCurrentQueue} from '../actions/SongsActions';
 import {duration} from '../lib/duration';
 import styles from '../../assets/styles/player.scss';
+import sliderStyles from '../../assets/styles/slider.scss';
 
 const mapStateToProps = (state, ownProps) => {
   return state.player ?
@@ -86,18 +87,18 @@ class Player extends Component {
 
         <i className={`material-icons ${styles.volumeIcon}`}>volume_down</i>
         <div className={styles.playerVolume}>
-          <Slider min={0} max={1} className={`${styles}`} value={this.props.volume} onChange={this.props.setVolume} />
+          <Slider min={0} max={1} theme={sliderStyles} className={`${styles}`} value={this.props.volume} onChange={this.props.setVolume} />
         </div>
 
-        {duration(this.props.playingSong.duration * this.props.played)}
+        <span>{duration(this.props.playingSong.duration * this.props.played)}</span>
         <div className={`${styles.songProgress}`} onMouseUp={this.onSeekMouseUp}>
-          <Slider className={`${styles.slider}`} min={0} max={1} value={this.props.played}
+          <Slider theme={sliderStyles} min={0} max={1} value={this.props.played}
             onChange={val => {
               this.props.setSeeking(true);
               return this.props.setProgress({played: val});
             }} />
         </div>
-        {duration(this.props.playingSong.duration * (1 - this.props.played))}
+        <span>{duration(this.props.playingSong.duration * (1 - this.props.played))}</span>
 
         <i className={`material-icons ${styles.currentQueueIcon}`}>queue_music</i>
 

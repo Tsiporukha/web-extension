@@ -54,6 +54,7 @@ i{cursor: pointer;}
 	.songProgress, .playerVolume {
 		padding-top: 10px;
 		padding-bottom: 10px;
+		margin: 0 2px;
 	}
 	.playerVolume {
 		width: 10%;
@@ -153,26 +154,4 @@ body.player-visible {
 	.main-content {
 		bottom: $playerHeight;
 	}
-}
-
-
-
-.slider{
-	width: 100%;
-	.container{
-		background-color: black;
-	}
-}
-
-.value{
-	background-color: #5ABBFF;
-}
-.innerknob{
-	background-color: white;
-}
-.knob{
-	background-color: black;
-}
-.linear{
-	background-color: #989BA1;
 }

@@ -24,8 +24,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       return dispatch(play());
     },
     cleanCurrentQueue: (songs, isQueuePlaying) => {
-      dispatch(removeFromCurrentQueue(songs));
       if(isQueuePlaying) dispatch(cleanPlayer());
+      return dispatch(removeFromCurrentQueue(songs));
     }
   }
 }
