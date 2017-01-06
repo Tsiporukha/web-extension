@@ -31,6 +31,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       return dispatch(playNextSong(song, song.playlist)).then(newCurSong => {
         dispatch(removeFromCurrentQueue([song]));
         if(newCurSong.id == song.id) dispatch(clean());
+        return newCurSong;
       });
     },
     seekTo: val => dispatch(seekTo(val)),
@@ -42,7 +43,7 @@ class Player extends Component {
 
   state = {duration: 0};
 
-  onProgress = progress => { console.log(this.props.seeking); if(!this.props.seeking) this.props.setProgress(progress) };
+  onProgress = progress => this.props.seeking ? false : this.props.setProgress(progress);
 
 
   onSeekMouseDown = e => this.props.setSeeking(true);
@@ -57,6 +58,7 @@ class Player extends Component {
     this.player.seekTo(this.props.played);
     this.props.play();
     if(!wasPlaying) this.props.pause();
+    return true;
 //    this.player.player.player.a.id = 'ytPlayer';
   };
 
@@ -99,7 +101,7 @@ class Player extends Component {
 
         <i className={`material-icons ${styles.currentQueueIcon}`}>queue_music</i>
 
-        {window.ONLY_IN_BG &&
+        {!window.HIDE_ER_PLAYER &&
         <ReactPlayer
           ref={player =>  window.bgReactPlayer = this.player = player}
           className={styles.reactPlayer}

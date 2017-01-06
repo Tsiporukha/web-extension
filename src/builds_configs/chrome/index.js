@@ -10,6 +10,7 @@ if(!document.getElementById('echo-app-ext')){
   document.body.innerHTML = document.body.innerHTML + '<div id="echo-app-ext"></div>';
 }
 
+window.HIDE_ER_PLAYER = true;
 
 const proxyStore =  new Store({portName: 'echo-app-ext'});
 

@@ -11,8 +11,6 @@ import Player from '../../scripts/containers/Player';
 import YT from './yt.js';
 if(!(window['YT'] && window['YT'].loaded)) YT();
 
-window.ONLY_IN_BG = true;
-
 
 const store = configureStore();
 wrapStore(store, {portName: 'echo-app-ext'}); // make sure portName matches
