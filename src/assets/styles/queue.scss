@@ -88,7 +88,7 @@ $sqHeaderPadding: 10px;
 
 
 .input{
-  padding: 0;
+  padding: 0!important;
   div{padding: 0;}
   input{
     border-radius: 4px;
@@ -116,3 +116,4 @@ $sqHeaderPadding: 10px;
     font-size: 12px;
   }
 }
+.autocomplete{padding: 0;}

@@ -7,7 +7,9 @@ import {play, pause, setVolume, setProgress, playNextSong, playPrevSong, clean,
 import {removeFromCurrentQueue} from '../actions/SongsActions';
 import {duration} from '../lib/duration';
 import styles from '../../assets/styles/player.scss';
+import bp from '../../assets/styles/bootstrap.css';
 import sliderStyles from '../../assets/styles/slider.scss';
+import CurrentQueue from './CurrentQueue';
 
 const mapStateToProps = (state, ownProps) => {
   return state.player ?
@@ -42,7 +44,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 
 class Player extends Component {
 
-  state = {duration: 0};
+  state = {duration: 0, tracklistOpened: false};
 
   onProgress = progress => this.props.seeking ? false : this.props.setProgress(progress);
 
@@ -62,6 +64,8 @@ class Player extends Component {
     return true;
 //    this.player.player.player.a.id = 'ytPlayer';
   };
+
+  toggleTracklistOpened = () => this.setState({tracklistOpened: !this.state.tracklistOpened})
 
   render () {
     return (
@@ -100,7 +104,8 @@ class Player extends Component {
         </div>
         <span>{duration(this.props.playingSong.duration * (1 - this.props.played))}</span>
 
-        <i className={`material-icons ${styles.currentQueueIcon}`}>queue_music</i>
+        <i className={`material-icons ${this.state.tracklistOpened? styles.currentQueueIconActive : styles.currentQueueIcon}`}
+          onClick={this.toggleTracklistOpened}>queue_music</i>
 
         {!window.HIDE_ER_PLAYER &&
         <ReactPlayer
@@ -116,6 +121,8 @@ class Player extends Component {
           onReady={this.syncPlayer}
           onDuration={duration => this.setState({ duration })}
         />}
+
+        {this.state.tracklistOpened && <div className={`${bp['col-xs-3']} ${styles.currentQueue}`}> <CurrentQueue /></div>}
       </div>
     )
   }

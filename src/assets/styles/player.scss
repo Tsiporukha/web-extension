@@ -97,13 +97,11 @@ i{cursor: pointer;}
 		margin: 0 14px 0 4px;
 	}
 
-	.currentQueueIcon{
-		font-size: 28px !important;
-		background-color: #525d7a;
-		border-radius: 60px;
-		padding: 5px;
-		margin: 0 30px 0 16px;
-		color: #959fad;
+	.currentQueue{
+		position: fixed;
+		bottom: 62px;
+		height: 400px;
+		right: 0;
 	}
 
 	.pl-length{
@@ -141,6 +139,20 @@ i{cursor: pointer;}
 	> *:first-child {
 		margin-left: 0;
 	}
+}
+
+.currentQueueIcon{
+	font-size: 28px !important;
+	border-radius: 60px;
+	padding: 5px;
+	margin: 0 30px 0 16px;
+	color: #959fad;
+}
+
+.currentQueueIconActive{
+	composes: currentQueueIcon;
+	background-color: #525d7a;
+	color: white;
 }
 
 .reactPlayer{
