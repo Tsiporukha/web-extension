@@ -7,7 +7,9 @@ import YT from './yt.js';
 if(!(window['YT'] && window['YT'].loaded)) YT();
 
 if(!document.getElementById('echo-app-ext')){
-  document.body.innerHTML = document.body.innerHTML + '<div id="echo-app-ext"></div>';
+  const div = document.createElement('div');
+  div.setAttribute('id', 'echo-app-ext');
+  document.body.appendChild(div);
 }
 
 window.HIDE_ER_PLAYER = true;
