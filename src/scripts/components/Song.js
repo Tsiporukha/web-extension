@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 import PlayPauseSong from '../containers/PlayPauseSong';
 
 import bp from '../../assets/styles/bootstrap.css';
@@ -7,6 +7,20 @@ import styles from '../../assets/styles/song.scss';
 import {duration} from '../lib/duration';
 
 export default class Song extends Component {
+
+  static propTypes = {
+    song: PropTypes.shape({
+      id: PropTypes.string,
+      title: PropTypes.string,
+      artist: PropTypes.string,
+      artwork_url: PropTypes.string,
+      duration: PropTypes.number
+    }),
+
+    addToCurrentQueue: PropTypes.func,
+    play: PropTypes.func,
+    removeFromCurrentQueue: PropTypes.func
+  }
 
   render() {
     return (

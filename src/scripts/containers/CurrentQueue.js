@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import {removeFromCurrentQueue} from '../actions/SongsActions';
 import {setPlayingSong, play, clean as cleanPlayer} from '../actions/PlayerActions';
@@ -20,8 +20,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     removeFromCurrentQueue: (songs) => dispatch(removeFromCurrentQueue(songs)),
     play: (song) => {
-      dispatch(setPlayingSong({...song, playlist: 'currentQueue'}));
-      return dispatch(play());
+      return dispatch(setPlayingSong({...song, playlist: 'currentQueue'}))
+        .then(() => dispatch(play()));
     },
     cleanCurrentQueue: (songs, isQueuePlaying) => {
       if(isQueuePlaying) dispatch(cleanPlayer());
@@ -31,6 +31,17 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 }
 
 class CurrentQueue extends Component {
+
+  static propTypes = {
+    songs: PropTypes.array,
+    isQueuePlaying: PropTypes.bool,
+
+    cleanCurrentQueue: PropTypes.func,
+    play: PropTypes.func,
+    removeFromCurrentQueue: PropTypes.func
+  }
+
+
   render(){
     const queueDuration = flowRight([durationWithHours, sumBy])(this.props.songs, 'duration');
     return (

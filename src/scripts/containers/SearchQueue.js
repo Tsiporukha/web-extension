@@ -1,5 +1,5 @@
 import { v4 } from 'node-uuid'
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 import { connect } from 'react-redux';
 import {addToCurrentQueue, addToCurrentQueueTop, searchAndUpdateSearchQueue} from '../actions/SongsActions';
 import {getAndUpdateAutocomplete} from '../actions/AutocompleteActions';
@@ -32,6 +32,16 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 }
 
 class SearchQueue extends Component {
+
+  static propTypes = {
+    songs: PropTypes.array,
+    suggestions: PropTypes.array,
+
+    getAndUpdateAutocomplete: PropTypes.func,
+    addToCurrentQueue: PropTypes.func,
+    playAll: PropTypes.func,
+    searchAndUpdateSearchQueue: PropTypes.func
+  }
 
   updateSearchPhrase = phrase => this.searchPhrase = phrase;
 

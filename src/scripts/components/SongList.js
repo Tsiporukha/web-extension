@@ -1,12 +1,20 @@
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 import { List } from 'react-toolbox/lib/list';
 import Song from './Song';
 
 import styles from '../../assets/styles/songList.scss';
 
 export default class SongList extends Component {
-  render() {
 
+  static propTypes = {
+    songs: PropTypes.array,
+
+    addToCurrentQueue: PropTypes.func,
+    play: PropTypes.func,
+    removeFromCurrentQueue: PropTypes.func
+  }
+
+  render() {
     const sQueue = <div className={styles.emptyQueue}>
       <i className={`material-icons ${styles.bigIcon}`}>search</i> <br />
       <span>

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component, PropTypes} from 'react';
 import ReactPlayer from 'react-player';
 import { connect } from 'react-redux';
 import Slider from 'react-toolbox/lib/slider';
@@ -43,6 +43,33 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 }
 
 class Player extends Component {
+
+  static propTypes = {
+    playingSong: PropTypes.shape({
+      id: PropTypes.string,
+      title: PropTypes.string,
+      artist: PropTypes.string,
+      artwork_url: PropTypes.string,
+      data_url: PropTypes.string,
+      duration: PropTypes.number,
+      playlist: PropTypes.string
+    }),
+    seeking: PropTypes.bool,
+    isQueuePlaying: PropTypes.bool,
+    playing: PropTypes.bool,
+    played: PropTypes.number,
+    volume:  PropTypes.number,
+
+    play: PropTypes.func,
+    pause: PropTypes.func,
+    prev: PropTypes.func,
+    next: PropTypes.func,
+    setVolume: PropTypes.func,
+    setProgress: PropTypes.func,
+    setSeeking: PropTypes.func,
+    seekTo: PropTypes.func
+  }
+
 
   state = {duration: 0, tracklistOpened: false};
 
