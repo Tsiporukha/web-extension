@@ -17,15 +17,32 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
+
+  /**
+   * Remove passed songs from current queue
+   * @param  {array} songs - songs for removing
+   * @return {array}       removed songs
+   */
+  const _removeFromCurrentQueue = songs => dispatch(removeFromCurrentQueue(songs));
+
   return {
-    removeFromCurrentQueue: (songs) => dispatch(removeFromCurrentQueue(songs)),
+    removeFromCurrentQueue: _removeFromCurrentQueue,
+
     play: (song) => {
-      return dispatch(setPlayingSong({...song, playlist: 'currentQueue'}))
-        .then(() => dispatch(play()));
+      return dispatch(setPlayingSong(song))
+        .then(() => dispatch(play())).then(e => console.log(e));
     },
+    
+    /**
+     * Remove passed songs from current queue.
+     * Stop Player if playing playlist is current queue
+     * @param  {array} songs - songs for removing. Should be all songs from current queue
+     * @param  {Boolean} isQueuePlaying - is current queue playing
+     * @return {array}       removed songs
+     */
     cleanCurrentQueue: (songs, isQueuePlaying) => {
       if(isQueuePlaying) dispatch(cleanPlayer());
-      return dispatch(removeFromCurrentQueue(songs));
+      return _removeFromCurrentQueue(songs);
     }
   }
 }
@@ -44,13 +61,19 @@ class CurrentQueue extends Component {
 
   render(){
     const queueDuration = flowRight([durationWithHours, sumBy])(this.props.songs, 'duration');
+
+    /**
+     * removes all songs from current queue
+     * @return {array} removed songs
+     */
+    const clearQueue = () => this.props.cleanCurrentQueue(this.props.songs, this.props.isQueuePlaying);
+
     return (
       <div className={`${styles.queue} h100perc`}>
         {this.props.songs && <div className={`${styles.cqHeader}`}>
           <span className={styles.cqInfo}>
             YOUR QUEUE: <b>{this.props.songs.length} songs, {queueDuration}</b>
-            <i className='material-icons'
-              onClick={() => this.props.cleanCurrentQueue(this.props.songs, this.props.isQueuePlaying)}>clear_all</i>
+            <i className='material-icons' onClick={clearQueue}>clear_all</i>
             <i className='material-icons'>add</i>
           </span>
         </div>}

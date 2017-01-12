@@ -21,6 +21,12 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     addToCurrentQueue: songs => dispatch(addToCurrentQueue(songs)),
     searchAndUpdateSearchQueue: term => dispatch(searchAndUpdateSearchQueue(term)),
+
+    /**
+     * Add all songs from SongList to CurrentQueue top, then start first song
+     * playing from current queue
+     * @param  {array} songs
+     */
     playAll: songs => {
       const fSongs = songs.map(song => ({id: v4(), ...song}) );
       dispatch(addToCurrentQueueTop(fSongs));
@@ -43,9 +49,21 @@ class SearchQueue extends Component {
     searchAndUpdateSearchQueue: PropTypes.func
   }
 
-  updateSearchPhrase = phrase => this.searchPhrase = phrase;
-
   render(){
+
+    // Autocomplete
+    const updateSearchPhrase = phrase => this.searchPhrase = phrase;
+
+    const onAutocompleteQueryChange = val => {
+      if(val.length > 2) this.props.getAndUpdateAutocomplete(val);
+      return updateSearchPhrase(val);
+    }
+
+    const onAutocompleteValueChange = val => {
+      if(val.trim()) this.props.searchAndUpdateSearchQueue(val);
+      return updateSearchPhrase(val);
+    }
+
     return (
       <div className={`${styles.queue} h100perc`}>
         <div className={`${bp.row} no-margin ${styles.sqHeader}`}>
@@ -56,14 +74,8 @@ class SearchQueue extends Component {
               multiple={false}
               direction='down'
               source={this.props.suggestions}
-              onQueryChange={val => {
-                if(val.length > 2) this.props.getAndUpdateAutocomplete(val);
-                return this.updateSearchPhrase(val);
-              }}
-              onChange={val => {
-                if(val.trim()) this.props.searchAndUpdateSearchQueue(val);
-                return this.updateSearchPhrase(val);
-              }}
+              onQueryChange={onAutocompleteQueryChange}
+              onChange={onAutocompleteValueChange}
               value={this.searchPhrase}
             />
           </div>

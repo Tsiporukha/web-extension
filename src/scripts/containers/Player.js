@@ -73,16 +73,20 @@ class Player extends Component {
 
   state = {duration: 0, tracklistOpened: false};
 
+  // ReactPlayer
+  //
+  /**
+   * callback for onProgress event
+   * @param  {hash} progress - played and loaded progress as fraction,
+   * eg {played: 0.12, loaded: 0.34}
+   * @return {[type]}          update progress state if not seeking
+   */
   onProgress = progress => this.props.seeking ? false : this.props.setProgress(progress);
 
-
-  onSeekMouseDown = e => this.props.setSeeking(true);
-
-  onSeekMouseUp = e => {
-    this.props.setSeeking(false);
-    return this.props.seekTo(this.props.played);
-  };
-
+  /**
+   * synchronize ReactPlayer with current state
+   * @return {[type]} [description]
+  */
   syncPlayer = () => {
     const wasPlaying = this.props.playing;
     this.player.seekTo(this.props.played);
@@ -92,6 +96,16 @@ class Player extends Component {
 //    this.player.player.player.a.id = 'ytPlayer';
   };
 
+  // songProgress
+  onSeekMouseDown = e => this.props.setSeeking(true);
+
+  onSeekMouseUp = e => {
+    this.props.setSeeking(false);
+    return this.props.seekTo(this.props.played);
+  };
+
+
+  // playing queue
   toggleTracklistOpened = () => this.setState({tracklistOpened: !this.state.tracklistOpened})
 
   render () {

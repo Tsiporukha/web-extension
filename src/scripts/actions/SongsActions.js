@@ -5,14 +5,14 @@ import * as types from '../constants/ActionTypes';
 export function addToCurrentQueue(songs) {
   return {
     type: types.ADD_SONGS,
-    payload:  songs.map(song => ({id: v4(), ...song}) )
+    payload: songs.map(song => ({id: v4(), playlist: 'currentQueue', ...song}) )
   }
 }
 
 export function addToCurrentQueueTop(songs) {
   return {
     type: types.ADD_SONGS_TO_TOP,
-    payload:  songs.map(song => ({id: v4(), ...song}) )
+    payload: songs.map(song => ({id: v4(), playlist: 'currentQueue', ...song}) )
   }
 }
 
