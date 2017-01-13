@@ -8,6 +8,7 @@ $sqHeaderPadding: 10px;
 
 .songList{
   overflow-y: auto;
+  width: 100%;
   &.current{ height: calc(100% - 28px - 32px); }
   &.searchList{ height: calc(100% - 28px - 16px - 40px); }
 }
@@ -29,6 +30,43 @@ $sqHeaderPadding: 10px;
   .search{
     width: 70%;
     display: inline-block;
+
+    .autocomplete{padding: 0;}
+    .focus{
+      border: none;
+      span, .bar{display: none;}
+    }
+
+    .input{
+      padding: 0;
+      &:after{display: none;}
+
+      input{
+        border-radius: 4px;
+        outline: none;
+        border: none;
+        padding: 2px 8px;
+        height: 26px;
+        background-color: white;
+        font-size: 12px;
+        min-height: 20px!important;
+        width: 100%!important;
+        height: 26px!important;
+        margin: 0!important;
+      }
+
+      .suggestions{
+        top: 23px;
+        color: #343434;
+        padding: 0;
+        margin: 0;
+        .suggestion{
+          padding: 4px;
+          font-size: 12px;
+        }
+      }
+    }
+
   }
 
   .icons{
@@ -85,35 +123,3 @@ $sqHeaderPadding: 10px;
     padding-right: 6px;
   }
 }
-
-
-.input{
-  padding: 0!important;
-  div{padding: 0;}
-  input{
-    border-radius: 4px;
-    outline: none;
-    border: none;
-    padding: 2px 8px;
-    height: 26px;
-    background-color: white;
-    font-size: 12px;
-    min-height: 20px!important;
-    width: 100%!important;
-    height: 26px!important;
-    margin: 0!important;
-  }
-  span{display: none;}
-
-  ul{
-    top: 64px;
-    color: #343434;
-    padding: 0;
-    margin: 0;
-  }
-  li{
-    padding: 4px;
-    font-size: 12px;
-  }
-}
-.autocomplete{padding: 0;}

@@ -1,15 +1,18 @@
 const webpack = require('webpack');
+const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const nmPath = '../../../node_modules';
+
+const joinToDirname = _path => path.join(__dirname, _path);
 
 module.exports = {
   cache: true,
   devtool: 'eval',
 
   entry: {
-    bundle: __dirname + '/index.js' // will be  /build/bundle.js
+    bundle: joinToDirname('/index.js') // will be  /build/bundle.js
   },
   output: {
     path: './build/web',
@@ -40,7 +43,7 @@ module.exports = {
 
   plugins: [
     new CopyWebpackPlugin([
-      {from: __dirname + '/index.html'}  // {output}/index.html
+      {from: joinToDirname('/index.html')}  // {output}/index.html
     ]),
     new ExtractTextPlugin('styles.css', {allChunks: true})
   ],

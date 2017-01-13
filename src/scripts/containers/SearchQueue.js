@@ -77,6 +77,7 @@ class SearchQueue extends Component {
               onQueryChange={onAutocompleteQueryChange}
               onChange={onAutocompleteValueChange}
               value={this.searchPhrase}
+              theme={styles}
             />
           </div>
           <div className={`${styles.icons}`}>
