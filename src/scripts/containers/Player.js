@@ -148,7 +148,7 @@ class Player extends Component {
         <i className={`material-icons ${this.state.tracklistOpened? styles.currentQueueIconActive : styles.currentQueueIcon}`}
           onClick={this.toggleTracklistOpened}>queue_music</i>
 
-        {!window.HIDE_ER_PLAYER &&
+        {!window.HIDE_ER_PLAYER && !window.echoApi &&
         <ReactPlayer
           ref={player =>  window.bgReactPlayer = this.player = player}
           className={styles.reactPlayer}

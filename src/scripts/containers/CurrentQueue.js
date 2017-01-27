@@ -6,6 +6,7 @@ import SongList from '../components/SongList';
 import styles from '../../assets/styles/queue.scss';
 
 import {withHours as durationWithHours} from '../lib/duration';
+import * as EchoCli from '../lib/echoWebCliApi';
 import {sumBy, flowRight} from 'lodash';
 
 const mapStateToProps = (state, ownProps) => {
@@ -32,7 +33,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       return dispatch(setPlayingSong(song))
         .then(() => dispatch(play())).then(e => console.log(e));
     },
-    
+
     /**
      * Remove passed songs from current queue.
      * Stop Player if playing playlist is current queue
@@ -74,7 +75,7 @@ class CurrentQueue extends Component {
           <span className={styles.cqInfo}>
             YOUR QUEUE: <b>{this.props.songs.length} songs, {queueDuration}</b>
             <i className='material-icons' onClick={clearQueue}>clear_all</i>
-            <i className='material-icons'>add</i>
+            <i className='material-icons' onClick={() => EchoCli.either((() => EchoCli.playQueue(this.props.songs, 0)))}>add</i>
           </span>
         </div>}
         <div className={`${styles.songList} ${styles.current}`}>
