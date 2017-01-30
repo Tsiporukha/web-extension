@@ -47,7 +47,7 @@
     "grunt": "^0.4.5",
     "grunt-webpack": "^1.0.18",
     "immutability-helper": "^2.0.0",
-    "node-sass": "^3.13.0",
+    "node-sass": "^4.4.0",
     "react-addons-css-transition-group": "^15.4.1",
     "resolve-url-loader": "^1.6.0",
     "sass-loader": "^4.0.2",
