@@ -1,8 +1,17 @@
-import findIndex from 'lodash/findIndex';
 import at from 'lodash/at';
 import {loadState} from '../store/localStorage.js';
 
-export function isEchoApi(){ return !!window.echoApi }
+const CURRENT_QUEUE_ID = -1;
+const getPlayingPlaylist = () => window.echoApi.getPlayingPlaylist() || {};
+const getSongIndex = (songs, song) => songs.findIndex(sng => sng.id == song.id);
+
+export const isEchoApi = () => !!window.echoApi;
+export const isPlaylistPlaying = playlistId => getPlayingPlaylist().id == playlistId;
+
+export function either(right, left = () => false) {
+  return isEchoApi() ? right() : left();
+}
+
 
 export function playQueue(songs, playingSongPosition = 0) {
   return window.echoApi.playStream(createStreamData(songs), playingSongPosition);
@@ -13,8 +22,10 @@ export function playSongFrom(path, song) {
   return playQueue(songs, getSongIndex(songs, song));
 }
 
-export function either(right, left = () => false) {
-  return isEchoApi() ? right() : left();
+export function updatePlaylistSongs(path, streamId = CURRENT_QUEUE_ID) {
+  return getPlayingPlaylist().id == streamId ?
+   window.echoApi.updatePlaylistSongs(getSongsFromLocalStorage(path), streamId) :
+   false
 }
 
 
@@ -24,14 +35,11 @@ function createStreamData(songs) {
       title: 'Current Queue',
       songs
     },
-    id: -1,
+    id: CURRENT_QUEUE_ID,
     history_listeners:[]
   }
 }
 
-function getSongIndex(songs, song){
-  return findIndex(songs, {id: song.id});
-}
 
 function getSongsFromLocalStorage (path) {
   return at(loadState(), path)[0];
