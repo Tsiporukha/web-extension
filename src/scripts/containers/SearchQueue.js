@@ -7,6 +7,8 @@ import {setPlayingSong, play} from '../actions/PlayerActions';
 import SongList from '../components/SongList';
 import Autocomplete from 'react-toolbox/lib/autocomplete';
 
+import * as EchoCli from '../lib/echoWebCliApi';
+
 import styles from '../../assets/styles/queue.scss';
 import bp from '../../assets/styles/bootstrap.css';
 
@@ -18,8 +20,24 @@ const mapStateToProps = (state, ownPropsslider) => {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
+
+  const echoApi = {
+    maybePlayCurrentQueueWith: song => echoApi.isCurrentQueuePlaying() ? echoApi.play(song) : false,
+    isCurrentQueuePlaying: () => EchoCli.isPlaylistPlaying(EchoCli.CURRENT_QUEUE_ID),
+
+    play: song => EchoCli.playSongFrom('currentQueue', song)
+  }
+
+  const playCurrentQueueWith = song => {
+    dispatch(setPlayingSong({...song, playlist: 'currentQueue'}));
+    return dispatch(play());
+  }
+
   return {
-    addToCurrentQueue: songs => dispatch(addToCurrentQueue(songs)),
+    addToCurrentQueue: songs => {
+      dispatch(addToCurrentQueue(songs))
+      return EchoCli.maybeUpdatePlaylistSongs('currentQueue', EchoCli.CURRENT_QUEUE_ID);
+    },
     searchAndUpdateSearchQueue: term => dispatch(searchAndUpdateSearchQueue(term)),
 
     /**
@@ -30,8 +48,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     playAll: songs => {
       const fSongs = songs.map(song => ({id: v4(), ...song}) );
       dispatch(addToCurrentQueueTop(fSongs));
-      dispatch(setPlayingSong({...fSongs[0], playlist: 'currentQueue'}));
-      return dispatch(play());
+      return EchoCli.either(() => echoApi.maybePlayCurrentQueueWith(fSongs[0]),
+        () => playCurrentQueueWith(fSongs[0]));
     },
     getAndUpdateAutocomplete: term => dispatch(getAndUpdateAutocomplete(term))
   }

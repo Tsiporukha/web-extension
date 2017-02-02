@@ -26,7 +26,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
    */
   const _removeFromCurrentQueue = songs => {
     dispatch(removeFromCurrentQueue(songs));
-    return EchoCli.either(() => EchoCli.updatePlaylistSongs('currentQueue'));
+    return EchoCli.either(() => EchoCli.maybeUpdatePlaylistSongs('currentQueue'));
   }
 
   const _play = song => dispatch(setPlayingSong(song)).then(() => dispatch(play()));

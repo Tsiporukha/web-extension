@@ -22,7 +22,7 @@ export function playSongFrom(path, song) {
   return playQueue(songs, getSongIndex(songs, song));
 }
 
-export function updatePlaylistSongs(path, streamId = CURRENT_QUEUE_ID) {
+export function maybeUpdatePlaylistSongs(path, streamId = CURRENT_QUEUE_ID) {
   return getPlayingPlaylist().id == streamId ?
    window.echoApi.updatePlaylistSongs(getSongsFromLocalStorage(path), streamId) :
    false

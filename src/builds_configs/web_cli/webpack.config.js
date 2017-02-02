@@ -52,6 +52,17 @@ module.exports = {
     nmPath
   ],
 
-  stats: { children: false }
+  stats: { children: false },
+
+  watch: true,
+
+  watchOptions: {
+      aggregateTimeout: 500,
+      poll: true
+  },
+
+  keepalive: true,
+
+  inline: true
 
 }
