@@ -3,7 +3,7 @@ import React, {Component, PropTypes} from 'react';
 import { connect } from 'react-redux';
 import {addToCurrentQueue, addToCurrentQueueTop, searchAndUpdateSearchQueue} from '../actions/SongsActions';
 import {getAndUpdateAutocomplete} from '../actions/AutocompleteActions';
-import {setPlayingSong, play} from '../actions/PlayerActions';
+import {setPlayingSong, setPlayingSongId, play} from '../actions/PlayerActions';
 import SongList from '../components/SongList';
 import Autocomplete from 'react-toolbox/lib/autocomplete';
 
@@ -22,10 +22,10 @@ const mapStateToProps = (state, ownPropsslider) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
 
   const echoApi = {
-    maybePlayCurrentQueueWith: song => echoApi.isCurrentQueuePlaying() ? echoApi.play(song) : false,
-    isCurrentQueuePlaying: () => EchoCli.isPlaylistPlaying(EchoCli.CURRENT_QUEUE_ID),
-
-    play: song => EchoCli.playSongFrom('currentQueue', song)
+    playCurrentQueueWith: song => {
+      dispatch(setPlayingSongId(song.id));
+      return EchoCli.playSongFrom('currentQueue', song);
+    }
   }
 
   const playCurrentQueueWith = song => {
@@ -48,7 +48,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     playAll: songs => {
       const fSongs = songs.map(song => ({id: v4(), ...song}) );
       dispatch(addToCurrentQueueTop(fSongs));
-      return EchoCli.either(() => echoApi.maybePlayCurrentQueueWith(fSongs[0]),
+      return EchoCli.either(() => echoApi.playCurrentQueueWith(fSongs[0]),
         () => playCurrentQueueWith(fSongs[0]));
     },
     getAndUpdateAutocomplete: term => dispatch(getAndUpdateAutocomplete(term))

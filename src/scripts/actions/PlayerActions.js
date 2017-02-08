@@ -1,5 +1,5 @@
 import {PLAY, PAUSE, SET_PLAYING_SONG, SET_VOLUME, SET_PROGRESS, CLEAN_PLAYER,
-  PLAY_NEXT, PLAY_PREV, SEEK_TO, SET_SEEKING} from "../constants/ActionTypes";
+  PLAY_NEXT, PLAY_PREV, SEEK_TO, SET_SEEKING, SET_PLAYING_SONG_ID} from "../constants/ActionTypes";
 import {at, findIndex} from 'lodash';
 
 
@@ -19,6 +19,13 @@ export function setPlayingSong(song) {
   return {
     type: SET_PLAYING_SONG,
     payload: song
+  }
+}
+
+export function setPlayingSongId(songId) {
+  return {
+    type: SET_PLAYING_SONG_ID,
+    payload: songId
   }
 }
 

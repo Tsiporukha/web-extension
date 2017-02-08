@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import {removeFromCurrentQueue} from '../actions/SongsActions';
-import {setPlayingSong, play, clean as cleanPlayer} from '../actions/PlayerActions';
+import {setPlayingSong, setPlayingSongId, play, clean as cleanPlayer} from '../actions/PlayerActions';
 import SongList from '../components/SongList';
 import styles from '../../assets/styles/queue.scss';
 
@@ -29,18 +29,24 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     return EchoCli.either(() => EchoCli.maybeUpdatePlaylistSongs('currentQueue'));
   }
 
-  const _play = song => dispatch(setPlayingSong(song)).then(() => dispatch(play()));
+  const _play = song => dispatch(setPlayingSong(song));
 
 
   const echoCli = {
-    play: song => EchoCli.playSongFrom('currentQueue', song)
+    play: song => {
+      dispatch(setPlayingSongId(song.id));
+      return EchoCli.playSongFrom('currentQueue', song)
+    }
   }
 
 
   return {
     removeFromCurrentQueue: _removeFromCurrentQueue,
 
-    play: EchoCli.either(() => echoCli.play, () => _play),
+    play: song => {
+      EchoCli.either(() => echoCli.play(song), () => _play(song));
+      return dispatch(play());
+    },
 
     /**
      * Remove passed songs from current queue.

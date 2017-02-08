@@ -7,6 +7,9 @@ const getSongIndex = (songs, song) => songs.findIndex(sng => sng.id == song.id);
 
 export const isEchoApi = () => !!window.echoApi;
 export const isPlaylistPlaying = playlistId => getPlayingPlaylist().id == playlistId;
+export const getPlayingSongId = () => window.echoApi.getPlayingSongId();
+export const isSongPlaying = id => getPlayingSongId() == id;
+export const pause = () => window.echoApi.pausePlayingPlaylist();
 
 export function either(right, left = () => false) {
   return isEchoApi() ? right() : left();

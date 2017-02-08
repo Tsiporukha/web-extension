@@ -13,6 +13,7 @@ export const PLAY = 'PLAY';
 export const PAUSE = 'PAUSE';
 export const CLEAN_PLAYER = 'CLEAN_PLAYER';
 export const SET_PLAYING_SONG = 'SET_PLAYING_SONG';
+export const SET_PLAYING_SONG_ID = 'SET_PLAYING_SONG_ID';
 export const SET_VOLUME = 'SET_VOLUME';
 export const SET_PROGRESS = 'SET_PROGRESS';
 export const PLAY_NEXT = 'PLAY_NEXT';
