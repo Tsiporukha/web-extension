@@ -7,13 +7,15 @@ import Player from '../containers/Player';
 import styles from '../../assets/styles/app.scss';
 import tabStyles from '../../assets/styles/tabs.scss';
 
+import * as EchoCli from '../lib/echoWebCliApi';
+
 class App extends Component {
 
   state = {index: 0};
 
   handleTabChange = index => this.setState({index});
 
-  unmountApp = () => unmountComponentAtNode(document.getElementById('echo-app-ext'));
+  unmountApp = () => EchoCli.either(EchoCli.hideRoot, () => unmountComponentAtNode(document.getElementById('echo-app-ext')));
 
   render() {
     return (

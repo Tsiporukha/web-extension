@@ -1,4 +1,4 @@
-import { v4 } from 'node-uuid'
+import { v4 } from 'node-uuid';
 import React, {Component, PropTypes} from 'react';
 import { connect } from 'react-redux';
 import {addToCurrentQueue, addToCurrentQueueTop, searchAndUpdateSearchQueue} from '../actions/SongsActions';

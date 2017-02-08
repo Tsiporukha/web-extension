@@ -10,6 +10,8 @@ export const isPlaylistPlaying = playlistId => getPlayingPlaylist().id == playli
 export const getPlayingSongId = () => window.echoApi.getPlayingSongId();
 export const isSongPlaying = id => getPlayingSongId() == id;
 export const pause = () => window.echoApi.pausePlayingPlaylist();
+export const hideRoot = () => document.getElementById('echo-app-ext').style.visibility = 'hidden';
+
 
 export function either(right, left = () => false) {
   return isEchoApi() ? right() : left();
