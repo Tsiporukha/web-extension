@@ -109,8 +109,10 @@ class SearchQueue extends Component {
 
         <div className={`${bp.row} no-margin ${styles.sources} ${styles.active}`}>
           <i className={`fa fa-youtube `} />
-          <i className={`fa fa-soundcloud`} />
-          <i className={`fa fa-mixcloud`} />
+          {
+          //  <i className={`fa fa-soundcloud`} />
+          //  <i className={`fa fa-mixcloud`} />
+          }
         </div>
 
         <div className={`${styles.songList} ${styles.searchList}`}>

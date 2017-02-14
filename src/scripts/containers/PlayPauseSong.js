@@ -5,7 +5,8 @@ import * as EchoCli from '../lib/echoWebCliApi';
 
 const mapStateToProps = (state, ownProps) => {
   return state.player ?
-   {isPlaying: state.player.currentSong.id == ownProps.songId && state.player.playing} :
+   {isPlaying: state.player.playing && !!state.player.currentSong.id &&
+      state.player.currentSong.id == ownProps.songId} :
     {}
 }
 
