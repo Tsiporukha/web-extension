@@ -11,9 +11,8 @@ export function searchOnYoutube(term){
     .then(items => items.map(item => parseYoutubeItem(item)));
 }
 
-export function getSuggestions(term){
-  return fetch(`http://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=${term}`).then(resp => resp.json());
-}
+export const getSuggestions = term =>
+  fetch(`https://api.echoapplication.com/v1/songs/get_yt_suggestions?read_token=ecd61b6de296c006e273a2906dd80357&term=${term}`).then(resp => resp.json());
 
 function addYTDuration(items){
   const idsStr = items.map(item => item['id']['videoId']).join(', ')
