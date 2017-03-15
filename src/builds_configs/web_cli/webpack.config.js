@@ -5,7 +5,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const nmPath = '../../../node_modules';
 
-const joinToDirname = _path => path.join(__dirname, _path);
+const joinToDirname = pth => path.join(__dirname, pth);
 
 module.exports = {
   cache: true,
@@ -52,9 +52,7 @@ module.exports = {
     nmPath
   ],
 
-  stats: { children: false },
-
-  watch: true,
+  stats: {children: false},
 
   watchOptions: {
       aggregateTimeout: 500,

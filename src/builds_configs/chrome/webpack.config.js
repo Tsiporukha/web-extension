@@ -1,16 +1,19 @@
 const webpack = require('webpack');
+const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const nmPath = '../../../node_modules';
+
+const joinToDirname = pth => path.join(__dirname, pth);
 
 module.exports = {
   cache: true,
   devtool: 'eval',
 
   entry: {
-    bundle: __dirname + '/index', // will be  /build/chrome/bundle.js,
-    background: __dirname + '/background'
+    bundle: joinToDirname('/index'), // will be  /build/chrome/bundle.js,
+    background:joinToDirname('/background')
   },
   output: {
     path: './build/chrome',
@@ -41,10 +44,10 @@ module.exports = {
 
   plugins: [
     new CopyWebpackPlugin([
-      {from: __dirname + '/background.html'},
-      {from: __dirname + '/manifest.json'},
-      {from: __dirname + '/logo.png'},
-      {from: __dirname + '/echo.css'}
+      {from: joinToDirname('/background.html')},
+      {from: joinToDirname('/manifest.json')},
+      {from: joinToDirname('/logo.png')},
+      {from: joinToDirname('/echo.css')}
     ]),
     new ExtractTextPlugin('styles.css', {allChunks: true})
   ],
@@ -53,7 +56,7 @@ module.exports = {
     nmPath
   ],
 
-  watch: true,
+  stats: {children: false},
 
   watchOptions: {
       aggregateTimeout: 500,
@@ -62,13 +65,6 @@ module.exports = {
 
   keepalive: true,
 
-  inline: true,
-
-  stats: {
-    children: false,
-    colors: false,
-    modules: true,
-    reasons: true
-  }
+  inline: true
 
 }
