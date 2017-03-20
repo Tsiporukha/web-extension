@@ -13,7 +13,10 @@ const configureStore = () => {
   const store = createStore(rootReducer, loadState(), composeEnhancers(
     applyMiddleware(alias(aliases), thunkMiddleware))); // a normal Redux store
 
-  store.subscribe(throttle(() => saveState({currentQueue: store.getState().currentQueue}), 1000));
+  store.subscribe(throttle(() => saveState({
+    currentQueue: store.getState().currentQueue,
+    session: store.getState().session
+  }), 1000));
 
   return store;
 }

@@ -20,3 +20,7 @@ export const PLAY_NEXT = 'PLAY_NEXT';
 export const PLAY_PREV = 'PLAY_PREV';
 export const SEEK_TO = 'SEEK_TO';
 export const SET_SEEKING = 'SET_SEEKING';
+
+export const AUTH_USER = 'AUTH_USER';
+export const SET_USER_DATA = 'SET_USER_DATA';
+export const CLEAN_SESSION = 'CLEAN_SESSION';

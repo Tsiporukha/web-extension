@@ -1993,7 +1993,7 @@ eslint-config-standard@^7.0.1:
   version "7.0.1"
   resolved "https://registry.yarnpkg.com/eslint-config-standard/-/eslint-config-standard-7.0.1.tgz#6cec96084de9ac862c33ccb953d13a7c59872342"
 
-eslint-plugin-fp@^2.2.0:
+eslint-plugin-fp@^2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/eslint-plugin-fp/-/eslint-plugin-fp-2.3.0.tgz#376d2a108710e981980bdc3875e3b9920da0489c"
   dependencies:
