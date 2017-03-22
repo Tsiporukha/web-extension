@@ -52,8 +52,8 @@ const chromeConfig = {
   name: 'chrome',
 
   entry: {
-    bundle: joinToDirname(jointToChromeDir('/index')),
-    background:joinToDirname(jointToChromeDir('/background'))
+    background:joinToDirname(jointToChromeDir('/background')),
+    bundle: joinToDirname(jointToChromeDir('/index'))
   },
   output: {
     path: joinToDirname('/build/chrome'),
