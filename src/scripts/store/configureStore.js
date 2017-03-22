@@ -15,7 +15,8 @@ const configureStore = () => {
 
   store.subscribe(throttle(() => saveState({
     currentQueue: store.getState().currentQueue,
-    session: store.getState().session
+    session: store.getState().session,
+    streams: store.getState().streams
   }), 1000));
 
   return store;

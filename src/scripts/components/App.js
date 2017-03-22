@@ -3,6 +3,7 @@ import {unmountComponentAtNode} from 'react-dom';
 import {connect} from 'react-redux';
 import {Tab, Tabs} from 'react-toolbox';
 import QueueTab from './QueueTab';
+import MyStreams from '../containers/MyStreams';
 import Player from '../containers/Player';
 import styles from '../../assets/styles/app.scss';
 import tabStyles from '../../assets/styles/tabs.scss';
@@ -27,6 +28,7 @@ class App extends Component {
 
         <Tabs theme={tabStyles} index={this.state.index} onChange={this.handleTabChange}>
           <Tab label='Queue'> <QueueTab /> </Tab>
+          <Tab label='My playlists'> <MyStreams /> </Tab>
           {
 //            <Tab label='Scan' className='hide-on-echo'>Scan</Tab>
 //            <Tab label='My playlists'> <i className='material-icons'>&#xE84F;</i> <i className='fa fa-eercast' aria-hidden='true' /></Tab>

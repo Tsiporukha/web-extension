@@ -24,3 +24,7 @@ export const SET_SEEKING = 'SET_SEEKING';
 export const AUTH_USER = 'AUTH_USER';
 export const SET_USER_DATA = 'SET_USER_DATA';
 export const CLEAN_SESSION = 'CLEAN_SESSION';
+
+export const GET_STREAMS = 'GET_STREAMS';
+export const SET_MY_STREAMS = 'SET_MY_STREAMS';
+export const CLEAN_MY_STREAMS = 'CLEAN_MY_STREAMS';
