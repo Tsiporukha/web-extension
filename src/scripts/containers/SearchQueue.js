@@ -12,12 +12,10 @@ import * as EchoCli from '../lib/echoWebCliApi';
 import styles from '../../assets/styles/queue.scss';
 import bp from '../../assets/styles/bootstrap.css';
 
-const mapStateToProps = (state, ownPropsslider) => {
-  return {
-    songs: state.searchQueue,
-    suggestions: state.searchAutocomplete
-  }
-}
+const mapStateToProps = (state, ownPropsslider) => ({
+  songs: state.searchQueue,
+  suggestions: state.searchAutocomplete
+});
 
 const mapDispatchToProps = (dispatch, ownProps) => {
 

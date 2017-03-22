@@ -3,12 +3,10 @@ import { connect } from 'react-redux';
 import {pause} from '../actions/PlayerActions';
 import * as EchoCli from '../lib/echoWebCliApi';
 
-const mapStateToProps = (state, ownProps) => {
-  return state.player ?
-   {isPlaying: state.player.playing && !!state.player.currentSong.id &&
-      state.player.currentSong.id == ownProps.songId} :
-    {}
-}
+const mapStateToProps = (state, ownProps) => ({
+  isPlaying: state.player.playing && !!state.player.currentSong.id &&
+   state.player.currentSong.id == ownProps.songId
+});
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {

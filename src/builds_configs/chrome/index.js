@@ -16,7 +16,7 @@ window.HIDE_ER_PLAYER = true;
 
 const proxyStore =  new Store({portName: 'echo-app-ext'});
 
-render(
-  <Root store={proxyStore} />,
-  document.getElementById('echo-app-ext')
-);
+const unsubscribe = proxyStore.subscribe(() => {
+  unsubscribe();
+  return render(<Root store={proxyStore} />, document.getElementById('echo-app-ext'));
+});

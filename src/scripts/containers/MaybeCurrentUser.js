@@ -8,10 +8,10 @@ import {authUser, cleanSession} from '../actions/SessionActions';
 import bp from '../../assets/styles/bootstrap.css';
 
 
-const mapStateToProps = store => store.session ? {
+const mapStateToProps = store => ({
   token: store.session.token,
   currentUser: store.session.user
-} : {};
+});
 
 const mapDispatchToProps = dispatch => ({
   authUser: (email, password) => dispatch(authUser(email, password)),

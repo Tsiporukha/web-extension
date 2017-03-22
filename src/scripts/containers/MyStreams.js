@@ -7,7 +7,7 @@ import {get as getStreamsAction, setMyStreams, cleanMyStreams} from '../actions/
 
 import bp from '../../assets/styles/bootstrap.css';
 
-const mapStateToProps = store => store.session ? {
+const mapStateToProps = store => ({
   user: store.session.user,
   streamsData: store.streams.myStreams,
   filters: store.session.user ? {
@@ -15,7 +15,7 @@ const mapStateToProps = store => store.session ? {
       limit: store.streams.myStreams.limit, fetchedAll: store.streams.myStreams.fetchedAll},
     firstStreams: {user_id: store.session.user.id, offset: 0, limit: store.streams.myStreams.limit, fetchedAll: false},
   } : {}
-} : {};
+});
 
 const mapDispatchToProps = dispatch => ({
   getStreams: filters => dispatch(getStreamsAction(filters)),

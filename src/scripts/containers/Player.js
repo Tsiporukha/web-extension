@@ -11,16 +11,13 @@ import bp from '../../assets/styles/bootstrap.css';
 import sliderStyles from '../../assets/styles/slider.scss';
 import CurrentQueue from './CurrentQueue';
 
-const mapStateToProps = (state, ownProps) => {
-  return state.player ?
-    {
-      playingSong: state.player.currentSong,
-      playing: state.player.playing,
-      volume: state.player.volume,
-      played: state.player.played,
-      seeking: state.player.seeking
-    } : {played: 0, volume: 80, playingSong: {duration: 0}, seeking: false}
-}
+const mapStateToProps = state => ({
+  playingSong: state.player.currentSong,
+  playing: state.player.playing,
+  volume: state.player.volume,
+  played: state.player.played,
+  seeking: state.player.seeking
+});
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {

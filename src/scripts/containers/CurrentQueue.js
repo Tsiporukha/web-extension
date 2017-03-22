@@ -9,13 +9,10 @@ import {withHours as durationWithHours} from '../lib/duration';
 import * as EchoCli from '../lib/echoWebCliApi';
 import {sumBy, flowRight} from 'lodash';
 
-const mapStateToProps = (state, ownProps) => {
-  return state.player ?
-   {
-    songs: state.currentQueue,
-    isQueuePlaying: state.player.currentSong.playlist == 'currentQueue'
-  } : {}
-}
+const mapStateToProps = state => ({
+  songs: state.currentQueue,
+  isQueuePlaying: state.player.currentSong.playlist == 'currentQueue'
+});
 
 const mapDispatchToProps = (dispatch, ownProps) => {
 
