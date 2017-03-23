@@ -13,5 +13,3 @@ export function setMyStreams(streamsData) {
     payload: streamsData
   }
 }
-
-export const cleanMyStreams = () => ({type: CLEAN_MY_STREAMS})

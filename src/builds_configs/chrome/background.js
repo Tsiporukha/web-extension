@@ -13,7 +13,13 @@ if(!(window['YT'] && window['YT'].loaded)) YT();
 
 
 const store = configureStore();
-wrapStore(store, {portName: 'echo-app-ext'}); // make sure portName matches
+
+const reduxPromiseResponder = (dispatchRes, send) =>
+  Promise.resolve(dispatchRes).then(data => Promise.resolve({payload: data}))
+    .then(res => send({error: false, value: res})).catch(err => send({error: err, value: false}));
+
+
+wrapStore(store, {portName: 'echo-app-ext', dispatchResponder: reduxPromiseResponder}); // make sure portName matches
 
 const rmCode = "if(document.getElementById('echo-app-ext')) document.getElementById('echo-app-ext').remove()";
 chrome.browserAction.onClicked.addListener(function(tab) {
