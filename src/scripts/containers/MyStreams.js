@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import { connect } from 'react-redux';
 
 import MaybeCurrentUser from './MaybeCurrentUser';
-import Stream from '../components/Stream';
+import Stream from './Stream';
 
 import {get as getStreamsAction, setMyStreams, cleanMyStreams} from '../actions/StreamsActions'
 

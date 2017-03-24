@@ -5,9 +5,8 @@ import {setPlayingSong, setPlayingSongId, play, clean as cleanPlayer} from '../a
 import SongList from '../components/SongList';
 import styles from '../../assets/styles/queue.scss';
 
-import {withHours as durationWithHours} from '../lib/duration';
+import {queueDuration, withHours as durationWithHours} from '../lib/duration';
 import * as EchoCli from '../lib/echoWebCliApi';
-import {sumBy, flowRight} from 'lodash';
 
 const mapStateToProps = state => ({
   songs: state.currentQueue,
@@ -72,8 +71,7 @@ class CurrentQueue extends Component {
 
 
   render(){
-    const queueDuration = flowRight([durationWithHours, sumBy])(this.props.songs, 'duration');
-
+    const add = () => EchoCli.either((() => EchoCli.playQueue(this.props.songs, 0)))
     /**
      * removes all songs from current queue
      * @return {array} removed songs
@@ -84,9 +82,9 @@ class CurrentQueue extends Component {
       <div className={`${styles.queue} h100perc`}>
         {this.props.songs && <div className={`${styles.cqHeader}`}>
           <span className={styles.cqInfo}>
-            YOUR QUEUE: <b>{this.props.songs.length} songs, {queueDuration}</b>
+            YOUR QUEUE: <b>{this.props.songs.length} songs, {durationWithHours(queueDuration(this.props.songs))}</b>
             <i className='material-icons' onClick={clearQueue}>clear_all</i>
-            <i className='material-icons' onClick={() => EchoCli.either((() => EchoCli.playQueue(this.props.songs, 0)))}>add</i>
+            <i className='material-icons' onClick={add}>add</i>
           </span>
         </div>}
         <div className={`${styles.songList} ${styles.current}`}>

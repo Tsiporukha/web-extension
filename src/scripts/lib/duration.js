@@ -9,3 +9,5 @@ export function withHours(totalSeconds) {
   const drtn = duration(totalSeconds);
   return ('00:00:00'.substring(0, (8-drtn.length)) + drtn);
 }
+
+export const queueDuration = songs => songs.reduce((td, sng) => td + sng.duration, 0);
