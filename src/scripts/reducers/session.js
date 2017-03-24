@@ -1,6 +1,6 @@
 import {SET_TOKEN, SET_USER_DATA, CLEAN_SESSION} from '../constants/ActionTypes';
 
-export default (state = {}, action) => {
+export default (state = {user: {}}, action) => {
   switch (action.type) {
     case SET_TOKEN:
       return {...state, token: action.payload};

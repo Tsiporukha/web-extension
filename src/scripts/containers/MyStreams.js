@@ -2,10 +2,12 @@ import React, {Component, PropTypes} from 'react';
 import { connect } from 'react-redux';
 
 import MaybeCurrentUser from './MaybeCurrentUser';
+import Stream from '../components/Stream';
 
 import {get as getStreamsAction, setMyStreams, cleanMyStreams} from '../actions/StreamsActions'
 
 import bp from '../../assets/styles/bootstrap.css';
+import styles from '../../assets/styles/streams.scss';
 
 const mapStateToProps = store => ({
   user: store.session.user,
@@ -42,14 +44,16 @@ class MyStreams extends Component {
   render(){
     return (
       <div className={`${bp.container} h100perc`}>
-        <div className={`${bp['col-xs-offset-2']} ${bp['col-xs-4']} h100perc`}>
+        <div className={`${bp['col-xs-offset-2']} ${bp['col-xs-4']}`}>
           <MaybeCurrentUser />
           <br />
           {this.props.user &&
             <button style={{margin: '40px 0'}} onClick={this.updateWithLatestStreams}>Refresh</button>}
+        </div>
 
+        <div className={`${bp['col-xs-offset-2']} ${bp['col-xs-8']}`}>
           {this.props.streamsData.streams.map(stream =>
-            <div key={stream.id}> {stream.id} </div>
+            <Stream key={stream.id} stream={stream} />
           )}
 
           {this.props.user && !this.props.filters.nextStreams.fetchedAll &&
