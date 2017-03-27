@@ -1,7 +1,7 @@
 import { v4 } from 'node-uuid';
 import React, {Component, PropTypes} from 'react';
 import { connect } from 'react-redux';
-import {addToCurrentQueue, addToCurrentQueueTop, searchAndUpdateSearchQueue} from '../actions/SongsActions';
+import {addToCurrentQueue, addToCurrentQueueTop, searchAndUpdateSearchQueue, addToCurrentQueueTopAndPlay} from '../actions/SongsActions';
 import {getAndUpdateAutocomplete} from '../actions/AutocompleteActions';
 import {setPlayingSong, setPlayingSongId, play} from '../actions/PlayerActions';
 import SongList from '../components/SongList';
@@ -19,18 +19,6 @@ const mapStateToProps = (state, ownPropsslider) => ({
 
 const mapDispatchToProps = (dispatch, ownProps) => {
 
-  const echoApi = {
-    playCurrentQueueWith: song => {
-      dispatch(setPlayingSongId(song.id));
-      return EchoCli.playSongFrom('currentQueue', song);
-    }
-  }
-
-  const playCurrentQueueWith = song => {
-    dispatch(setPlayingSong({...song, playlist: 'currentQueue'}));
-    return dispatch(play());
-  }
-
   return {
     addToCurrentQueue: songs => {
       dispatch(addToCurrentQueue(songs))
@@ -43,12 +31,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
      * playing from current queue
      * @param  {array} songs
      */
-    playAll: songs => {
-      const fSongs = songs.map(song => ({id: v4(), ...song}) );
-      dispatch(addToCurrentQueueTop(fSongs));
-      return EchoCli.either(() => echoApi.playCurrentQueueWith(fSongs[0]),
-        () => playCurrentQueueWith(fSongs[0]));
-    },
+    playAll: songs => dispatch(addToCurrentQueueTopAndPlay(songs.map(song => ({id: v4(), ...song})))),
     getAndUpdateAutocomplete: term => dispatch(getAndUpdateAutocomplete(term))
   }
 }

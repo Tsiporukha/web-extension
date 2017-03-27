@@ -1,3 +1,5 @@
+import {setPlayingSongId} from '../actions/PlayerActions';
+
 import at from 'lodash/at';
 import {loadState} from '../store/localStorage.js';
 
@@ -31,6 +33,13 @@ export function maybeUpdatePlaylistSongs(path, streamId = CURRENT_QUEUE_ID) {
   return getPlayingPlaylist().id == streamId ?
    window.echoApi.updatePlaylistSongs(getSongsFromLocalStorage(path), streamId) :
    false
+}
+
+export function playCurrentQueueWith(song) {
+  return dispatch => {
+    dispatch(setPlayingSongId(song.id));
+    return EchoCli.playSongFrom('currentQueue', song);
+  }
 }
 
 

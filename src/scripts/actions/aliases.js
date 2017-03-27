@@ -1,13 +1,14 @@
-import {updateSearchQueue} from './SongsActions';
+import {updateSearchQueue, addToCurrentQueueTop, playCurrentQueueWith} from './SongsActions';
 import {updateAutocomplete} from './AutocompleteActions';
 import {next, prev} from './PlayerActions';
 import {setUserData} from './SessionActions';
 import {SEARCH_SONGS, SEARCH_AND_UPDATE_SEARCH_QUEUE, SEARCH_AND_UPDATE_AUTOCOMPLETE,
   PLAY_NEXT, PLAY_PREV, SEEK_TO, GET_AND_UPDATE_AUTOCOMPLETE, AUTH_USER, SET_USER_DATA,
-  GET_STREAMS} from '../constants/ActionTypes';
+  GET_STREAMS, ADD_SONGS_TO_TOP_AND_PLAY} from '../constants/ActionTypes';
 import {searchOnYoutube, getSuggestions} from '../lib/youtube';
 import {login} from '../lib/serverApi/session';
 import * as Stream from '../lib/serverApi/streams';
+import * as EchoCli from '../lib/echoWebCliApi';
 
 function searchSongs(term){
   return dispatch => searchOnYoutube(term);
@@ -41,6 +42,13 @@ function getStreams(filters){
   return (dispatch, getState) => Stream.get({...filters, token: getState().session.token})
 }
 
+function addToCurrentQueueTopAndPlay(songs){
+  return dispatch => {
+    dispatch(addToCurrentQueueTop(songs));
+    return EchoCli.either(() => EchoApi.playCurrentQueueWith(songs[0])(dispatch), () => playCurrentQueueWith(songs[0])(dispatch));
+  }
+}
+
 const aliases = {};
 aliases[SEARCH_SONGS] = action => searchSongs(action.payload);
 aliases[SEARCH_AND_UPDATE_SEARCH_QUEUE] = action => searchAndUpdateSearchQueue(action.payload);
@@ -50,5 +58,6 @@ aliases[PLAY_PREV] = action => playPrevSong(action.payload.currentSong, action.p
 aliases[SEEK_TO] = action => seekTo(action.payload);
 aliases[AUTH_USER] = action => authUser(action.payload);
 aliases[GET_STREAMS] = action => getStreams(action.payload);
+aliases[ADD_SONGS_TO_TOP_AND_PLAY] = action => addToCurrentQueueTopAndPlay(action.payload);
 
 export default aliases;
