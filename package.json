@@ -45,6 +45,7 @@
     "extract-text-webpack-plugin": "^2.1.0",
     "file-loader": "^0.10.1",
     "immutability-helper": "^2.0.0",
+    "moment": "^2.18.1",
     "node-sass": "^4.4.0",
     "react-addons-css-transition-group": "^15.4.1",
     "resolve-url-loader": "^2.0.2",

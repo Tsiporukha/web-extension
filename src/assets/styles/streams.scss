@@ -2,29 +2,33 @@
   background-color: white;
   padding: 0;
   margin-bottom: 24px;
+	font-size: 13px;
+  color: grey;
+
   .img{
     padding: 0;
     height: 100px;
   }
 }
 
-.playPause{
-  position: absolute;
-  top: 24px;
-  left: 24px;
-  font-size: 20px;
-  border-radius: 60px;
-  background-color: rgba(0, 0, 0, 0.45);
-  height: 52px;
-  width: 52px;
-  &:hover, &:active{ background-color: rgba(0, 0, 0, 0.7); }
-  i.material-icons{
-    font-size: 34px;
-    color: white;
-    position: relative;
-    left: 9px;
-    top: 9px;
-  }
+.playPause {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+
+    :global(.material-icons){
+      padding: 8px;
+      font-size: 34px;
+      color: #fff;
+      position: relative;
+      left: 2px;
+      top: 2px;
+      background-color: rgba(0, 0, 0, 0.45);
+      border-radius: 60px;
+
+
+      &:hover, &:active{ background-color: rgba(0, 0, 0, 0.8); }
+    }
 }
 
 .textData{
@@ -43,10 +47,11 @@
     font-size: 13px;
     letter-spacing: .5px;
     font-weight: 500;
+    padding-top: 2px;
   }
 
   .llArea{
-    top: 5px;
+    top: 8px;
     position: relative;
     left: -2px;
   }
@@ -62,50 +67,80 @@
   }
 
   .author{
-    margin-top: 12px;
+    margin-top: 6px;
     font-size: 11px;
     text-align: right;
     .avatar{
+      position: relative;
+      top: 6px;
       height: 20px;
       width: 20px;
       margin: 0 4px;
       border-radius: 4px;
     }
+    .pt{padding-top: 4px;}
   }
+
 
   .rIcons{
     position: absolute;
     bottom: 2px;
     right: -22px;
-    .player-icon{margin-right: 20px;}
+    .playerIcon{margin-right: 20px;}
     .counter{font-size: 9px;}
   }
 
   .playerIcon{
     margin-right: 8px;
-    .notLiked, .liked{
-      font-size: 18px;
-      position: inherit;
+    font-weight: 600;
+    font-size: 12px;
+    float: left;
+    color: #a3adb7;
+
+    .miLike{
+      .notLiked, .liked{
+        font-size: 18px;
+        position: inherit;
+      }
+      .liked{
+        color: hotpink;
+        display:none;
+      }
+      &:hover .notLiked, &.active .notLiked{
+        display:none;
+      }
+      &:hover .liked, &.active .liked{
+        display:inline!important;
+      }
     }
+
     .miListeners{
       font-size: 17px;
       position: relative;
       top: 1px;
+      &:hover, &.active{
+        color: #f8ce79;
+      }
     }
     .miTracklist{
       font-size: 21px;
       top: 2px;
       position: relative;
     }
-    .miShare{font-size: 17px;}
+    .miShare{
+      font-size: 17px;
+      &.active{
+       color: #43a047;
+      }
+    }
 
   }
   .counter{
     position: relative;
     font-size: 10px;
-    left: -2px;
-    bottom: 0;
+    left: 0px;
+    bottom: 4px;
     font-weight: 500;
-    &.ls{bottom: -1px;}
+    &.ls{bottom: 3px;}
   }
 }

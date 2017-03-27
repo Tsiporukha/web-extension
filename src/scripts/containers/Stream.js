@@ -7,6 +7,8 @@ import bp from '../../assets/styles/bootstrap.css';
 import styles from '../../assets/styles/streams.scss';
 
 import {queueDuration, duration} from '../lib/duration';
+import words from 'lodash/words';
+import moment from 'moment';
 
 const mapStateToProps = (state, ownProps) => ({
   user: state.session.user,
@@ -26,9 +28,9 @@ class Stream extends Component {
   }
 
   render() {
-    const stream = this.props.stream;
+    const stream = {...this.props.stream, tags: words(this.props.stream.playlist.title, /#([^ ]+)/g)};
     return (
-      <div className={`${bp['col-xs-12']} ${styles.stream}`}>
+      <div className={`${bp['container-fluid']} no-padding ${styles.stream}`}>
 
         <div className={`${bp['col-xs-2']} ${styles.img}`}>
           <img src={stream.artwork_url} alt='artwork_url' style={{height: '100px', width: '100px'}} />
@@ -45,7 +47,8 @@ class Stream extends Component {
             <div className={`${bp['col-xs-12']} no-padding ${styles.llArea}`}>
               <div className={`${styles.playerIcon}`}>
                 <span className={`${styles.miLike} ${stream.your_likes ? styles.active : ''}`}>
-                  <i className={`material-icons ${stream.your_likes ? styles.liked : styles.notLiked}`}>{stream.your_likes ? 'favorite' : 'favorite_border'}</i>
+                  <i className={`material-icons ${styles.notLiked}`}>favorite_border</i>
+                  <i className={`material-icons ${styles.liked}`}>favorite</i>
                 </span>
                 <span className={`${styles.counter}`}>{stream.likes_count}</span>
               </div>
@@ -56,8 +59,8 @@ class Stream extends Component {
             </div>
 
             <div className={`${styles.tags}`}>
-              {(stream.tags||[]).map(tag =>
-                <span className={`${styles.tag}`}>#{tag} </span>
+              {(stream.tags).map(tag =>
+                <span key={tag} className={`${styles.tag}`}>{tag} </span>
               )}
             </div>
           </div>
@@ -71,7 +74,7 @@ class Stream extends Component {
                   <span>{stream.user.name}</span>
                 </a>
               </div>
-              <div className={styles.playlistTime}>{stream.updated_at}</div>
+              <div className={styles.pt}>{moment(stream.updated_at).fromNow()}</div>
             </div>
             <div className={`no-padding ${styles.rIcons}`}>
               <div className={`${styles.playerIcon}`}>
