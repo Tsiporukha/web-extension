@@ -10,7 +10,7 @@ export default class Song extends Component {
 
   static propTypes = {
     song: PropTypes.shape({
-      id: PropTypes.string,
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
       title: PropTypes.string,
       artist: PropTypes.string,
       artwork_url: PropTypes.string,

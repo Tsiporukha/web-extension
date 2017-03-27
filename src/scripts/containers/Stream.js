@@ -1,6 +1,8 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 
+import PlayPauseStream from './PlayPauseStream';
+
 import bp from '../../assets/styles/bootstrap.css';
 import styles from '../../assets/styles/streams.scss';
 
@@ -9,7 +11,7 @@ import {queueDuration, duration} from '../lib/duration';
 const mapStateToProps = (state, ownProps) => ({
   user: state.session.user,
   stream: {...ownProps.stream,
-    listened: ownProps.stream.history_listeners.includes(state.session.user.id),
+    listened: ownProps.stream.history_listeners.includes(state.session.user && state.session.user.id),
     duration: duration(queueDuration(ownProps.stream.playlist.songs))
   }
 })
@@ -31,8 +33,7 @@ class Stream extends Component {
         <div className={`${bp['col-xs-2']} ${styles.img}`}>
           <img src={stream.artwork_url} alt='artwork_url' style={{height: '100px', width: '100px'}} />
           <span className={styles.playPause}>
-            <i className={'material-icons'}>pause</i>
-            <i className={'material-icons'}>play_arrow</i>
+            <PlayPauseStream songs={stream.playlist.songs} />
           </span>
         </div>
 

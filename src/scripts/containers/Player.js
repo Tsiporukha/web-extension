@@ -43,7 +43,7 @@ class Player extends Component {
 
   static propTypes = {
     playingSong: PropTypes.shape({
-      id: PropTypes.string,
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
       title: PropTypes.string,
       artist: PropTypes.string,
       artwork_url: PropTypes.string,
