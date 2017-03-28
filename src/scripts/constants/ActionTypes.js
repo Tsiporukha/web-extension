@@ -30,3 +30,6 @@ export const CLEAN_SESSION = 'CLEAN_SESSION';
 export const GET_STREAMS = 'GET_STREAMS';
 export const SET_MY_STREAMS = 'SET_MY_STREAMS';
 export const CLEAN_MY_STREAMS = 'CLEAN_MY_STREAMS';
+export const UPDATE_STREAM = 'UPDATE_STREAM';
+export const LIKE_STREAM = 'LIKE_STREAM';
+export const UNLIKE_STREAM = 'UNLIKE_STREAM';
