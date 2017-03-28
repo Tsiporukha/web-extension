@@ -3,12 +3,14 @@ import {connect} from 'react-redux';
 
 import PlayPauseStream from './PlayPauseStream';
 
-import bp from '../../assets/styles/bootstrap.css';
-import styles from '../../assets/styles/streams.scss';
+import {like, unlike} from '../actions/StreamsActions';
 
 import {queueDuration, duration} from '../lib/duration';
 import words from 'lodash/words';
 import moment from 'moment';
+
+import bp from '../../assets/styles/bootstrap.css';
+import styles from '../../assets/styles/streams.scss';
 
 const mapStateToProps = (state, ownProps) => ({
   user: state.session.user,
@@ -19,7 +21,7 @@ const mapStateToProps = (state, ownProps) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-
+  toggleLike: stream => () => dispatch(stream.your_likes ? unlike(stream) : like(stream))
 });
 
 class Stream extends Component {
@@ -46,7 +48,7 @@ class Stream extends Component {
 
             <div className={`${bp['col-xs-12']} no-padding ${styles.llArea}`}>
               <div className={`${styles.playerIcon}`}>
-                <span className={`${styles.miLike} ${stream.your_likes ? styles.active : ''}`}>
+                <span className={`${styles.miLike} ${stream.your_likes ? styles.active : ''}`} onClick={this.props.toggleLike(stream)}>
                   <i className={`material-icons ${styles.notLiked}`}>favorite_border</i>
                   <i className={`material-icons ${styles.liked}`}>favorite</i>
                 </span>

@@ -2,9 +2,11 @@ import {updateSearchQueue, addToCurrentQueueTop, playCurrentQueueWith} from './S
 import {updateAutocomplete} from './AutocompleteActions';
 import {next, prev} from './PlayerActions';
 import {setUserData, updateUserData, cleanSession} from './SessionActions';
+import {maybeUpdate as maybeUpdateStream} from './StreamsActions';
 import {SEARCH_SONGS, SEARCH_AND_UPDATE_SEARCH_QUEUE, SEARCH_AND_UPDATE_AUTOCOMPLETE,
   PLAY_NEXT, PLAY_PREV, SEEK_TO, GET_AND_UPDATE_AUTOCOMPLETE, AUTH_USER, SET_USER_DATA,
-  GET_STREAMS, ADD_SONGS_TO_TOP_AND_PLAY, UPDATE_CURRENT_USER_DATA} from '../constants/ActionTypes';
+  GET_STREAMS, ADD_SONGS_TO_TOP_AND_PLAY, UPDATE_CURRENT_USER_DATA, LIKE_STREAM,
+  UNLIKE_STREAM} from '../constants/ActionTypes';
 import {searchOnYoutube, getSuggestions} from '../lib/youtube';
 import {login, getCurrentUserData} from '../lib/serverApi/session';
 import * as Stream from '../lib/serverApi/streams';
@@ -49,6 +51,11 @@ function getStreams(filters){
   return (dispatch, getState) => Stream.get({...filters, token: getState().session.token})
 }
 
+const likeStream = stream => (dispatch, getState) => Stream.like(stream.id, getState().session.token)
+  .then(data => maybeUpdateStream(data.status, {...stream, likes_count: stream.likes_count + 1, your_likes: 1})(dispatch));
+const unlikeStream = stream => (dispatch, getState) => Stream.unlike(stream.id, getState().session.token)
+  .then(data => maybeUpdateStream(data.status, {...stream, likes_count: stream.likes_count - 1, your_likes: 0})(dispatch));
+
 const updateCurrentUserData = () => (dispatch, getState) => getCurrentUserData(getState().session.token)
   .then(user => dispatch(setUserData({user, token: getState().session.token}))).catch(err => dispatch(cleanSession()));
 
@@ -63,5 +70,7 @@ aliases[AUTH_USER] = action => authUser(action.payload);
 aliases[GET_STREAMS] = action => getStreams(action.payload);
 aliases[ADD_SONGS_TO_TOP_AND_PLAY] = action => addToCurrentQueueTopAndPlay(action.payload);
 aliases[UPDATE_CURRENT_USER_DATA] = _ => updateCurrentUserData();
+aliases[LIKE_STREAM] = action => likeStream(action.payload)
+aliases[UNLIKE_STREAM] = action => unlikeStream(action.payload)
 
 export default aliases;

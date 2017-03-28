@@ -11,7 +11,7 @@ export const configureParamsForPostReq = data => ({
   headers: {'Content-Type': 'application/json'},
   body: JSON.stringify(data)
 })
-
+export const getJson = resp => resp.json();
 
 export const fetcho = {
   get: (url, params) => fetch(`${url}${objToQuery(params)}`),
