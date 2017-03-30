@@ -1,12 +1,16 @@
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
+
+import SongList from '../components/SongList';
+import StreamPublication from './StreamPublication';
+
 import {removeFromCurrentQueue} from '../actions/SongsActions';
 import {setPlayingSong, setPlayingSongId, play, clean as cleanPlayer} from '../actions/PlayerActions';
-import SongList from '../components/SongList';
-import styles from '../../assets/styles/queue.scss';
 
 import {queueDuration, withHours as durationWithHours} from '../lib/duration';
 import * as EchoCli from '../lib/echoWebCliApi';
+
+import styles from '../../assets/styles/queue.scss';
 
 const mapStateToProps = state => ({
   songs: state.currentQueue,
@@ -69,6 +73,9 @@ class CurrentQueue extends Component {
     removeFromCurrentQueue: PropTypes.func
   }
 
+  state = {spVisibility: false}
+
+  toggleSPVisibility = () => this.setState({spVisibility: !this.state.spVisibility})
 
   render(){
     const add = () => EchoCli.either((() => EchoCli.playQueue(this.props.songs, 0)))
@@ -84,7 +91,8 @@ class CurrentQueue extends Component {
           <span className={styles.cqInfo}>
             YOUR QUEUE: <b>{this.props.songs.length} songs, {durationWithHours(queueDuration(this.props.songs))}</b>
             <i className='material-icons' onClick={clearQueue}>clear_all</i>
-            <i className='material-icons' onClick={add}>add</i>
+            <i className='material-icons' onClick={this.toggleSPVisibility}>add</i>
+            <StreamPublication visible={this.state.spVisibility} toggleVisibility={this.toggleSPVisibility} />
           </span>
         </div>}
         <div className={`${styles.songList} ${styles.current}`}>
