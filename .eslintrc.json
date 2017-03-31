@@ -23,7 +23,6 @@
     "no-extra-semi": 1,
 
     "fp/no-mutation": ["error", {
-      "commonjs": true,
       "allowThis": true,
       "exceptions": [
         {"object": "window"},

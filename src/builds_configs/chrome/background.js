@@ -22,14 +22,12 @@ const reduxPromiseResponder = (dispatchRes, send) =>
 wrapStore(store, {portName: 'echo-app-ext', dispatchResponder: reduxPromiseResponder}); // make sure portName matches
 
 const rmCode = "if(document.getElementById('echo-app-ext')) document.getElementById('echo-app-ext').remove()";
-chrome.browserAction.onClicked.addListener(function(tab) {
+chrome.browserAction.onClicked.addListener(tab =>
   chrome.tabs.query({}, tabs => {
-    tabs.forEach((tab, index) => {
-      chrome.tabs.executeScript(tab.id, {code: rmCode})
-    });
-    chrome.tabs.executeScript(null, {file: "bundle.js"});
-  });
-});
+    tabs.forEach((tab, index) => chrome.tabs.executeScript(tab.id, {code: rmCode}));
+    return chrome.tabs.executeScript(null, {file: "bundle.js"});
+  })
+);
 
 render(
   <Provider store={store}>
