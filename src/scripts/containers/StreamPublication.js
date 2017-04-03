@@ -12,6 +12,8 @@ import styles from '../../assets/styles/streamPublication.scss';
 import dialogTheme from '../../assets/styles/streamPublicationDialogTheme.scss';
 import bp from '../../assets/styles/bootstrap.css';
 
+import tags from '../../assets/tags.json';
+
 const mapStateToProps = (state, ownProps) => ({
   songs: state.currentQueue
 })
@@ -69,7 +71,7 @@ class StreamPublication extends Component {
         </div>
 
         <div>Choose Tags:</div>
-        
+
       </Dialog>
     )
   }
