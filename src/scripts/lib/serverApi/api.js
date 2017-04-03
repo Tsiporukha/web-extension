@@ -10,10 +10,19 @@ export const configureParamsForPostReq = data => ({
   method: 'POST',
   headers: {'Content-Type': 'application/json'},
   body: JSON.stringify(data)
-})
+});
+
+// export const objToFormData = (obj, fd = new FormData(), res = Object.keys(obj).map(key => fd.append(key, obj[key]))) => res;
+
+export const appendToFormData = (obj, fd = new FormData()) => {
+  Object.keys(obj).map(key => fd.append(key, obj[key]))
+  return fd;
+};
 export const getJson = resp => resp.json();
 
-export const fetcho = {
-  get: (url, params) => fetch(`${url}${objToQuery(params)}`),
-  post: (url, data) => fetch(`${url}`, configureParamsForPostReq(data))
-}
+export const fetcho = Object.assign(
+  (url, config = {}) => fetch(url, config),{
+    get: (url, params) => fetch(`${url}${objToQuery(params)}`),
+    post: (url, data) => fetch(`${url}`, configureParamsForPostReq(data))
+  }
+);

@@ -1,4 +1,60 @@
+.npdng{padding: 0;}
+
 .title{
   color: black;
   font-size: 16px;
+}
+
+.pName{width: 45%;}
+
+.artworks{
+  width: 100%;
+  white-space: nowrap;
+  overflow-x: auto;
+
+  img{
+    cursor: pointer;
+    height: 88px;
+    width: 88px;
+    padding: 6px;
+    object-fit: cover;
+  }
+
+  .upload{
+    padding: 0;
+    margin: 6px;
+    height: 88px;
+    width: 88px;
+    text-align: center;
+    color: #6e6e6e;
+    cursor: pointer;
+
+    .empty{
+      border: 1px dashed #6e6e6e;
+      border-radius: 10px;
+      height: 100%;
+      i{
+        font-size: 60px;
+        position: relative;
+        left: 2px;
+        top: 4px;
+      }
+      span{
+        font-size: 11px;
+        position: relative;
+        top: -4px;
+        color: black;
+      }
+    }
+
+    input{
+      cursor: pointer;
+      position: absolute;
+      top: 0;
+      height: 88px;
+      width: 88px;
+      padding: 0;
+      opacity: 0;
+    }
+  }
 }
