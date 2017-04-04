@@ -30,13 +30,17 @@ class MaybeCurrentUser extends Component {
 
   render(){
     return (
-      this.props.token ?
-        <span>
-          <img src={this.props.currentUser.avatar_url} alt='avatar' style={{height: '60px', width: '60px'}} />
-          <button onClick={this.props.cleanSession}>Logout</button>
-        </span>
-        :
-        <Login authUser={this.props.authUser} />
+      <div className={bp['container-fluid']}>
+        {this.props.token ?
+          <span>
+            <img src={this.props.currentUser.avatar_url} alt='avatar' style={{height: '60px', width: '60px'}} />
+            <button onClick={this.props.cleanSession}>Logout</button>
+          </span>
+          :
+          <div className={`${bp['col-md-offset-3']} ${bp['col-md-6']}`}>
+            <Login authUser={this.props.authUser} />
+          </div>}
+      </div>
     );
   }
 }

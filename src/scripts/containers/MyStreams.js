@@ -46,21 +46,21 @@ class MyStreams extends Component {
   render(){
     return (
       <div className={`${bp.container} h100perc`}>
-        <div className={`${bp['col-xs-offset-2']} ${bp['col-xs-4']}`}>
+        <div>
           <MaybeCurrentUser />
           <br />
           {this.props.user &&
             <button style={{margin: '40px 0'}} onClick={this.updateWithLatestStreams}>Refresh</button>}
         </div>
 
-        <div className={`${bp['col-xs-offset-2']} ${bp['col-xs-8']}`}>
+        {this.props.user && <div className={`${bp['col-xs-offset-2']} ${bp['col-xs-8']}`}>
           {this.props.streamsData.streams.map(stream =>
             <Stream key={stream.id} stream={stream} />
           )}
 
           {this.props.user && !this.props.filters.nextStreams.fetchedAll &&
             <button style={{margin: '40px 0'}} onClick={this.updateWithNextStreams}>Load more</button>}
-        </div>
+        </div>}
       </div>
     );
   }
