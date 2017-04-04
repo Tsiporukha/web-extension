@@ -34,3 +34,4 @@ export const UPDATE_STREAM = 'UPDATE_STREAM';
 export const LIKE_STREAM = 'LIKE_STREAM';
 export const UNLIKE_STREAM = 'UNLIKE_STREAM';
 export const UPLOAD_ARTWORK = 'UPLOAD_ARTWORK';
+export const CREATE_STREAM = 'CREATE_STREAM';
