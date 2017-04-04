@@ -2,7 +2,7 @@ import React from 'react';
 import bp from '../../assets/styles/bootstrap.css';
 
 const UploadArtwork = ({uploadedArtwork, selectArtwork, rmUploadedArtwork, uploadArtwork, selectedArtwork, setUploadedArtwork, styles}) => {
-  const uploadAndSet = () => uploadArtwork(refs.artworkToUpload.files[0]).then(({artwork_url}) => setUploadedArtwork(artwork_url));
+  const uploadAndSet = () => uploadArtwork(refs.artworkToUpload.files[0])(({artwork_url}) => setUploadedArtwork(artwork_url));
   const refs = {};
 
   return(

@@ -1,5 +1,5 @@
 import {GET_STREAMS, SET_MY_STREAMS, CLEAN_MY_STREAMS, LIKE_STREAM,
-  UNLIKE_STREAM, UPDATE_STREAM, UPLOAD_ARTWORK} from "../constants/ActionTypes";
+  UNLIKE_STREAM, UPDATE_STREAM, UPLOAD_ARTWORK, CREATE_STREAM} from "../constants/ActionTypes";
 
 export const get = filters => ({
   type: GET_STREAMS,
@@ -29,7 +29,10 @@ export const update = stream => ({
 export const maybeUpdate = (status, stream) => dispatch => status == 'ok' ? dispatch(update(stream)) : false;
 
 
-export const uploadArtwork = image => ({
+export const uploadArtwork = (imageBase64Url, filename) => ({
   type: UPLOAD_ARTWORK,
-  payload: image
+  payload: {
+    imageBase64Url,
+    filename
+  }
 });
