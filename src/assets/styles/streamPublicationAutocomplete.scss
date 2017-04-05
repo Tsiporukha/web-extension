@@ -1,0 +1,19 @@
+
+.autocomplete{
+  padding: 0;
+  margin: 0;
+}
+
+.input{
+  padding: 0;
+  background-color: red;
+}
+
+.values{
+  padding: 0;
+  margin: 0;
+}
+
+.inputInputElement {
+  composes: inputElement from './streamPublicationInput.scss';
+}
