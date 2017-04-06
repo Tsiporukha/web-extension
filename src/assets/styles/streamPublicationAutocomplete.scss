@@ -1,19 +1,39 @@
 
 .autocomplete{
   padding: 0;
-  margin: 0;
+  margin: 14px 0 20px;
 }
 
 .input{
   padding: 0;
-  background-color: red;
+  &::after{
+    display: none;
+  }
 }
 
 .values{
   padding: 0;
   margin: 0;
+  display: none;
+}
+
+.suggestions{
+  list-style-type: none;
+  margin-top: 0!important;
+  width: 85%;
+}
+
+.suggestion{
+  padding: 8px;
+  font-size: 12px;
+  position: relative;
+  left: -40px;
 }
 
 .inputInputElement {
   composes: inputElement from './streamPublicationInput.scss';
+}
+
+.inputBar{
+  composes: bar from './streamPublicationInput.scss';
 }

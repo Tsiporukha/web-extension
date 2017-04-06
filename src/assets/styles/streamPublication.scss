@@ -1,3 +1,8 @@
+.root{
+  text-align: left;
+  color: #333;
+}
+
 .npdng{padding: 0;}
 
 .title{
@@ -7,10 +12,13 @@
 
 .pName{width: 45%;}
 
+.actionTitle{padding: 6px 0;}
+
 .artworks{
   width: 100%;
   white-space: nowrap;
   overflow-x: auto;
+  margin-bottom: 26px;
 
   img{
     cursor: pointer;
@@ -18,6 +26,9 @@
     width: 88px;
     padding: 6px;
     object-fit: cover;
+  }
+  .selected{
+    color: #333; 
   }
 
   .upload{
@@ -57,4 +68,48 @@
       opacity: 0;
     }
   }
+}
+
+.tagsArea{
+  .tag, .atag{
+    display: inline-block;
+    background-color: #4dc1f2;
+    color: white;
+    padding: 0px 12px 6px;
+    border-radius: 60px;
+    margin: 6px;
+    font-size: 12px;
+    i{
+      top: 5px;
+      left: 6px;
+      position: relative;
+      font-size: 19px;
+    }
+  }
+  .atag{
+    padding: 6px 12px;
+    cursor: pointer;
+  }
+}
+
+.autocomplete{
+  width: 80%;
+}
+
+.actions{
+  float: right;
+  .done, .cancel{
+    font-size: 14px;
+    font-weight: 600;
+    background-color: transparent;
+    line-height: 1;
+    position: relative;
+    cursor: pointer;
+    border: 0;
+    padding: 10px;
+    outline: none;
+    &:hover{background-color: #ddd;}
+  }
+  .done{color: #0093eb;}
+  .cancel{color: #6e6e6e;}
 }

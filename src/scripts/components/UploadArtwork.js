@@ -10,7 +10,7 @@ const UploadArtwork = ({uploadedArtwork, selectArtwork, rmUploadedArtwork, uploa
       <a>
         <img src={uploadedArtwork} alt='artwork' onClick={selectArtwork(uploadedArtwork)} />
         <i className={`material-icons`} onClick={rmUploadedArtwork}>close</i>
-        {selectedArtwork == uploadedArtwork && <i className={`material-icons`}>gif</i>}
+        {selectedArtwork == uploadedArtwork && <i className={`material-icons`}>done</i>}
       </a>
       :
       <div className={`${bp['col-xs-1']} ${styles.upload}`}>
