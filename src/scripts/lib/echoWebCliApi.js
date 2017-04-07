@@ -19,6 +19,7 @@ export function either(right, left = () => false) {
   return isEchoApi() ? right() : left();
 }
 
+export const maybe = fn => isEchoApi() ? fn() : false;
 
 export function playQueue(songs, playingSongPosition = 0) {
   return window.echoApi.playStream(createStreamData(songs), playingSongPosition);
@@ -38,7 +39,7 @@ export function maybeUpdatePlaylistSongs(path, streamId = CURRENT_QUEUE_ID) {
 export function playCurrentQueueWith(song) {
   return dispatch => {
     dispatch(setPlayingSongId(song.id));
-    return EchoCli.playSongFrom('currentQueue', song);
+    return playSongFrom('currentQueue', song);
   }
 }
 

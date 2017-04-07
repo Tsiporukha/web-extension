@@ -27,7 +27,7 @@ function getAndUpdateAutocomplete(term){
 function addToCurrentQueueTopAndPlay(songs){
   return dispatch => {
     dispatch(addToCurrentQueueTop(songs));
-    return EchoCli.either(() => EchoApi.playCurrentQueueWith(songs[0])(dispatch), () => playCurrentQueueWith(songs[0])(dispatch));
+    return EchoCli.either(() => EchoCli.playCurrentQueueWith(songs[0])(dispatch), () => playCurrentQueueWith(songs[0])(dispatch));
   }
 }
 
