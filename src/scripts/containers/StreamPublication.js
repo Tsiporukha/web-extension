@@ -8,8 +8,10 @@ import Input from 'react-toolbox/lib/input';
 import Autocomplete from 'react-toolbox/lib/autocomplete';
 
 import {uploadArtwork, create as createStream} from '../actions/StreamsActions';
+import {setUserData} from '../actions/SessionActions';
 
 import {convertToBase64Url, onReaderLoad} from '../lib/FileReader';
+import * as EchoCli from '../lib/echoWebCliApi';
 
 import styles from '../../assets/styles/streamPublication.scss';
 import dialogTheme from '../../assets/styles/streamPublicationDialogTheme.scss';
@@ -26,7 +28,8 @@ const mapStateToProps = (state, ownProps) => ({
 const mapDispatchToProps = dispatch => ({
   uploadArtwork: image => callback =>
     Promise.resolve(onReaderLoad(e => dispatch(uploadArtwork(e.target.result, image.name)).then(callback), convertToBase64Url(image))),
-  createStream: (playlist_title, tags, default_artwork_url, songs) => dispatch(createStream(playlist_title, tags, default_artwork_url, songs))
+  createStream: (playlist_title, tags, default_artwork_url, songs) => dispatch(createStream(playlist_title, tags, default_artwork_url, songs)),
+  setUserData: userData => dispatch(setUserData(userData))
 });
 
 class StreamPublication extends Component {
@@ -41,9 +44,13 @@ class StreamPublication extends Component {
     tags: []
   };
 
-  selectArtwork = artwork_url => () => this.setState({artwork_url})
+  componentWillReceiveProps(nextProps){
+    return nextProps.visible ? EchoCli.maybe(() => this.props.setUserData(EchoCli.getSession())) : false;
+  }
 
   render() {
+    const selectArtwork = artwork_url => () => this.setState({artwork_url})
+
     const updTitle = str => this.setState({title: str});
 
     const setUploadedArtwork = artwork_url => this.setState({uploadedArtwork: artwork_url});
@@ -74,7 +81,7 @@ class StreamPublication extends Component {
             <div className={styles.artworks}>
               <UploadArtwork
                 uploadedArtwork={this.state.uploadedArtwork}
-                selectArtwork={this.selectArtwork}
+                selectArtwork={selectArtwork}
                 rmUploadedArtwork={rmUploadedArtwork}
                 selectedArtwork={this.state.artwork_url}
                 uploadArtwork={this.props.uploadArtwork}
@@ -82,7 +89,7 @@ class StreamPublication extends Component {
                 styles={styles} />
               {this.props.songs.map(song =>
                 <a key={song.id}>
-                  <img src={song.artwork_url} alt='artwork' onClick={this.selectArtwork(song.artwork_url)} />
+                  <img src={song.artwork_url} alt='artwork' onClick={selectArtwork(song.artwork_url)} />
                   {this.state.artwork_url == song.artwork_url && <i className={`material-icons ${styles.selected}`}>done</i>}
                 </a>
               )}

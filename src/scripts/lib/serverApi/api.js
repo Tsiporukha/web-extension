@@ -12,8 +12,6 @@ export const configureParamsForPostReq = data => ({
   body: JSON.stringify(data)
 });
 
-// export const objToFormData = (obj, fd = new FormData(), res = Object.keys(obj).map(key => fd.append(key, obj[key]))) => res;
-
 export const appendToFormData = (obj, fd = new FormData()) => {
   Object.keys(obj).map(key => fd.append(key, obj[key]))
   return fd;

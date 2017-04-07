@@ -19,6 +19,7 @@
   white-space: nowrap;
   overflow-x: auto;
   margin-bottom: 26px;
+  box-sizing: content-box;
 
   img{
     cursor: pointer;
@@ -28,7 +29,7 @@
     object-fit: cover;
   }
   .selected{
-    color: #333; 
+    color: #333;
   }
 
   .upload{
