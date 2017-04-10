@@ -1,0 +1,28 @@
+.userArea{
+  position: fixed;
+  top: 20px;
+  left: 44px;
+  color: white;
+  .avatar{
+    height: 50px;
+    width: 50px;
+  }
+  .name{
+    position: relative;
+    top: -20px;
+    left: 8px;
+    letter-spacing: 1px;
+  }
+}
+
+.logout{
+  cursor: pointer;
+  padding: 4px 14px;
+  border-radius: 4px;
+  position: fixed;
+  top: 200px;
+  left: 44px;
+  border: none;
+  background-color: #dfdfdf;
+  color: #333;
+}

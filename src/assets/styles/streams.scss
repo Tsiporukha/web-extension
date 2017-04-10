@@ -1,3 +1,20 @@
+.empty{
+  margin: 180px 0 30px;
+  color: white;
+  text-align: center;
+  i{font-size: 72px;}
+  span{font-size: 15px;}
+}
+
+.refresh{
+  cursor: pointer;
+  padding: 12px 26px;
+  border-radius: 3px;
+  border: none;
+  background-color: #dfdfdf;
+  margin: 0 0 40px;
+}
+
 .stream{
   background-color: white;
   padding: 0;

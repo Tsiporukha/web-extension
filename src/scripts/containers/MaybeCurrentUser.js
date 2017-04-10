@@ -5,6 +5,7 @@ import Login from '../components/Login';
 
 import {authUser, cleanSession} from '../actions/SessionActions';
 
+import styles from '../../assets/styles/maybeCurrentUser.scss';
 import bp from '../../assets/styles/bootstrap.css';
 
 
@@ -32,9 +33,10 @@ class MaybeCurrentUser extends Component {
     return (
       <div className={bp['container-fluid']}>
         {this.props.token ?
-          <span>
-            <img src={this.props.currentUser.avatar_url} alt='avatar' style={{height: '60px', width: '60px'}} />
-            <button onClick={this.props.cleanSession}>Logout</button>
+          <span className={styles.userArea}>
+            <img src={this.props.currentUser.avatar_url} alt='avatar' className={styles.avatar} />
+            <span className={styles.name}>{this.props.currentUser.username}</span>
+            <button className={styles.logout} onClick={this.props.cleanSession}>Log Out</button>
           </span>
           :
           <div className={`${bp['col-md-offset-3']} ${bp['col-md-6']}`}>

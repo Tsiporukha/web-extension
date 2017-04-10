@@ -38,19 +38,24 @@ class MyStreams extends Component {
   getFirstStream = () => this.props.getStreams({...this.props.filters.firstStreams, limit: 1}).then(data => data.streams[0])
 
   componentDidMount(){
-    return this.props.user ? this.props.updateCurrentUserData().then(_ => this.getFirstStream()).then(stream => (this.props.streamsData.streams.length &&
-      stream.id == this.props.streamsData.streams[0].id) ? false : this.updateWithLatestStreams()) : false;
+    return (this.props.user && this.props.streamsData.streams.length) ? this.props.updateCurrentUserData().then(_ => this.getFirstStream())
+      .then(stream => (this.props.streamsData.streams.length && stream.id == this.props.streamsData.streams[0].id) ?
+        false : this.updateWithLatestStreams()) : false;
   }
 
 
   render(){
     return (
       <div className={`${bp.container} h100perc`}>
-        <div>
+        <div style={{textAlign: 'center'}}>
           <MaybeCurrentUser />
           <br />
+          {!this.props.streamsData.streams.length && <div className={styles.empty}>
+            <i className='material-icons'>queue_music</i> <br />
+            <span>You don't have any playlists yet</span>
+          </div>}
           {this.props.user &&
-            <button style={{margin: '40px 0'}} onClick={this.updateWithLatestStreams}>Refresh</button>}
+            <button className={styles.refresh} onClick={this.updateWithLatestStreams}>Refresh</button>}
         </div>
 
         {this.props.user && <div className={`${bp['col-xs-offset-2']} ${bp['col-xs-8']}`}>
