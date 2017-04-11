@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 
 import PlayPauseStream from './PlayPauseStream';
+import MoreTags from '../components/MoreTags';
 
 import {like, unlike} from '../actions/StreamsActions';
 
@@ -30,7 +31,15 @@ class Stream extends Component {
   }
 
   render() {
-    const stream = {...this.props.stream, tags: words(this.props.stream.playlist.title, /#([^ ]+)/g)};
+    const MAX_TAGS_CHARS = 58;
+
+    const getFittedTagsLength = (tags, cindx = 0, clnght = 0, maxChars = MAX_TAGS_CHARS) =>
+      cindx < tags.length && clnght + tags[cindx].length < maxChars ? getFittedTagsLength(tags, cindx+1, clnght + tags[cindx].length) : cindx - 1;
+    const transformTags = (tags, lastFitted) => ({fitted: tags.slice(0, lastFitted + 1), more: tags.slice(lastFitted + 1)});
+
+    const stream = {...this.props.stream,
+      tags: (tags => transformTags(tags, getFittedTagsLength(tags)))(words(this.props.stream.playlist.title, /#([^ ]+)/g))};
+
     return (
       <div className={`${bp['container-fluid']} no-padding ${styles.stream}`}>
 
@@ -61,9 +70,10 @@ class Stream extends Component {
             </div>
 
             <div className={`${styles.tags}`}>
-              {(stream.tags).map(tag =>
+              {stream.tags.fitted.map(tag =>
                 <span key={tag} className={`${styles.tag}`}>{tag} </span>
               )}
+              {!!stream.tags.more.length && <MoreTags tags={stream.tags.more} />}
             </div>
           </div>
 
