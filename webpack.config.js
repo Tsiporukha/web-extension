@@ -40,7 +40,7 @@ const commonConfig = {
       },
       {
         test: /\.woff2?$|\.ttf$|\.eot$|\.svg$|\.png|\.jpe?g|\.gif$/,
-        loader: 'file-loader'
+        loader: 'file-loader?' + JSON.stringify({name: 'assets/[name].[ext]'})
       }
     ]
   },

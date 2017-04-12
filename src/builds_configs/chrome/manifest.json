@@ -29,6 +29,7 @@
 
   "web_accessible_resources": [
     "background.html",
+    "assets/*",
     "echo.css"
   ]
 
