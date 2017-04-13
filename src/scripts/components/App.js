@@ -21,11 +21,6 @@ class App extends Component {
   render() {
     return (
       <div className={styles.root}>
-
-        <link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet' />
-        <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&amp;subset=cyrillic-ext,greek-ext,latin-ext,vietnamese' rel='stylesheet' />
-        <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' />
-
         <Tabs theme={tabStyles} index={this.state.index} onChange={this.handleTabChange}>
           <Tab label='Queue'> <QueueTab /> </Tab>
           <Tab label='My playlists'> <MyStreams /> </Tab>
