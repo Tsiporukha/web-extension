@@ -12,6 +12,7 @@ import moment from 'moment';
 
 import bp from '../../assets/styles/bootstrap.css';
 import styles from '../../assets/styles/streams.scss';
+import moreTagsTheme from '../../assets/styles/moreTags.scss';
 
 const mapStateToProps = (state, ownProps) => ({
   user: state.session.user,

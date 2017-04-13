@@ -1,0 +1,42 @@
+.iconMenu{
+    position: absolute;
+    top: -15px;
+    right: 0;
+  button{
+    color: #9a9a9a!important;
+    font-size: 12px;
+    height: inherit;
+    line-height: inherit;
+    width: 100%;
+    text-transform: none;
+    i{
+      position: relative;
+      top: 9px;
+      left: 4px;
+      font-size: 26px;
+      color: #757575;
+    }
+  }
+}
+
+.menu{
+  font-size: 12px;
+  position: absolute;
+  top: 32px!important;
+  left: 4px!important;
+}
+
+
+.menuInner{
+  padding: 0;
+  margin: 0;
+}
+
+.menuItem{
+  min-width: 40px;
+  padding: 6px 12px;
+  height: initial;
+}
+.caption{
+  font-size: 12px;
+}
