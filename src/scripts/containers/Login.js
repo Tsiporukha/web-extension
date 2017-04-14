@@ -1,11 +1,19 @@
 import React, {Component, PropTypes} from 'react';
+import {connect} from 'react-redux';
 
-import bp from '../../assets/styles/bootstrap.css';
+import {authUser} from '../actions/SessionActions';
+
 import styles from '../../assets/styles/login.scss';
 
-export default class Login extends Component {
 
-  state = {error: ''};
+const mapDispatchToProps = dispatch => ({
+  authUser: (email, password) => dispatch(authUser(email, password))
+});
+
+
+class Login extends Component {
+
+  state = {invalidCredentials: false};
 
   static propTypes = {
     authUser: PropTypes.func
@@ -13,11 +21,14 @@ export default class Login extends Component {
 
   render(){
     const auth = () => this.props.authUser(this.refs.email.value, this.refs.password.value)
-      .catch(_e => this.setState({error: 'Incorrect email or password.'}));
+      .catch(_e => this.setState({invalidCredentials: true}));
+
+    const onSubmit = e => Promise.resolve(e.preventDefault()).then(auth);
+
     return (
       <div className={styles.root}>
         <div className={styles.signIn}>Sign in with:</div>
-        <div>
+        <form onSubmit={onSubmit}>
           <div className={styles.input}>
             <input ref='email' required type='email' placeholder='email' />
           </div>
@@ -26,11 +37,11 @@ export default class Login extends Component {
           </div>
 
           <div className={styles.ebArea}>
-            <p className={styles.err}>{this.state.error}</p>
+            {this.state.invalidCredentials && <p className={styles.err}>Incorrect email or password.</p>}
 
-            <button className={styles.btn} onClick={auth}>Login</button>
+            <button type='submit' className={styles.btn}>Login</button>
           </div>
-        </div>
+        </form>
 
         <div className={styles.mobileArea}>
           <div>
@@ -58,5 +69,6 @@ export default class Login extends Component {
       </div>
     );
   }
-
 }
+
+export default connect(() => ({}), mapDispatchToProps)(Login);

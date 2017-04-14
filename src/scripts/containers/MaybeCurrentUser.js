@@ -1,9 +1,9 @@
 import React, {Component, PropTypes} from 'react';
 import { connect } from 'react-redux';
 
-import Login from '../components/Login';
+import Login from './Login';
 
-import {authUser, cleanSession} from '../actions/SessionActions';
+import {cleanSession} from '../actions/SessionActions';
 
 import styles from '../../assets/styles/maybeCurrentUser.scss';
 import bp from '../../assets/styles/bootstrap.css';
@@ -15,9 +15,8 @@ const mapStateToProps = store => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  authUser: (email, password) => dispatch(authUser(email, password)),
   cleanSession: () => dispatch(cleanSession())
-})
+});
 
 class MaybeCurrentUser extends Component {
 
@@ -40,7 +39,7 @@ class MaybeCurrentUser extends Component {
           </span>
           :
           <div className={`${bp['col-md-offset-3']} ${bp['col-md-6']}`}>
-            <Login authUser={this.props.authUser} />
+            <Login />
           </div>}
       </div>
     );
