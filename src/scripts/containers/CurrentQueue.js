@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import {connect} from 'react-redux';
 
 import SongList from '../components/SongList';
-import StreamPublication from './StreamPublication';
+import StreamPublicationDialog from './StreamPublicationDialog';
 
 import {removeFromCurrentQueue} from '../actions/SongsActions';
 import {setPlayingSong, setPlayingSongId, play, clean as cleanPlayer} from '../actions/PlayerActions';
@@ -92,7 +92,7 @@ class CurrentQueue extends Component {
             YOUR QUEUE: <b>{this.props.songs.length} songs, {durationWithHours(queueDuration(this.props.songs))}</b>
             <i className='material-icons' onClick={clearQueue}>clear_all</i>
             <i className='material-icons' onClick={this.toggleSPVisibility}>add</i>
-            <StreamPublication visible={this.state.spVisibility} toggleVisibility={this.toggleSPVisibility} />
+            <StreamPublicationDialog visible={this.state.spVisibility} toggleVisibility={this.toggleSPVisibility} />
           </span>
         </div>}
         <div className={`${styles.songList} ${styles.current}`}>
