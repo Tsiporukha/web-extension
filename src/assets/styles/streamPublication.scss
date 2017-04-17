@@ -114,3 +114,21 @@
   .done{color: #0093eb;}
   .cancel{color: #6e6e6e;}
 }
+
+.primary, .flat, .disabled{
+  min-width: initial;
+  min-height: initial;
+  height: auto;
+  width: auto;
+  font-size: 14px;
+  font-weight: 600;
+  background-color: transparent;
+  line-height: 1;
+  position: relative;
+  cursor: pointer;
+  border: 0;
+  padding: 10px;
+  outline: none;
+}
+
+.primary:not([disabled]).flat{color: #0093eb;}

@@ -4,6 +4,7 @@ import UploadArtwork from '../components/UploadArtwork';
 
 import Input from 'react-toolbox/lib/input';
 import Autocomplete from 'react-toolbox/lib/autocomplete';
+import {Button} from 'react-toolbox/lib/button';
 
 import {convertToBase64Url, onReaderLoad} from '../lib/FileReader';
 
@@ -45,6 +46,8 @@ export default class StreamPublication extends Component {
     const removeTag = tag => () => this.setState({tags: this.state.tags.filter(t => t!==tag)});
 
     const publishStream = () => this.props.createStream(this.state.title, this.state.tags.join(', '), this.state.artwork_url, this.props.songs).then(_ => this.props.toggleVisibility());
+
+    const isValid = () => this.props.songs.length && this.state.title && this.state.tags.length && this.state.artwork_url;
 
     return(
       <div className={styles.root}>
@@ -94,8 +97,8 @@ export default class StreamPublication extends Component {
         </div>
 
         <div className={styles.actions}>
-          <button className={styles.cancel} onClick={this.props.toggleVisibility}>CANCEL</button>
-          <button className={styles.done} onClick={publishStream}>DONE</button>
+          <Button className={styles.cancel} theme={styles} onClick={this.props.toggleVisibility} flat>CANCEL</Button>
+          <Button theme={styles} onClick={publishStream} flat primary disabled={!isValid()}>DONE</Button>
         </div>
       </div>
     )

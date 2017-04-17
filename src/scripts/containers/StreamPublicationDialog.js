@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 
+import Login from './Login';
 import StreamPublication from '../components/StreamPublication';
 
 import Dialog from 'react-toolbox/lib/dialog';
@@ -14,7 +15,8 @@ import {setUserData} from '../actions/SessionActions';
 import dialogTheme from '../../assets/styles/streamPublicationDialogTheme.scss';
 
 const mapStateToProps = (state, ownProps) => ({
-  songs: state.currentQueue
+  songs: state.currentQueue,
+  authed: !!state.session.token
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -40,7 +42,7 @@ class streamPublicationDialog extends Component {
         theme={dialogTheme}
         onEscKeyDown={this.props.toggleVisibility}
       >
-        <StreamPublication {...this.props} />
+        {this.props.authed ? <StreamPublication {...this.props} /> : <Login />}
       </Dialog>
     )
   }
