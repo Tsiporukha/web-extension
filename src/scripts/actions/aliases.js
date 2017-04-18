@@ -6,7 +6,7 @@ import {maybeUpdate as maybeUpdateStream} from './StreamsActions';
 import {SEARCH_SONGS, SEARCH_AND_UPDATE_SEARCH_QUEUE, SEARCH_AND_UPDATE_AUTOCOMPLETE,
   PLAY_NEXT, PLAY_PREV, SEEK_TO, GET_AND_UPDATE_AUTOCOMPLETE, AUTH_USER, SET_USER_DATA,
   GET_STREAMS, ADD_SONGS_TO_TOP_AND_PLAY, UPDATE_CURRENT_USER_DATA, LIKE_STREAM,
-  UNLIKE_STREAM, UPLOAD_ARTWORK, CREATE_STREAM} from '../constants/ActionTypes';
+  UNLIKE_STREAM, UPLOAD_ARTWORK, CREATE_STREAM, SET_ECHO_CLI_SESSION} from '../constants/ActionTypes';
 import {searchOnYoutube, getSuggestions} from '../lib/youtube';
 import {login, getCurrentUserData} from '../lib/serverApi/session';
 import * as Stream from '../lib/serverApi/streams';
@@ -64,6 +64,8 @@ const uploadArtwork = ({imageBase64Url, filename}) => (dispatch, getState) => St
 const createStream = ({playlist_title, tags, default_artwork_url, songs}) => (dispatch, getState) =>
   Stream.create(playlist_title, tags, default_artwork_url, songs, getState().session.token)
 
+const setEchoCliSession = () => dispatch => dispatch(setUserData(EchoCli.getSession()));
+
 const aliases = {};
 aliases[SEARCH_SONGS] = action => searchSongs(action.payload);
 aliases[SEARCH_AND_UPDATE_SEARCH_QUEUE] = action => searchAndUpdateSearchQueue(action.payload);
@@ -79,5 +81,6 @@ aliases[LIKE_STREAM] = action => likeStream(action.payload);
 aliases[UNLIKE_STREAM] = action => unlikeStream(action.payload);
 aliases[UPLOAD_ARTWORK] = action => uploadArtwork(action.payload);
 aliases[CREATE_STREAM] = action => createStream(action.payload);
+aliases[SET_ECHO_CLI_SESSION] = _ => setEchoCliSession();
 
 export default aliases;

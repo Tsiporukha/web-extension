@@ -9,7 +9,7 @@ import Dialog from 'react-toolbox/lib/dialog';
 import * as EchoCli from '../lib/echoWebCliApi';
 
 import {uploadArtwork, create as createStream} from '../actions/StreamsActions';
-import {setUserData} from '../actions/SessionActions';
+import {maybeSetEchoCliSession} from '../actions/SessionActions';
 
 
 import dialogTheme from '../../assets/styles/streamPublicationDialogTheme.scss';
@@ -23,7 +23,7 @@ const mapDispatchToProps = dispatch => ({
   uploadArtwork: image => callback =>
     Promise.resolve(onReaderLoad(e => dispatch(uploadArtwork(e.target.result, image.name)).then(callback), convertToBase64Url(image))),
   createStream: (playlist_title, tags, default_artwork_url, songs) => dispatch(createStream(playlist_title, tags, default_artwork_url, songs)),
-  setUserData: userData => dispatch(setUserData(userData))
+  maybeSetEchoCliSession: () => maybeSetEchoCliSession(dispatch)
 });
 
 class streamPublicationDialog extends Component {
@@ -32,7 +32,7 @@ class streamPublicationDialog extends Component {
   }
 
   componentWillReceiveProps(nextProps){
-    return nextProps.visible ? EchoCli.maybe(() => this.props.setUserData(EchoCli.getSession())) : false;
+    return nextProps.visible ? this.props.maybeSetEchoCliSession() : false;
   }
 
   render() {

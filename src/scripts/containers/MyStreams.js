@@ -5,7 +5,9 @@ import MaybeCurrentUser from './MaybeCurrentUser';
 import Stream from './Stream';
 
 import {get as getStreamsAction, setMyStreams, cleanMyStreams} from '../actions/StreamsActions';
-import {updateCurrentUserData} from '../actions/SessionActions';
+import {updateCurrentUserData, maybeSetEchoCliSession} from '../actions/SessionActions';
+
+import * as EchoCli from '../lib/echoWebCliApi';
 
 import bp from '../../assets/styles/bootstrap.css';
 import styles from '../../assets/styles/streams.scss';
@@ -24,7 +26,8 @@ const mapDispatchToProps = dispatch => ({
   getStreams: filters => dispatch(updateCurrentUserData()).then(_ => dispatch(getStreamsAction(filters))),
   updateCurrentUserData: () => dispatch(updateCurrentUserData()),
   setMyStreams: (filters, prevStreams) => data => dispatch(setMyStreams({streams: [...prevStreams, ...data.streams],
-    offset: filters.fetchedAll ? filters.offset : filters.offset + filters.limit, limit: filters.limit, fetchedAll: data.count < filters.limit}))
+    offset: filters.fetchedAll ? filters.offset : filters.offset + filters.limit, limit: filters.limit, fetchedAll: data.count < filters.limit})),
+  maybeSetEchoCliSession: () => maybeSetEchoCliSession(dispatch)
 })
 
 class MyStreams extends Component {
@@ -38,9 +41,11 @@ class MyStreams extends Component {
   getFirstStream = () => this.props.getStreams({...this.props.filters.firstStreams, limit: 1}).then(data => data.streams[0])
 
   componentDidMount(){
-    return (this.props.user && this.props.streamsData.streams.length) ? this.props.updateCurrentUserData().then(_ => this.getFirstStream())
-      .then(stream => (this.props.streamsData.streams.length && stream.id == this.props.streamsData.streams[0].id) ?
-        false : this.updateWithLatestStreams()) : false;
+    const maybeUpdateUserAndStreams = () => (this.props.user && this.props.streamsData.streams.length) ?
+      this.props.updateCurrentUserData().then(_ => this.getFirstStream()).then(stream =>
+        (this.props.streamsData.streams.length && stream.id == this.props.streamsData.streams[0].id) ? false : this.updateWithLatestStreams()) : false;
+
+    return EchoCli.either(this.props.maybeSetEchoCliSession, maybeUpdateUserAndStreams);
   }
 
 

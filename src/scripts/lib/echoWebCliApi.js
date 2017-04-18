@@ -30,11 +30,8 @@ export function playSongFrom(path, song) {
   return playQueue(songs, getSongIndex(songs, song));
 }
 
-export function maybeUpdatePlaylistSongs(path, streamId = CURRENT_QUEUE_ID) {
-  return getPlayingPlaylist().id == streamId ?
-   window.echoApi.updatePlaylistSongs(getSongsFromLocalStorage(path), streamId) :
-   false
-}
+export const maybeUpdatePlaylistSongs = (path, streamId = CURRENT_QUEUE_ID) => isPlaylistPlaying(streamId) ?
+  window.echoApi.updatePlaylistSongs(getSongsFromLocalStorage(path), streamId) : false;
 
 export function playCurrentQueueWith(song) {
   return dispatch => {
