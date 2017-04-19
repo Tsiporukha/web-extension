@@ -4,7 +4,7 @@ import UploadArtwork from './UploadArtwork';
 
 import {Button, Input, Autocomplete} from 'react-toolbox';
 
-import {convertToBase64Url, onReaderLoad} from '../lib/FileReader';
+import * as EchoCli from '../lib/echoWebCliApi';
 
 import styles from '../../assets/styles/streamPublication.scss';
 import inputTheme from '../../assets/styles/streamPublicationInput.scss';
@@ -44,7 +44,8 @@ export default class StreamPublication extends Component {
     const removeTag = tag => () => this.setState({tags: this.state.tags.filter(t => t!==tag)});
 
     const publishStream = () => this.props.createStream(this.state.title, this.state.tags.join(', '), this.state.artwork_url, this.props.songs)
-      .then(resp => resp.status == 200 ? resp.json() : Promise.reject(resp)).then(this.props.showSnackBar).then(this.props.toggleVisibility());
+      .then(resp => resp.status == 200 ? resp.json() : Promise.reject(resp)).then(this.props.showSnackBar).then(this.props.toggleVisibility)
+      .then(() => EchoCli.maybe(EchoCli.maybeReloadRouteAfterStreamPublication));
 
     const isValid = () => this.props.songs.length && this.state.title && this.state.tags.length && this.state.artwork_url;
 

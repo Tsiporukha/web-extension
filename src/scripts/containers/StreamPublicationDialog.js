@@ -7,6 +7,7 @@ import SavedStreamSnackbar from '../components/SavedStreamSnackbar';
 
 import Dialog from 'react-toolbox/lib/dialog';
 
+import {convertToBase64Url, onReaderLoad} from '../lib/FileReader';
 import * as EchoCli from '../lib/echoWebCliApi';
 
 import {uploadArtwork, create as createStream} from '../actions/StreamsActions';

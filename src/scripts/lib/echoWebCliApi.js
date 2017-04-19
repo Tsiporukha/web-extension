@@ -40,7 +40,9 @@ export function playCurrentQueueWith(song) {
   }
 }
 
-export const getSession = () => ((({EchoToken: token, ...user}) => ({token, user}))(window.echoApi.getSession()))
+export const getSession = () => ((({EchoToken: token, ...user}) => ({token, user}))(window.echoApi.getSession()));
+
+export const maybeReloadRouteAfterStreamPublication = () => window.echoApi.maybeReloadRouteAfterStreamPublication();
 
 function createStreamData(songs) {
   return {
