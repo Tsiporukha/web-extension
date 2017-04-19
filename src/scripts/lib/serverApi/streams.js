@@ -9,7 +9,7 @@ export const like = (id, token) => fetcho.post(getAbsoluteUrl(`/streams/${id}/ad
 export const unlike = (id, token) => fetcho.post(getAbsoluteUrl(`/streams/${id}/remove_like`), {token}).then(getJson);
 
 export const create = (playlist_title, tags, default_artwork_url, songs, token) =>
-  fetcho.post(getAbsoluteUrl('/streams'), {playlist_title, tags, default_artwork_url, songs, token}).then(getJson);
+  fetcho.post(getAbsoluteUrl('/streams'), {playlist_title, tags, default_artwork_url, songs, token});
 
 
 export const uploadArtwork = (imageBase64Url, filename, token, key = `data/atrworks/${v4()}${filename}`) =>

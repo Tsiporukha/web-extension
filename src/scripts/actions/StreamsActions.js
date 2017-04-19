@@ -37,7 +37,7 @@ export const uploadArtwork = (imageBase64Url, filename) => ({
   }
 });
 
-export const create = (playlist_title, tags, default_artwork_url, songs) => console.log(playlist_title, tags, default_artwork_url, songs) || ({
+export const create = (playlist_title, tags, default_artwork_url, songs) => ({
   type: CREATE_STREAM,
   payload: {playlist_title, tags, default_artwork_url, songs}
 })

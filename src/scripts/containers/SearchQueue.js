@@ -22,7 +22,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     addToCurrentQueue: songs => {
       dispatch(addToCurrentQueue(songs))
-      return EchoCli.maybeUpdatePlaylistSongs('currentQueue', EchoCli.CURRENT_QUEUE_ID);
+      return EchoCli.maybe(() =>  EchoCli.maybeUpdatePlaylistSongs('currentQueue', EchoCli.CURRENT_QUEUE_ID));
     },
     searchAndUpdateSearchQueue: term => dispatch(searchAndUpdateSearchQueue(term)),
 

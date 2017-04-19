@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 
 import Login from './Login';
 import StreamPublication from '../components/StreamPublication';
+import SavedStreamSnackbar from '../components/SavedStreamSnackbar';
 
 import Dialog from 'react-toolbox/lib/dialog';
 
@@ -31,19 +32,32 @@ class streamPublicationDialog extends Component {
   static propTypes = {
   }
 
+  state = {sbVisibility: false}
+
   componentWillReceiveProps(nextProps){
     return nextProps.visible ? this.props.maybeSetEchoCliSession() : false;
   }
 
+  hideSnackbar = () => this.setState({sbVisibility: false});
+  showSnackBar = () => this.setState({sbVisibility: true});
+
   render() {
     return(
-      <Dialog
-        active={this.props.visible}
-        theme={dialogTheme}
-        onEscKeyDown={this.props.toggleVisibility}
-      >
-        {this.props.authed ? <StreamPublication {...this.props} /> : <Login />}
-      </Dialog>
+      <div>
+        <Dialog
+          active={this.props.visible}
+          theme={dialogTheme}
+          onEscKeyDown={this.props.toggleVisibility}
+        >
+          {this.props.authed ? <StreamPublication {...this.props} showSnackBar={this.showSnackBar} /> : <Login />}
+        </Dialog>
+
+        <SavedStreamSnackbar
+          onTimeout={this.hideSnackbar}
+          onClick={this.hideSnackbar}
+          active={this.state.sbVisibility}
+          streamTitle='' />
+      </div>
     )
   }
 }
