@@ -5,6 +5,8 @@ import Login from './Login';
 
 import {cleanSession} from '../actions/SessionActions';
 
+import * as EchoCli from '../lib/echoWebCliApi';
+
 import styles from '../../assets/styles/maybeCurrentUser.scss';
 import bp from '../../assets/styles/bootstrap.css';
 
@@ -29,12 +31,17 @@ class MaybeCurrentUser extends Component {
   }
 
   render(){
+
+    const maybeGoToUser = userId => () => EchoCli.maybe(() => EchoCli.goToPath(`/profile/${userId}`));
+
     return (
       <div className={bp['container-fluid']}>
         {this.props.token ?
           <span className={styles.userArea}>
-            <img src={this.props.currentUser.avatar_url} alt='avatar' className={styles.avatar} />
-            <span className={styles.name}>{this.props.currentUser.username}</span>
+            <a onClick={maybeGoToUser(this.props.currentUser.id)}>
+              <img src={this.props.currentUser.avatar_url} alt='avatar' className={styles.avatar} />
+              <span className={styles.name}>{this.props.currentUser.username}</span>
+            </a>
             <button className={styles.logout} onClick={this.props.cleanSession}>Log Out</button>
           </span>
           :

@@ -44,6 +44,8 @@ export const getSession = () => ((({EchoToken: token, ...user}) => ({token, user
 
 export const maybeReloadRouteAfterStreamPublication = () => window.echoApi.maybeReloadRouteAfterStreamPublication();
 
+export const goToPath = path => window.echoApi.goToPath(path);
+
 function createStreamData(songs) {
   return {
     playlist: {
