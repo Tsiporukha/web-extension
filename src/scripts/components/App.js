@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {Tab, Tabs} from 'react-toolbox';
 import QueueTab from './QueueTab';
 import MyStreams from '../containers/MyStreams';
+import CurrentUser from '../containers/CurrentUser';
 import Player from '../containers/Player';
 import styles from '../../assets/styles/app.scss';
 import tabStyles from '../../assets/styles/tabs.scss';
@@ -30,6 +31,8 @@ class App extends Component {
 //            <Tab label='History'>History</Tab>
           }
         </Tabs>
+
+        <CurrentUser />
 
         <Player />
 

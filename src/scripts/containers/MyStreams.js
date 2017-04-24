@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import { connect } from 'react-redux';
 
-import MaybeCurrentUser from './MaybeCurrentUser';
+import Login from './Login';
 import Stream from './Stream';
 
 import {get as getStreamsAction, setMyStreams, cleanMyStreams} from '../actions/StreamsActions';
@@ -54,7 +54,9 @@ class MyStreams extends Component {
     return (
       <div className={`${bp.container} h100perc`}>
         <div style={{textAlign: 'center'}}>
-          <MaybeCurrentUser />
+          {!this.props.user && <div className={`${bp['col-md-offset-3']} ${bp['col-md-6']}`}>
+            <Login />
+          </div>}
           <br />
           {this.props.user && !this.props.streamsData.streams.length && <div className={styles.empty}>
             <i className='material-icons'>queue_music</i> <br />

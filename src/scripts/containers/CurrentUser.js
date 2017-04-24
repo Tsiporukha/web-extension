@@ -20,13 +20,12 @@ const mapDispatchToProps = dispatch => ({
   cleanSession: () => dispatch(cleanSession())
 });
 
-class MaybeCurrentUser extends Component {
+class CurrentUser extends Component {
 
   static propTypes = {
     token: PropTypes.string,
     currentUser:  PropTypes.object,
 
-    authUser: PropTypes.func,
     cleanSession: PropTypes.func
   }
 
@@ -35,22 +34,18 @@ class MaybeCurrentUser extends Component {
     const maybeGoToUser = userId => () => EchoCli.maybe(() => EchoCli.goToPath(`/profile/${userId}`));
 
     return (
-      <div className={bp['container-fluid']}>
-        {this.props.token ?
-          <span className={styles.userArea}>
-            <a onClick={maybeGoToUser(this.props.currentUser.id)}>
-              <img src={this.props.currentUser.avatar_url} alt='avatar' className={styles.avatar} />
-              <span className={styles.name}>{this.props.currentUser.username}</span>
-            </a>
-            <button className={styles.logout} onClick={this.props.cleanSession}>Log Out</button>
-          </span>
-          :
-          <div className={`${bp['col-md-offset-3']} ${bp['col-md-6']}`}>
-            <Login />
-          </div>}
-      </div>
+      this.props.token ?
+        <span className={styles.userArea}>
+          <a onClick={maybeGoToUser(this.props.currentUser.id)}>
+            <img src={this.props.currentUser.avatar_url} alt='avatar' className={styles.avatar} />
+            <span className={styles.name}>{this.props.currentUser.username}</span>
+          </a>
+          <button className={styles.logout} onClick={this.props.cleanSession}>Log Out</button>
+        </span>
+        :
+        false
     );
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MaybeCurrentUser);
+export default connect(mapStateToProps, mapDispatchToProps)(CurrentUser);
