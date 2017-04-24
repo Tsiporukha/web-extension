@@ -12,6 +12,8 @@ import * as EchoCli from '../lib/echoWebCliApi';
 import bp from '../../assets/styles/bootstrap.css';
 import styles from '../../assets/styles/streams.scss';
 
+const orObj = arg => arg || {};
+
 const mapStateToProps = store => ({
   user: store.session.user,
   streamsData: store.streams.myStreams,
@@ -38,14 +40,13 @@ class MyStreams extends Component {
   updateStreams = (filters, prevStreams = []) => this.props.getStreams(filters).then(this.props.setMyStreams(filters, prevStreams));
   updateWithNextStreams = () => this.updateStreams(this.props.filters.nextStreams, this.props.streamsData.streams);
   updateWithLatestStreams = () => this.updateStreams(this.props.filters.firstStreams, []);
-  getFirstStream = () => this.props.getStreams({...this.props.filters.firstStreams, limit: 1}).then(data => data.streams[0])
+  getFirstStream = () => this.props.getStreams({...this.props.filters.firstStreams, limit: 1}).then(data => orObj(data.streams[0]))
 
   componentDidMount(){
-    const maybeUpdateUserAndStreams = () => (this.props.user && this.props.streamsData.streams.length) ?
-      this.props.updateCurrentUserData().then(_ => this.getFirstStream()).then(stream =>
-        (this.props.streamsData.streams.length && stream.id == this.props.streamsData.streams[0].id) ? false : this.updateWithLatestStreams()) : false;
+    const maybeUpdateStreams = () => this.props.user ? this.getFirstStream()
+      .then(stream => stream.id == orObj(this.props.streamsData.streams[0]).id ? false : this.updateWithLatestStreams()) : false;
 
-    return EchoCli.either(this.props.maybeSetEchoCliSession, maybeUpdateUserAndStreams);
+    return Promise.resolve(EchoCli.either(this.props.maybeSetEchoCliSession, this.props.updateCurrentUserData)).then(maybeUpdateStreams);
   }
 
 
@@ -55,7 +56,7 @@ class MyStreams extends Component {
         <div style={{textAlign: 'center'}}>
           <MaybeCurrentUser />
           <br />
-          {!this.props.streamsData.streams.length && <div className={styles.empty}>
+          {this.props.user && !this.props.streamsData.streams.length && <div className={styles.empty}>
             <i className='material-icons'>queue_music</i> <br />
             <span>You don't have any playlists yet</span>
           </div>}
