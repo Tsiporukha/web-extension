@@ -31,12 +31,14 @@ class CurrentUser extends Component {
 
   render(){
 
-    const maybeGoToUser = userId => () => EchoCli.maybe(() => EchoCli.goToPath(`/profile/${userId}`));
+    const goToUser = userId => () => EchoCli.either(
+      () => EchoCli.goToPath(`/profile/${userId}`),
+      () => Promise.resolve(window.open(`http://beta.echoapplication.com/#/profile/${userId}`)).then(win => win.focus()));
 
     return (
       this.props.token ?
         <span className={styles.userArea}>
-          <a onClick={maybeGoToUser(this.props.currentUser.id)}>
+          <a onClick={goToUser(this.props.currentUser.id)}>
             <img src={this.props.currentUser.avatar_url} alt='avatar' className={styles.avatar} />
             <span className={styles.name}>{this.props.currentUser.username}</span>
           </a>
