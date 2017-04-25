@@ -62,7 +62,7 @@ const updateCurrentUserData = () => (dispatch, getState) => getCurrentUserData(g
 const uploadArtwork = ({imageBase64Url, filename}) => (dispatch, getState) => Stream.uploadArtwork(imageBase64Url, filename, getState().session.token);
 
 const createStream = ({playlist_title, tags, default_artwork_url, songs}) => (dispatch, getState) =>
-  Stream.create(playlist_title, tags, default_artwork_url, songs, getState().session.token)
+  Stream.create(playlist_title, tags, default_artwork_url, songs, getState().session.token).then(resp => resp.json());
 
 const setEchoCliSession = () => dispatch => dispatch(setUserData(EchoCli.getSession()));
 

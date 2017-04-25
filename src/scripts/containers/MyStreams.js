@@ -42,11 +42,17 @@ class MyStreams extends Component {
   updateWithLatestStreams = () => this.updateStreams(this.props.filters.firstStreams, []);
   getFirstStream = () => this.props.getStreams({...this.props.filters.firstStreams, limit: 1}).then(data => orObj(data.streams[0]))
 
-  componentDidMount(){
-    const maybeUpdateStreams = () => this.props.user ? this.getFirstStream()
-      .then(stream => stream.id == orObj(this.props.streamsData.streams[0]).id ? false : this.updateWithLatestStreams()) : false;
+  maybeUpdateStreams = () => this.props.user ? this.getFirstStream()
+    .then(stream => stream.id == orObj(this.props.streamsData.streams[0]).id ? false : this.updateWithLatestStreams()) : false;
+  maybeUpdateUserAndStreams = () =>
+    Promise.resolve(EchoCli.either(this.props.maybeSetEchoCliSession, this.props.updateCurrentUserData)).then(this.maybeUpdateStreams);
 
-    return Promise.resolve(EchoCli.either(this.props.maybeSetEchoCliSession, this.props.updateCurrentUserData)).then(maybeUpdateStreams);
+  componentDidMount(){
+    return this.maybeUpdateUserAndStreams();
+  }
+
+  componentWillReceiveProps(nextProps){
+    return nextProps.user && !this.props.user ? this.maybeUpdateUserAndStreams() : false;
   }
 
 

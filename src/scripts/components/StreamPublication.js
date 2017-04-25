@@ -44,8 +44,8 @@ export default class StreamPublication extends Component {
     const removeTag = tag => () => this.setState({tags: this.state.tags.filter(t => t!==tag)});
 
     const publishStream = () => this.props.createStream(this.state.title, this.state.tags.join(', '), this.state.artwork_url, this.props.songs)
-      .then(resp => resp.status == 200 ? resp.json() : Promise.reject(resp)).then(this.props.showSnackBar).then(this.props.toggleVisibility)
-      .then(() => EchoCli.maybe(EchoCli.maybeReloadRouteAfterStreamPublication));
+      .then(stream => stream.playlist.title == this.state.title ? stream : Promise.reject('err'))
+      .then(this.props.showSnackBar).then(this.props.toggleVisibility).then(() => EchoCli.maybe(EchoCli.maybeReloadRouteAfterStreamPublication));
 
     const isValid = () => this.props.songs.length && this.state.title && this.state.tags.length && this.state.artwork_url;
 
