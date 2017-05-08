@@ -13,6 +13,7 @@ if(!document.getElementById('echo-app-ext')){
 }
 
 window.HIDE_ER_PLAYER = true;
+window.EXTENSION = true;
 
 const proxyStore =  new Store({portName: 'echo-app-ext'});
 
