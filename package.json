@@ -1,10 +1,10 @@
 {
-  "name": "echo-ext-ext",
+  "name": "echo-web-ext",
   "version": "0.0.1",
   "description": "Echo web extension",
   "main": "src/scripts/app.js",
   "scripts": {
-    "dev-server": "build=web ./node_modules/.bin/webpack-dev-server ./src/builds_configs/web_cli/"
+    "dev-server": "build=web ./node_modules/.bin/webpack-dev-server ./src/environments/web_cli/"
   },
   "author": "",
   "license": "ISC",

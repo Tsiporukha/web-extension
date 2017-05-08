@@ -8,8 +8,8 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const nmPath = './node_modules';
 
 const joinToDirname = pth => path.join(__dirname, pth);
-const jointToWebCliDir = pth => path.join('./src/builds_configs/web_cli/', pth);
-const jointToChromeDir = pth => path.join('./src/builds_configs/chrome/', pth);
+const jointToWebCliDir = pth => path.join('./src/environments/web_cli/', pth);
+const jointToChromeDir = pth => path.join('./src/environments/chrome/', pth);
 
 const getFullConfig = envConfig => Object.assign({}, commonConfig, envConfig);
 
@@ -39,8 +39,12 @@ const commonConfig = {
         })
       },
       {
-        test: /\.woff2?$|\.ttf$|\.eot$|\.svg$|\.png|\.jpe?g|\.gif$/,
-        loader: 'file-loader?' + JSON.stringify({name: 'assets/[name].[ext]'})
+        test: /\.woff2?$|\.ttf$|\.eot$|.svg$/,
+        loader: 'file-loader?' + JSON.stringify({name: 'assets/fonts/[name].[ext]'})
+      },
+      {
+        test: /\.png|\.jpe?g|\.gif$/,
+        loader: 'file-loader?' + JSON.stringify({name: 'assets/images/[name].[ext]'})
       }
     ]
   },
