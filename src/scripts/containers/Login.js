@@ -1,7 +1,9 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 
-import {setUserData} from '../actions/SessionActions';
+import {setUserData, maybeSetEchoCliSession} from '../actions/SessionActions';
+
+import * as EchoCli from '../lib/echoWebCliApi';
 
 import styles from '../../assets/styles/login.scss';
 
@@ -9,12 +11,17 @@ const iframeLoginOrigin = 'http://beta.echoapplication.com'
 
 const mapDispatchToProps = dispatch => ({
   setUserData: userData => dispatch(setUserData(userData)),
+  maybeSetEchoCliSession: () => maybeSetEchoCliSession(dispatch)
 });
 
 
 class Login extends Component {
 
-  iframeMessageListener =  e => e.origin == iframeLoginOrigin ? this.props.setUserData(e.data) : false;
+  iframeMessageListener =  e => e.origin == iframeLoginOrigin ?
+    EchoCli.either(
+      () => Promise.resolve(EchoCli.setSession(e.data)).then(this.props.maybeSetEchoCliSession),
+      () => this.props.setUserData(e.data))
+    : false;
 
   addIframeMessageListener = () => window.addEventListener('message', this.iframeMessageListener);
 

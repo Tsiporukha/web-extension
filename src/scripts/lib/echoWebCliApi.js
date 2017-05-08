@@ -41,6 +41,7 @@ export function playCurrentQueueWith(song) {
 }
 
 export const getSession = () => ((({EchoToken: token, ...user}) => ({token, user}))(window.echoApi.getSession()));
+export const setSession = sessionData => window.echoApi.setSession({...sessionData.user, EchoToken: sessionData.token});
 
 export const maybeReloadRouteAfterStreamPublication = () => window.echoApi.maybeReloadRouteAfterStreamPublication();
 
