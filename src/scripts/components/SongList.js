@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import { List } from 'react-toolbox/lib/list';
 import Song from './Song';
+import {getFilePath} from '../lib/envDifferences';
 
 import styles from '../../assets/styles/songList.scss';
 
@@ -16,22 +17,11 @@ export default class SongList extends Component {
 
   render() {
     const sQueue = <div className={styles.emptyQueue}>
-      <i className={`material-icons ${styles.bigIcon}`}>search</i> <br />
-      <span>
-        Play songs/playlists <i className='material-icons'>play_arrow</i> <br />
-        Add to queue <i className='material-icons'>playlist_add</i> <br />
-        Search YouTube, SoundCloud, Spotify <br />
-        <b>Hint:</b> copy-paste song links into the Search Bar
-      </span>
+      <img src={getFilePath(require('../../assets/images/empty_search.png'))} className={styles.esImg} alt='empty search' />
     </div>;
 
     const cQueue = <div className={`${styles.emptyQueue} ${styles.current}`}>
-      <i className={`material-icons ${styles.bigIcon}`}>queue_music</i> <br />
-      <span>
-        Create/modify playlists<i className='material-icons'>add</i> <br />
-        Clear <i className='material-icons'>clear_all</i> <br />
-        <b>Hint:</b> Grag-n-drop songs from Search to Queue
-      </span>
+      <img src={getFilePath(require('../../assets/images/empty_queue.png'))}  className={styles.eqImg}  alt='empty queue' />
     </div>;
 
     return (

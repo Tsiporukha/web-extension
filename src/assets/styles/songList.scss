@@ -7,6 +7,10 @@
 
   &.current{ top: calc(24% + 18px); }
 
+  .esImg, .eqImg{
+    height: 160px;
+  }
+
   i{
     cursor: text;
     font-size: 20px;
