@@ -9,6 +9,7 @@ import {duration} from '../lib/duration';
 export default class Song extends Component {
 
   static propTypes = {
+    type: PropTypes.string,
     song: PropTypes.shape({
       id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
       title: PropTypes.string,
@@ -24,8 +25,8 @@ export default class Song extends Component {
 
   render() {
     return (
-      <div className={`${bp.row} no-margin`}>
-        <div className={`${bp['col-xs-1']} no-padding ${styles.artwork}`}>
+      <div className={`${bp.row} no-margin ${this.props.type === 'search' ? styles.search : styles.queue}`}>
+        <div className={`${bp['col-xs-1']} ${styles.artwork}`}>
           <img src={this.props.song.artwork_url} />
           <span className={styles.playPause}>
             <PlayPauseSong songId={this.props.song.id} play={() => this.props.play(this.props.song)} />

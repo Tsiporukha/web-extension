@@ -87,16 +87,18 @@ class CurrentQueue extends Component {
 
     return (
       <div className={`${styles.queue} h100perc`}>
-        {this.props.songs && <div className={`${styles.cqHeader}`}>
-          <span className={styles.cqInfo}>
-            YOUR QUEUE: <b>{this.props.songs.length} songs, {durationWithHours(queueDuration(this.props.songs))}</b>
+        <div className={`${styles.cqHeader}`}>
+          <div className={styles.cqInfo}>
+            <span>
+              YOUR QUEUE: <b>{this.props.songs.length} songs, {durationWithHours(queueDuration(this.props.songs))}</b>
+            </span>
             <i className='material-icons' onClick={clearQueue}>clear_all</i>
-            <i className='material-icons' onClick={this.toggleSPVisibility}>add</i>
+            <i className={`material-icons ${styles.saveIcon}`} onClick={this.toggleSPVisibility}>save</i>
             <StreamPublicationDialog visible={this.state.spVisibility} toggleVisibility={this.toggleSPVisibility} />
-          </span>
-        </div>}
+          </div>
+        </div>
         <div className={`${styles.songList} ${styles.current}`}>
-          <SongList {...this.props} />
+          <SongList {...this.props} type='queue' />
         </div>
       </div>
     )

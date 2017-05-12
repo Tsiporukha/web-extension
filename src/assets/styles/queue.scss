@@ -9,26 +9,25 @@ $sqHeaderPadding: 10px;
 .songList{
   overflow-y: auto;
   width: 100%;
-  &.current{ height: calc(100% - 28px - 32px); }
-  &.searchList{ height: calc(100% - 28px - 16px - 40px); }
+  &.current, &.searchList{ height: calc(100% - 45px); }
 }
 
 
 .header{
   background-color: #273559;
   color: #fff;
-  height: $headerHeight;
+//  height: $headerHeight;
   padding: 10px;
   font-size: 14px;
 }
 
 .sqHeader{
   composes: header;
-  padding-bottom: 6px;
-  height: 42px;
+//  padding-bottom: 6px;
+//  height: 42px;
 
   .search{
-    width: 70%;
+    width: calc(100% - 34px);
     display: inline-block;
 
     .autocomplete{padding: 0;}
@@ -46,12 +45,11 @@ $sqHeaderPadding: 10px;
         outline: none;
         border: none;
         padding: 2px 8px;
-        height: 26px;
         background-color: white;
         font-size: 12px;
         min-height: 20px!important;
         width: 100%!important;
-        height: 26px!important;
+        height: 25px!important;
         margin: 0!important;
       }
 
@@ -72,25 +70,27 @@ $sqHeaderPadding: 10px;
   .icons{
     box-sizing: border-box;
     padding: 0;
-    height: 26px;
-    top: 0;
-    width: 30%;
+    height: 25px;
+    top: -1px;
+    width: 34px;
     display: inline;
     float: right;
+    position: relative;
     i{
       font-size: 26px;
       position: relative;
       padding: 0px 2px;
       cursor: pointer;
-      &:first-child{ padding: 0px 4px 0px 8px;}
+      &:first-child{ padding: 0px 8px;}
     }
   }
 }
 
 .cqHeader{
   composes: header;
-  padding: 18px 10px 16px;
-  height: 60px;
+  padding: 12px 10px;
+  font-size: 13px;
+  height: 45px;
 }
 
 .sources{
@@ -113,7 +113,12 @@ $sqHeaderPadding: 10px;
 
 .cqInfo{
   position: relative;
-  top: 4px;
+  top: 2px;
+  padding-left: 12px;
+  span{
+    position: relative;
+    top: 2px;
+  }
   i{
     float: right;
     position: relative;
@@ -121,5 +126,9 @@ $sqHeaderPadding: 10px;
     font-size: 28px;
     cursor: pointer;
     padding-right: 6px;
+    &.saveIcon{
+      font-size: 19px;
+      top: -1px;
+    }
   }
 }

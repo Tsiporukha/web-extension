@@ -74,3 +74,72 @@
     &:hover, &:active{ background-color: rgba(0, 0, 0, 0.8); }
   }
 }
+
+.search{
+  padding: 12px 10px 12px 18px;
+  .content, .icons{ border-bottom: none;}
+  .content{
+    width: calc(100% - 78px - 38px);}
+  .artwork{width: 78px;}
+  .playPause{
+    left: 17px;
+    bottom: 55px;
+  }
+  .title{padding: 0 0 6px 0;}
+  .icons{
+    visibility: hidden;
+    width: 38px;
+    :global(.material-icons){
+      font-size: 26px;
+      top: 16px;
+    }
+  }
+  .duration{
+    position: absolute;
+    bottom: 0;
+    color: #343434;
+  }
+
+  &:hover{
+    .icons{visibility: visible;}
+    .artist{color: #343434;}
+  }
+}
+
+.queue{
+  padding: 10px 0;
+  border-bottom: 1px solid #e1e1e1;
+  .content, .icons{ border-bottom: none;}
+  .content{
+    width: calc(100% - 122px - 38px);
+    padding: 0;
+  }
+  .artwork{
+    width: 122px;
+    padding: 0 24px;
+  }
+  .playPause{
+    left: 21px;
+    bottom: 55px;
+  }
+  .title{padding: 0 0 9px 0;}
+  .icons{
+    visibility: hidden;
+    width: 38px;
+    :global(.material-icons){
+      font-size: 26px;
+      top: 16px;
+    }
+  }
+  .duration{
+    position: absolute;
+    bottom: 0;
+    font-size: 12px;
+  }
+
+  &:hover{
+    background-color: #e5e5e5;
+    .icons{visibility: visible;}
+    .artist{color: #343434;}
+  }
+}

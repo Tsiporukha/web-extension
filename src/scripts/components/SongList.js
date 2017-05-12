@@ -8,6 +8,7 @@ import styles from '../../assets/styles/songList.scss';
 export default class SongList extends Component {
 
   static propTypes = {
+    type: PropTypes.string,
     songs: PropTypes.array,
 
     addToCurrentQueue: PropTypes.func,
@@ -28,6 +29,7 @@ export default class SongList extends Component {
       (this.props.songs && this.props.songs.length) ?
         <div> {this.props.songs.map(song => (
           <Song
+            type={this.props.type}
             song={song}
             key={song.id || song.uid}
             addToCurrentQueue={this.props.addToCurrentQueue}

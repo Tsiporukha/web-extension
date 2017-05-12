@@ -80,24 +80,14 @@ class SearchQueue extends Component {
             />
           </div>
           <div className={`${styles.icons}`}>
-            <i onClick={() => this.props.playAll(this.props.songs)}
-              className={`material-icons`}>play_arrow</i>
-            <i className={`material-icons`}>playlist_play</i>
             <i onClick={() => this.props.addToCurrentQueue(this.props.songs)}
               className={`material-icons`}>add</i>
           </div>
         </div>
 
-        <div className={`${bp.row} no-margin ${styles.sources} ${styles.active}`}>
-          <i className={`fa fa-youtube `} />
-          {
-          //  <i className={`fa fa-soundcloud`} />
-          //  <i className={`fa fa-mixcloud`} />
-          }
-        </div>
-
         <div className={`${styles.songList} ${styles.searchList}`}>
           <SongList
+            type='search'
             songs={this.props.songs}
             addToCurrentQueue={this.props.addToCurrentQueue}
             play={song => this.props.playAll([song])}
