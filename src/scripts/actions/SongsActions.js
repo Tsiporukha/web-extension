@@ -2,58 +2,44 @@ import { v4 } from 'node-uuid';
 import * as types from '../constants/ActionTypes';
 import {setPlayingSong, play} from './PlayerActions';
 
-export function addToCurrentQueue(songs) {
-  return {
-    type: types.ADD_SONGS,
-    payload: songs.map(song => ({id: v4(), playlist: 'currentQueue', ...song}) )
-  }
-}
+const addIdAndPlaylistTitle = (songs, playlistTitle) => songs.map(song => ({id: v4(), playlist: playlistTitle, ...song}));
 
-export function addToCurrentQueueTop(songs) {
-  return {
-    type: types.ADD_SONGS_TO_TOP,
-    payload: songs.map(song => ({id: v4(), playlist: 'currentQueue', ...song}) )
-  }
-}
+export const addToCurrentQueue = songs => ({
+  type: types.ADD_SONGS,
+  payload: addIdAndPlaylistTitle(songs, 'currentQueue')
+});
 
-export function addToCurrentQueueTopAndPlay(songs) {
-  return {
-    type: types.ADD_SONGS_TO_TOP_AND_PLAY,
-    payload: songs.map(song => ({id: v4(), playlist: 'currentQueue', ...song}) )
-  }
-}
+export const addToCurrentQueueTop = songs => ({
+  type: types.ADD_SONGS_TO_TOP,
+  payload: addIdAndPlaylistTitle(songs, 'currentQueue')
+});
 
-export function removeFromCurrentQueue(songs) {
-  return {
-    type: types.REMOVE_SONGS,
-    payload: songs
-  }
-}
+export const addToCurrentQueueTopAndPlay = songs => ({
+  type: types.ADD_SONGS_TO_TOP_AND_PLAY,
+  payload: addIdAndPlaylistTitle(songs, 'currentQueue')
+});
 
-export function updateSearchQueue(songs) {
-  return {
-    type: types.UPDATE_SEARCH_QUEUE,
-    payload: songs
-  }
-}
+export const removeFromCurrentQueue = songs => ({
+  type: types.REMOVE_SONGS,
+  payload: songs
+});
 
-export function searchSongs(term) {
-  return {
-    type: types.SEARCH_SONGS,
-    payload: term
-  }
-}
+export const updateSearchQueue = songs => ({
+  type: types.UPDATE_SEARCH_QUEUE,
+  payload: songs
+});
 
-export function searchAndUpdateSearchQueue(term) {
-  return {
-    type: types.SEARCH_AND_UPDATE_SEARCH_QUEUE,
-    payload: term
-  }
-}
+export const searchSongs = term => ({
+  type: types.SEARCH_SONGS,
+  payload: term
+});
 
-export function playCurrentQueueWith(song){
-  return dispatch => {
-    dispatch(setPlayingSong({...song, playlist: 'currentQueue'}));
-    return dispatch(play());
-  }
+export const searchAndUpdateSearchQueue = term => ({
+  type: types.SEARCH_AND_UPDATE_SEARCH_QUEUE,
+  payload: term
+});
+
+export const playCurrentQueueWith = song => dispatch => {
+  dispatch(setPlayingSong({...song, playlist: 'currentQueue'}));
+  return dispatch(play());
 }

@@ -3,84 +3,57 @@ import {PLAY, PAUSE, SET_PLAYING_SONG, SET_VOLUME, SET_PROGRESS, CLEAN_PLAYER,
 import {at, findIndex} from 'lodash';
 
 
-export function play() {
-  return {type: PLAY}
-}
+export const play = () => ({type: PLAY});
 
-export function pause() {
-  return {type: PAUSE}
-}
+export const pause = () => ({type: PAUSE});
 
-export function clean() {
-  return {type: CLEAN_PLAYER}
-}
+export const clean = () => ({type: CLEAN_PLAYER});
 
-export function setPlayingSong(song) {
-  return {
-    type: SET_PLAYING_SONG,
-    payload: song
-  }
-}
+export const setPlayingSong = song => ({
+  type: SET_PLAYING_SONG,
+  payload: song
+});
 
-export function setPlayingSongId(songId) {
-  return {
-    type: SET_PLAYING_SONG_ID,
-    payload: songId
-  }
-}
+export const setPlayingSongId = songId => ({
+  type: SET_PLAYING_SONG_ID,
+  payload: songId
+});
 
-export function setVolume(volume) {
-  return {
-    type: SET_VOLUME,
-    payload: volume
-  }
-}
+export const setVolume = volume => ({
+  type: SET_VOLUME,
+  payload: volume
+});
 
-export function setProgress(progress){
-  return {
-    type: SET_PROGRESS,
-    payload: progress
-  }
-}
+export const setProgress = progress => ({
+  type: SET_PROGRESS,
+  payload: progress
+});
 
-export function playNextSong(currentSong, playlistPath){
-  return{
-    type: PLAY_NEXT,
-    payload: {currentSong, playlistPath}
-  }
-}
+export const playNextSong = (currentSong, playlistPath) => ({
+  type: PLAY_NEXT,
+  payload: {currentSong, playlistPath}
+});
 
-export function playPrevSong(currentSong, playlistPath){
-  return{
-    type: PLAY_PREV,
-    payload: {currentSong, playlistPath}
-  }
-}
+export const playPrevSong = (currentSong, playlistPath) => ({
+  type: PLAY_PREV,
+  payload: {currentSong, playlistPath}
+});
 
-export function seekTo(val){
-  return{
-    type: SEEK_TO,
-    payload: val
-  }
-}
+export const seekTo = val => ({
+  type: SEEK_TO,
+  payload: val
+});
 
-export function setSeeking(bool){
-  return{
-    type: SET_SEEKING,
-    payload: bool
-  }
-}
+export const setSeeking = bool => ({
+  type: SET_SEEKING,
+  payload: bool
+});
 
+export const next = (currentSong, playlistPath) => (dispatch, getState) =>
+  playNext(currentSong, playlistPath, getNextSong)(dispatch, getState);
 
-export function next(currentSong, playlistPath) {
-  return (dispatch, getState) =>
-    playNext(currentSong, playlistPath, getNextSong)(dispatch, getState);
-}
-
-export function prev(currentSong, playlistPath) {
-  return (dispatch, getState) =>
-    playNext(currentSong, playlistPath, getPrevSong)(dispatch, getState);
-}
+export const prev = (currentSong, playlistPath) => (dispatch, getState) =>
+  playNext(currentSong, playlistPath, getPrevSong)(dispatch, getState);
 
 
 function getPlaylist(playlistPath){
