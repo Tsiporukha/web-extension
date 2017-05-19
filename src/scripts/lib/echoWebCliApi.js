@@ -26,7 +26,7 @@ export function playQueue(songs, playingSongPosition = 0) {
 }
 
 export function playSongFrom(path, song) {
-  const songs = getSongsFromLocalStorage(path);
+  const songs =  getSongsFromLocalStorage(path).reduce((sngs, s) => sngs.concat(s.export_data_url ? s : s.playlist.songs), []);
   return playQueue(songs, getSongIndex(songs, song));
 }
 

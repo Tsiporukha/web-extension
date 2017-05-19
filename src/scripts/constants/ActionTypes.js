@@ -1,5 +1,6 @@
 export const ADD_SONGS = 'ADD_SONGS';
 export const ADD_SONGS_TO_TOP = 'ADD_SONGS_TO_TOP';
+export const ADD_STREAM_TO_TOP = 'ADD_STREAM_TO_TOP';
 export const ADD_SONGS_TO_TOP_AND_PLAY = 'ADD_SONGS_TO_TOP_AND_PLAY';
 export const REMOVE_SONGS = 'REMOVE_SONGS';
 

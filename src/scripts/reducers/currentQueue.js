@@ -1,10 +1,12 @@
 import differenceBy from 'lodash/differenceBy'
-import {ADD_SONGS, REMOVE_SONGS, ADD_SONGS_TO_TOP} from '../constants/ActionTypes';
+import {ADD_SONGS, REMOVE_SONGS, ADD_SONGS_TO_TOP, ADD_STREAM_TO_TOP} from '../constants/ActionTypes';
 
 export default (state = [], action) => {
   switch (action.type) {
     case ADD_SONGS:
       return state.concat(action.payload);
+    case ADD_STREAM_TO_TOP:
+      return [action.payload, ...state];
     case ADD_SONGS_TO_TOP:
       return (action.payload).concat(state);
     case REMOVE_SONGS:

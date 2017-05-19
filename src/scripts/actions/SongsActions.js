@@ -14,6 +14,11 @@ export const addToCurrentQueueTop = songs => ({
   payload: addIdAndPlaylistTitle(songs, 'currentQueue')
 });
 
+export const addStreamToCurrentQueueTop = stream => ({
+  type: types.ADD_STREAM_TO_TOP,
+  payload: stream
+});
+
 export const addToCurrentQueueTopAndPlay = songs => ({
   type: types.ADD_SONGS_TO_TOP_AND_PLAY,
   payload: addIdAndPlaylistTitle(songs, 'currentQueue')
