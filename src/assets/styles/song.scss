@@ -101,14 +101,14 @@
   }
 
   &:hover{
+    background-color: #e5e5e5;
     .icons{visibility: visible;}
     .artist{color: #343434;}
   }
 }
 
 .queue{
-  padding: 10px 0;
-  border-bottom: 1px solid #e1e1e1;
+  padding: 7px 0;
   .content, .icons{ border-bottom: none;}
   .content{
     width: calc(100% - 122px - 38px);
@@ -116,7 +116,7 @@
   }
   .artwork{
     width: 122px;
-    padding: 0 24px;
+    padding: 0 20px;
   }
   .playPause{
     left: 21px;

@@ -1,27 +1,42 @@
 $headerHeight: 28px;
 $sqHeaderPadding: 10px;
 
-.queue{
-  background: #fafafa;
-  box-shadow: 0 4px 46px #020202;
+
+.currentQueueRoot{
+  background-color: #e5e5e5;
+  .queue{
+    background-color: #f2f2f2;
+    height: calc(100% - 52px - 135px);
+  }
+}
+.search{
+  background-color: white;
+  border-radius: 4px;
 }
 
 .songList{
   overflow-y: auto;
   width: 100%;
-  &.current, &.searchList{ height: calc(100% - 45px); }
+  &.searchList{
+    height: calc(100% - 97px);
+    padding: 10px 20% 10px 14%;
+  }
+  &.current{ height: calc(100% - 50px); }
 }
 
 
 .header{
-  background-color: #273559;
-  color: #fff;
+//  background-color: #273559;
+//  color: #fff;
 //  height: $headerHeight;
   padding: 10px;
   font-size: 14px;
 }
 
 .sqHeader{
+  padding: 10px 20% 10px 14%;
+  background-color: #273559;
+  color: #fff;
   composes: header;
 //  padding-bottom: 6px;
 //  height: 42px;
@@ -87,10 +102,9 @@ $sqHeaderPadding: 10px;
 }
 
 .cqHeader{
-  composes: header;
-  padding: 12px 10px;
+  padding: 16px 10px;
   font-size: 13px;
-  height: 45px;
+  height: 50px;
 }
 
 .sources{
@@ -116,10 +130,13 @@ $sqHeaderPadding: 10px;
   top: 2px;
   padding-left: 12px;
   span{
+    font-weight: 500;
+    color: #626262;
     position: relative;
     top: 2px;
   }
   i{
+    color: #6f6f6f;
     float: right;
     position: relative;
     top: -5px;

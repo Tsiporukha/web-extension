@@ -32,7 +32,7 @@ class App extends Component {
           }
         </Tabs>
 
-        <CurrentUser />
+        {/* <CurrentUser /> */}
 
         <Player />
 

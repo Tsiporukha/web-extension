@@ -86,19 +86,21 @@ class CurrentQueue extends Component {
     const clearQueue = () => this.props.cleanCurrentQueue(this.props.songs, this.props.isQueuePlaying);
 
     return (
-      <div className={`${styles.queue} h100perc`}>
-        <div className={`${styles.cqHeader}`}>
-          <div className={styles.cqInfo}>
-            <span>
-              YOUR QUEUE: <b>{this.props.songs.length} songs, {durationWithHours(queueDuration(this.props.songs))}</b>
-            </span>
-            <i className='material-icons' onClick={clearQueue}>clear_all</i>
-            <i className={`material-icons ${styles.saveIcon}`} onClick={this.toggleSPVisibility}>save</i>
-            <StreamPublicationDialog visible={this.state.spVisibility} toggleVisibility={this.toggleSPVisibility} />
+      <div className={`${styles.currentQueueRoot} h100perc`}>
+        <div className={`${styles.queue}`}>
+          <div className={`${styles.cqHeader}`}>
+            <div className={styles.cqInfo}>
+              <span>
+                Your Queue: {this.props.songs.length} songs, {durationWithHours(queueDuration(this.props.songs))}
+              </span>
+              <i className='material-icons' onClick={clearQueue}>clear_all</i>
+              <i className={`material-icons ${styles.saveIcon}`} onClick={this.toggleSPVisibility}>save</i>
+              <StreamPublicationDialog visible={this.state.spVisibility} toggleVisibility={this.toggleSPVisibility} />
+            </div>
           </div>
-        </div>
-        <div className={`${styles.songList} ${styles.current}`}>
-          <SongList {...this.props} type='queue' />
+          <div className={`${styles.songList} ${styles.current}`}>
+            <SongList {...this.props} type='queue' />
+          </div>
         </div>
       </div>
     )

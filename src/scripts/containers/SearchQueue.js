@@ -79,10 +79,12 @@ class SearchQueue extends Component {
               theme={styles}
             />
           </div>
-          <div className={`${styles.icons}`}>
+          {/*
+            <div className={`${styles.icons}`}>
             <i onClick={() => this.props.addToCurrentQueue(this.props.songs)}
-              className={`material-icons`}>add</i>
+            className={`material-icons`}>add</i>
           </div>
+            */}
         </div>
 
         <div className={`${styles.songList} ${styles.searchList}`}>
