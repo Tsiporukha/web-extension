@@ -15,7 +15,6 @@ const getFullConfig = envConfig => Object.assign({}, commonConfig, envConfig);
 
 const commonConfig = {
   cache: true,
-  devtool: 'eval',
 
   module: {
     rules: [
