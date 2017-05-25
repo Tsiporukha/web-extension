@@ -1,0 +1,85 @@
+.root{
+  font-size: 15px;
+  color: #404040;
+  padding: 14px 0;
+  &.opened{background-color: #e6e6e6;}
+}
+
+.artwork{
+  display: inline-block;
+  padding: 0 20px;
+  height: 80px;
+  width: 120px;
+
+
+  img{
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.info{
+  display: inline-block;
+  height: 100%;
+  width: calc(100% - 120px);
+  vertical-align: top;
+
+  .title{
+    font-weight: 400;
+  }
+
+  .userAvatar{
+    padding: 10px 0;
+    font-size: 13px;
+
+    img{
+      height: 20px;
+      width: 20px;
+      vertical-align: middle;
+      margin-left: 10px;
+    }
+  }
+
+  .duration{
+    color: #6f6f6f;
+    font-size: 13px;
+    position: relative;
+    top: -6px;
+    .time{
+      font-size: 16px;
+      position: relative;
+      top: 3px;
+      margin-right: 3px;
+    }
+    .queue{
+      font-size: 21px;
+      position: relative;
+      top: 6px;
+      margin: 0 2px 0 8px;
+    }
+    .closed{
+      position: relative;
+      top: 8px;
+      transform: rotate(-90deg);
+      transition: transform .25s ease-in;
+    }
+    .opened{
+      transform: rotate(0deg);
+      transition: transform .25s ease-out;
+      position: relative;
+      top: 7px;
+    }
+  }
+}
+
+.songList{
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height .4s ease-out .4s, opacity .3s ease-out;
+  &.visible{
+    max-height: 1000px;
+    opacity: 1;
+    transition: max-height .4s ease-in, opacity .2s ease-in .4s;
+  }
+}
