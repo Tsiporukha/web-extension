@@ -1,46 +1,37 @@
 import React, {Component, PropTypes} from 'react';
-import { List } from 'react-toolbox/lib/list';
 import Song from './Song';
 import {getFilePath} from '../lib/envDifferences';
 
 import styles from '../../assets/styles/songList.scss';
 
-export default class SongList extends Component {
 
-  static propTypes = {
-    type: PropTypes.string,
-    songs: PropTypes.array,
+const emptySearchQueue = <div className={styles.emptyQueue}>
+  <img src={getFilePath(require('../../assets/images/empty_search.png'))} className={styles.esImg} alt='empty search' />
+</div>;
 
-    addToCurrentQueue: PropTypes.func,
-    play: PropTypes.func,
-    removeFromCurrentQueue: PropTypes.func
-  }
+const SongList = props => (props.songs.length ?
+  <div> {props.songs.map(song =>
+    <Song
+      type={props.type}
+      song={song}
+      key={song.id || song.uid}
+      addToCurrentQueue={props.addToCurrentQueue}
+      removeFromCurrentQueue={props.removeFromCurrentQueue}
+      play={props.play}
+    />
+  )} </div>
+  :
+  emptySearchQueue
+);
 
-  render() {
-    const sQueue = <div className={styles.emptyQueue}>
-      <img src={getFilePath(require('../../assets/images/empty_search.png'))} className={styles.esImg} alt='empty search' />
-    </div>;
 
-    const cQueue = <div className={`${styles.emptyQueue} ${styles.current}`}>
-      <img src={getFilePath(require('../../assets/images/empty_queue.png'))}  className={styles.eqImg}  alt='empty queue' />
-    </div>;
+SongList.propTypes = {
+  type: PropTypes.string,
+  songs: PropTypes.array,
 
-    return (
-      (this.props.songs && this.props.songs.length) ?
-        <div> {this.props.songs.map(song => (
-          <Song
-            type={this.props.type}
-            song={song}
-            key={song.id || song.uid}
-            addToCurrentQueue={this.props.addToCurrentQueue}
-            removeFromCurrentQueue={this.props.removeFromCurrentQueue}
-            play={this.props.play}
-          />)
-        )}
-        </div>
-        :
-        (this.props.removeFromCurrentQueue ? cQueue : sQueue)
-    );
-  }
-
+  addToCurrentQueue: PropTypes.func,
+  play: PropTypes.func,
+  removeFromCurrentQueue: PropTypes.func
 }
+
+export default SongList;
