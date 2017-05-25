@@ -1,13 +1,15 @@
 import React, { Component, PropTypes } from 'react';
 import {connect} from 'react-redux';
 
-import SongList from '../components/SongList';
+import CurrentQueuePlaylist from '../components/CurrentQueuePlaylist';
 import StreamPublicationDialog from './StreamPublicationDialog';
 
 import {removeFromCurrentQueue} from '../actions/SongsActions';
 import {setPlayingSong, setPlayingSongId, play, clean as cleanPlayer} from '../actions/PlayerActions';
 
-import {queueDuration, withHours as durationWithHours} from '../lib/duration';
+
+import {getQueueDuration, getQueueSongsLength} from '../lib/stream';
+import {withHours as getDurationWithHours} from '../lib/duration';
 import * as EchoCli from '../lib/echoWebCliApi';
 
 import styles from '../../assets/styles/queue.scss';
@@ -77,6 +79,8 @@ class CurrentQueue extends Component {
 
   toggleSPVisibility = () => this.setState({spVisibility: !this.state.spVisibility})
 
+  queueTotalSongs = queue => () => que
+
   render(){
     const add = () => EchoCli.either((() => EchoCli.playQueue(this.props.songs, 0)))
     /**
@@ -91,7 +95,7 @@ class CurrentQueue extends Component {
           <div className={`${styles.cqHeader}`}>
             <div className={styles.cqInfo}>
               <span>
-                Your Queue: {this.props.songs.length} songs, {durationWithHours(queueDuration(this.props.songs))}
+                Your Queue: {getQueueSongsLength(this.props.songs)} songs, {getDurationWithHours(getQueueDuration(this.props.songs))}
               </span>
               <i className='material-icons' onClick={clearQueue}>clear_all</i>
               <i className={`material-icons ${styles.saveIcon}`} onClick={this.toggleSPVisibility}>save</i>
@@ -99,7 +103,7 @@ class CurrentQueue extends Component {
             </div>
           </div>
           <div className={`${styles.songList} ${styles.current}`}>
-            <SongList {...this.props} type='queue' />
+            <CurrentQueuePlaylist {...this.props} playlist={this.props.songs} />
           </div>
         </div>
       </div>
