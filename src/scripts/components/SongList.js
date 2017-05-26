@@ -16,7 +16,7 @@ const SongList = props => (props.songs.length ?
       song={song}
       key={song.id || song.uid}
       addToCurrentQueue={props.addToCurrentQueue}
-      removeFromCurrentQueue={props.removeFromCurrentQueue}
+      remove={props.remove}
       play={props.play}
     />
   )} </div>

@@ -18,14 +18,15 @@ const CurrentQueuePlaylist = props => (props.playlist.length ?
       type='queue'
       song={item}
       key={item.id}
-      removeFromCurrentQueue={props.removeFromCurrentQueue}
+      remove={props.removeFromCurrentQueue}
       play={props.play}
     />
     :
     <QueueStream
       key={item.uid}
       stream={item}
-      removeFromCurrentQueue={props.removeFromCurrentQueue}
+      remove={props.removeFromCurrentQueue}
+      removeSong={props.removeSongFromQueueStream}
       play={props.play}
     />
   )} </div>

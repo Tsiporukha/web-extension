@@ -41,7 +41,7 @@ export default class QueueStream extends Component {
           <SongList
             type='queue'
             songs={this.props.stream.playlist.songs}
-            removeFromCurrentQueue={this.props.removeFromCurrentQueue}
+            remove={this.props.removeSong(this.props.stream.uid)}
             play={this.props.play}
           />
         </div>
