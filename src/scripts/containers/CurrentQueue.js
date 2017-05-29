@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import CurrentQueuePlaylist from '../components/CurrentQueuePlaylist';
 import StreamPublicationDialog from './StreamPublicationDialog';
 
-import {removeFromCurrentQueue} from '../actions/SongsActions';
+import {removeFromCurrentQueue, removeSongFromQueueStream} from '../actions/SongsActions';
 import {setPlayingSong, setPlayingSongId, play, clean as cleanPlayer} from '../actions/PlayerActions';
 
 
@@ -23,11 +23,11 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 
   /**
    * Remove passed songs from current queue
-   * @param  {array} songs - songs for removing
+   * @param  {array} items - items for removing
    * @return {array}       removed songs
    */
-  const _removeFromCurrentQueue = songs => {
-    dispatch(removeFromCurrentQueue(songs));
+  const _removeFromCurrentQueue = items => {
+    dispatch(removeFromCurrentQueue(items));
     return EchoCli.maybe(() => EchoCli.maybeUpdatePlaylistSongs('currentQueue'));
   }
 
@@ -57,9 +57,14 @@ const mapDispatchToProps = (dispatch, ownProps) => {
      * @param  {Boolean} isQueuePlaying - is current queue playing
      * @return {array}       removed songs
      */
-    cleanCurrentQueue: (songs, isQueuePlaying) => {
+    cleanCurrentQueue: (items, isQueuePlaying) => {
       if(isQueuePlaying) dispatch(cleanPlayer());
-      return _removeFromCurrentQueue(songs);
+      return _removeFromCurrentQueue(items);
+    },
+
+    removeSongFromQueueStream: streamUid => songAsArr => {
+      dispatch(removeSongFromQueueStream(streamUid, songAsArr[0]));
+      return EchoCli.maybe(() => EchoCli.maybeUpdatePlaylistSongs('currentQueue'));
     }
   }
 }
@@ -72,7 +77,8 @@ class CurrentQueue extends Component {
 
     cleanCurrentQueue: PropTypes.func,
     play: PropTypes.func,
-    removeFromCurrentQueue: PropTypes.func
+    removeFromCurrentQueue: PropTypes.func,
+    removeSongFromQueueStream: PropTypes.func
   }
 
   state = {spVisibility: false}

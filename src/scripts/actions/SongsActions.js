@@ -16,7 +16,7 @@ export const addToCurrentQueueTop = songs => ({
 
 export const addStreamToCurrentQueueTop = stream => ({
   type: types.ADD_STREAM_TO_TOP,
-  payload: stream
+  payload: {...stream, uid: v4()}
 });
 
 export const addToCurrentQueueTopAndPlay = songs => ({
@@ -24,10 +24,16 @@ export const addToCurrentQueueTopAndPlay = songs => ({
   payload: addIdAndPlaylistTitle(songs, 'currentQueue')
 });
 
-export const removeFromCurrentQueue = songs => ({
-  type: types.REMOVE_SONGS,
-  payload: songs
+export const removeFromCurrentQueue = items => ({
+  type: types.REMOVE_QUEUE_ITEMS,
+  payload: items
 });
+
+export const removeSongFromQueueStream = (streamUid, song) => ({
+  type: types.REMOVE_STREAM_SONG,
+  payload: {streamUid, song}
+});
+
 
 export const updateSearchQueue = songs => ({
   type: types.UPDATE_SEARCH_QUEUE,
