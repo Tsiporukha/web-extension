@@ -3,13 +3,17 @@
   color: #404040;
   padding: 14px 0;
   &.opened{background-color: #e6e6e6;}
+  &:hover{
+    background-color: #e5e5e5;
+    .icons{visibility: visible;}
+  }
 }
 
 .artwork{
   display: inline-block;
-  padding: 0 20px;
+  margin: 0 20px;
   height: 80px;
-  width: 120px;
+  width: 80px;
 
 
   img{
@@ -20,8 +24,8 @@
 
 .info{
   display: inline-block;
-  height: 100%;
-  width: calc(100% - 120px);
+  height: 80px;
+  width: calc(100% - 120px - 38px);
   vertical-align: top;
 
   .title{
@@ -61,25 +65,36 @@
       position: relative;
       top: 8px;
       transform: rotate(-90deg);
-      transition: transform .25s ease-in;
+      transition: transform .125s ease-in;
     }
     .opened{
       transform: rotate(0deg);
-      transition: transform .25s ease-out;
+      transition: transform .125s ease-out;
       position: relative;
       top: 7px;
     }
   }
 }
 
+.icons{
+  composes: icons from './song.scss';
+  visibility: hidden;
+  width: auto;
+  height: auto;;
+  border: none;
+  display: inline-block;
+  vertical-align: top;
+
+}
+
 .songList{
   overflow: hidden;
   max-height: 0;
   opacity: 0;
-  transition: max-height .4s ease-out .4s, opacity .3s ease-out;
+  transition: max-height .2s ease-out .15s, opacity .15s ease-out;
   &.visible{
     max-height: 1000px;
     opacity: 1;
-    transition: max-height .4s ease-in, opacity .2s ease-in .4s;
+    transition: max-height .2s ease-in, opacity .1s ease-in .2s;
   }
 }

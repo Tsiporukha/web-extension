@@ -39,9 +39,9 @@ export default class Song extends Component {
         </div>
         <div className={`${bp['col-xs-1']} no-padding ${styles.icons}`}>
           {this.props.addToCurrentQueue && <i className='material-icons pull-right'
-            onClick={() => this.props.addToCurrentQueue([this.props.song])}>&#xE145;</i> }
+            onClick={() => this.props.addToCurrentQueue([this.props.song])}>add</i> }
           {this.props.remove && <i className='material-icons pull-right'
-            onClick={() => this.props.remove([this.props.song])}>&#xE5CD;</i> }
+            onClick={() => this.props.remove([this.props.song])}>close</i>}
         </div>
       </div>
     );

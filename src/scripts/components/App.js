@@ -36,7 +36,7 @@ class App extends Component {
 
         <Player />
 
-        <i onClick={this.unmountApp} className={`material-icons ${styles.close}`}>&#xE5CD;</i>
+        {/* <i onClick={this.unmountApp} className={`material-icons ${styles.close}`}>close</i> */}
       </div>
     );
   }
