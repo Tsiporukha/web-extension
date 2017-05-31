@@ -149,3 +149,7 @@ $sqHeaderPadding: 10px;
     }
   }
 }
+
+.ripple{
+  composes: ripple from './effects.scss';
+}

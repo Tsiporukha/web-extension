@@ -103,8 +103,8 @@ class CurrentQueue extends Component {
               <span>
                 Your Queue: {getQueueSongsLength(this.props.songs)} songs, {getDurationWithHours(getQueueDuration(this.props.songs))}
               </span>
-              <i className='material-icons' onClick={clearQueue}>clear_all</i>
-              <i className={`material-icons ${styles.saveIcon}`} onClick={this.toggleSPVisibility}>save</i>
+              <i className={`material-icons  ${styles.ripple}`} onClick={clearQueue}>clear_all</i>
+              <i className={`material-icons ${styles.saveIcon} ${styles.ripple}`} onClick={this.toggleSPVisibility}>save</i>
               <StreamPublicationDialog visible={this.state.spVisibility} toggleVisibility={this.toggleSPVisibility} />
             </div>
           </div>
