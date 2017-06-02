@@ -13,6 +13,13 @@ export default class QueueStream extends Component {
 
   toggleSongList = () => this.setState({opened: !this.state.opened});
 
+  remove = () => this.props.remove([this.props.stream]);
+  removeIfPlaylistEmpty = playlist => playlist.songs.length ? false : this.remove();
+
+  componentWillReceiveProps(nextProps){
+    return nextProps.stream.playlist.songs.length ? false : this.remove();
+  }
+
   render(){
     return(
       <div className={`${styles.root} ${this.state.opened ? styles.opened : ''}`}>
@@ -29,13 +36,11 @@ export default class QueueStream extends Component {
             <span>{durationWithHours(playlistDuration(this.props.stream.playlist.songs))}</span>
             <i className={`material-icons ${styles.queue}`}>queue_music</i>
             <span>{this.props.stream.playlist.songs.length} tracks</span>
-            {this.state.opened ?
-              <i className={`material-icons ${styles.opened}`} onClick={this.toggleSongList}>arrow_drop_down</i>
-              :
-              <i className={`material-icons ${styles.closed}`} onClick={this.toggleSongList}>arrow_drop_down</i>
-            }
-
+            <i className={`material-icons ${styles[ this.state.opened ? 'opened' : 'closed']}`} onClick={this.toggleSongList}>arrow_drop_down</i>
           </div>
+        </div>
+        <div className={styles.icons}>
+          <i className={`material-icons ${styles.ripple}`} onClick={this.remove}>close</i>
         </div>
         <div className={`${styles.songList} ${this.state.opened ? styles.visible : ''}`}>
           <SongList
