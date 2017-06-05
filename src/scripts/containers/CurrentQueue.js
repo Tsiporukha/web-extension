@@ -2,13 +2,14 @@ import React, { Component, PropTypes } from 'react';
 import {connect} from 'react-redux';
 
 import CurrentQueuePlaylist from '../components/CurrentQueuePlaylist';
+import Song from '../components/Song';
 import StreamPublicationDialog from './StreamPublicationDialog';
 
 import {removeFromCurrentQueue, removeSongFromQueueStream} from '../actions/SongsActions';
 import {setPlayingSong, setPlayingSongId, play, clean as cleanPlayer} from '../actions/PlayerActions';
 
 
-import {getQueueDuration, getQueueSongsLength} from '../lib/stream';
+import {getQueueDuration, getQueueSongsLength, getQueueSongs} from '../lib/stream';
 import {withHours as getDurationWithHours} from '../lib/duration';
 import * as EchoCli from '../lib/echoWebCliApi';
 
@@ -16,7 +17,8 @@ import styles from '../../assets/styles/queue.scss';
 
 const mapStateToProps = state => ({
   songs: state.currentQueue,
-  isQueuePlaying: state.player.currentSong.playlist == 'currentQueue'
+  isQueuePlaying: state.player.currentSong.playlist == 'currentQueue',
+  playingSong: getQueueSongs(state.currentQueue).find(song => song.id === state.player.currentSong.id) || {}
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => {
@@ -97,6 +99,7 @@ class CurrentQueue extends Component {
 
     return (
       <div className={`${styles.currentQueueRoot} h100perc`}>
+        <div className={styles.pseudoHeader} />
         <div className={`${styles.queue}`}>
           <div className={`${styles.cqHeader}`}>
             <div className={styles.cqInfo}>
@@ -108,6 +111,7 @@ class CurrentQueue extends Component {
               <StreamPublicationDialog visible={this.state.spVisibility} toggleVisibility={this.toggleSPVisibility} />
             </div>
           </div>
+          <Song song={this.props.playingSong} type='playing' />
           <div className={`${styles.songList} ${styles.current}`}>
             <CurrentQueuePlaylist {...this.props} playlist={this.props.songs} />
           </div>

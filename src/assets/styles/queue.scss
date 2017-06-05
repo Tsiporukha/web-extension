@@ -4,6 +4,10 @@ $sqHeaderPadding: 10px;
 
 .currentQueueRoot{
   background-color: #e5e5e5;
+  .pseudoHeader{
+    height: 45px;
+    background-color: #273559;
+  }
   .queue{
     background-color: #f2f2f2;
     height: calc(100% - 52px - 135px);
@@ -21,7 +25,7 @@ $sqHeaderPadding: 10px;
     height: calc(100% - 97px);
     padding: 10px 20% 10px 14%;
   }
-  &.current{ height: calc(100% - 50px); }
+  &.current{ height: calc(100% - 50px - 60px); }
 }
 
 
@@ -146,6 +150,11 @@ $sqHeaderPadding: 10px;
     &.saveIcon{
       font-size: 19px;
       top: -1px;
+    }
+    &:disabled{
+      color: darkgrey;
+      cursor: default;
+      pointer-events: none;
     }
   }
 }
