@@ -16,6 +16,8 @@ export default class QueueStream extends Component {
   remove = () => this.props.remove([this.props.stream]);
   removeIfPlaylistEmpty = playlist => playlist.songs.length ? false : this.remove();
 
+  openStreamInNewTab = id => () => Promise.resolve(window.open(`http://beta.echoapplication.com/#/feed/${id}`)).then(win => win.focus());
+
   componentWillReceiveProps(nextProps){
     return nextProps.stream.playlist.songs.length ? false : this.remove();
   }
@@ -23,24 +25,30 @@ export default class QueueStream extends Component {
   render(){
     return(
       <div className={`${styles.root} ${this.state.opened ? styles.opened : ''}`}>
-        <div className={styles.artwork}>
-          <img src={this.props.stream.artwork_url} />
-        </div>
-        <div className={styles.info}>
-          <div className={styles.title}>{this.props.stream.playlist.title}</div>
-          <div className={styles.userAvatar}>
-            by <img src={this.props.stream.user.avatar_url} alt='user avatar' />
+        <div style={{cursor: 'pointer'}} onClick={this.toggleSongList}>
+          <div className={styles.artwork}>
+            <img src={this.props.stream.artwork_url} />
           </div>
-          <div className={styles.duration}>
-            <i className={`material-icons ${styles.time}`}>access_time</i>
-            <span>{durationWithHours(playlistDuration(this.props.stream.playlist.songs))}</span>
-            <i className={`material-icons ${styles.queue}`}>queue_music</i>
-            <span>{this.props.stream.playlist.songs.length} tracks</span>
-            <i className={`material-icons ${styles[ this.state.opened ? 'opened' : 'closed']}`} onClick={this.toggleSongList}>arrow_drop_down</i>
+          <div className={styles.info}>
+            <div className={styles.title}>
+              {this.props.stream.playlist.title}
+              <i className={`material-icons ${styles.openInNew}`} onClick={this.openStreamInNewTab(this.props.stream.id)}>open_in_new</i>
+            </div>
+            <div className={styles.userAvatar}>
+              by <img src={this.props.stream.user.avatar_url} alt='user avatar' />
+              <span className={styles.username}>{this.props.stream.user.name}</span>
+            </div>
+            <div className={styles.duration}>
+              <i className={`material-icons ${styles.time}`}>access_time</i>
+              <span>{durationWithHours(playlistDuration(this.props.stream.playlist.songs))}</span>
+              <i className={`material-icons ${styles.queue}`}>queue_music</i>
+              <span>{this.props.stream.playlist.songs.length} tracks</span>
+              <i className={`material-icons ${styles[ this.state.opened ? 'opened' : 'closed']}`}>arrow_drop_down</i>
+            </div>
           </div>
-        </div>
-        <div className={styles.icons}>
-          <i className={`material-icons ${styles.ripple}`} onClick={this.remove}>close</i>
+          <div className={styles.icons}>
+            <i className={`material-icons ${styles.ripple}`} onClick={this.remove}>close</i>
+          </div>
         </div>
         <div className={`${styles.songList} ${this.state.opened ? styles.visible : ''}`}>
           <SongList
