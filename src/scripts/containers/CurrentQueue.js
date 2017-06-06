@@ -106,12 +106,12 @@ class CurrentQueue extends Component {
               <span>
                 Your Queue: {getQueueSongsLength(this.props.songs)} songs, {getDurationWithHours(getQueueDuration(this.props.songs))}
               </span>
-              <i className={`material-icons  ${styles.ripple}`} onClick={clearQueue}>clear_all</i>
-              <i className={`material-icons ${styles.saveIcon} ${styles.ripple}`} onClick={this.toggleSPVisibility}>save</i>
+              <i className={`material-icons  ${styles.ripple} ${this.props.songs.length ? '' : styles.disabled}`} onClick={clearQueue}>clear_all</i>
+              <i className={`material-icons ${styles.saveIcon} ${styles.ripple}  ${this.props.songs.length ? '' : styles.disabled}`} onClick={this.toggleSPVisibility}>save</i>
               <StreamPublicationDialog visible={this.state.spVisibility} toggleVisibility={this.toggleSPVisibility} />
             </div>
           </div>
-          <Song song={this.props.playingSong} type='playing' />
+          {/* <Song song={this.props.playingSong} type='playing' /> */}
           <div className={`${styles.songList} ${styles.current}`}>
             <CurrentQueuePlaylist {...this.props} playlist={this.props.songs} />
           </div>
