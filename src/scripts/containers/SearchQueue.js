@@ -48,6 +48,8 @@ class SearchQueue extends Component {
     searchAndUpdateSearchQueue: PropTypes.func
   }
 
+  state = {searching: false}
+
   render(){
 
     // Autocomplete
@@ -59,7 +61,8 @@ class SearchQueue extends Component {
     }
 
     const onAutocompleteValueChange = val => {
-      if(val.trim()) this.props.searchAndUpdateSearchQueue(val);
+      if(val.trim()) Promise.resolve(this.setState({searching: true}))
+        .then(_ => this.props.searchAndUpdateSearchQueue(val)).then(_ => this.setState({searching: false}));
       return updateSearchPhrase(val);
     }
 
@@ -86,7 +89,7 @@ class SearchQueue extends Component {
           </div>
             */}
         </div>
-
+        {this.state.searching && <div  className={styles.progressLine} />}
         <div className={`${styles.songList} ${styles.searchList}`}>
           <SongList
             type='search'

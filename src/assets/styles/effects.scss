@@ -24,3 +24,24 @@
     transition: 0s;
   }
 }
+
+
+.progressLine, .progressLine:before {
+  height: 3px;
+  width: 100%;
+  margin: 0;
+}
+.progressLine {
+  background-color: #b3d4fc;
+  display: flex;
+}
+.progressLine:before {
+  background-color: #0091ea;
+  content: '';
+  animation: runningProgress 2.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+@keyframes runningProgress {
+  0% { margin-left: 0; margin-right: 100%; }
+  50% { margin-left: 25%; margin-right: 0; }
+  100% { margin-left: 100%; margin-right: 0; }
+}
