@@ -25,7 +25,7 @@ export default class Song extends Component {
 
   render() {
     return (
-      <div className={`${bp.row} no-margin ${this.props.type === 'search' ? styles.search : styles.queue}`}>
+      <div className={`${bp.row} no-margin ${styles[this.props.type]}`}>
         <div className={`${bp['col-xs-1']} ${styles.artwork}`}>
           <img src={this.props.song.artwork_url} />
           <span className={styles.playPause}>
